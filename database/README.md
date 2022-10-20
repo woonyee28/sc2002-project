@@ -50,12 +50,13 @@
 0. (String) cinemaCode
 1. (String) cinemaClass
 2. (ArrayList< int >) seatingPlan
-3. (ArrayList< String >) sessionsID - bookingdata+bookingtime - Foreign Key to Sessions' Column 1 - sessionID
+3. (ArrayList< String >) sessionsID - sessionData+sessionTtime - refer to Sessions column 1 and 2
 
 ## Sessions
 0. (int) movieID - Foreign Key to Movies' Column 0 - movieID
-1. (String) sessionID - Primary Key
-2. (ArrayList< int >) seatingPlan
+1. (String) sessionDate
+2. (String) sessionTime
+3. (ArrayList< int >) seatingPlan
 
 ## HolidayData
 0. (String) name
