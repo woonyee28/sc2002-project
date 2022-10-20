@@ -29,7 +29,7 @@
 1. (String) name
 2. (String) email
 3. (int) age
-4. (String) passwordHashed
+4. (String) passwordHashed - Using .hashCode() function
 5. (int) mobileNumber
 6. (String) TID
 
