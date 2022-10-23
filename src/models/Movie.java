@@ -119,9 +119,9 @@ public class Movie{
         oneLine.append(CSV_SEPARATOR);
         oneLine.append(this.getDirector());
         oneLine.append(CSV_SEPARATOR);
-        oneLine.append(cast);
+        oneLine.append(this.getCasts());
         oneLine.append(CSV_SEPARATOR);
-        oneLine.append(reviewsID); 
+        oneLine.append(this.getReviewsID()); 
         return oneLine.toString();
     }
 }
