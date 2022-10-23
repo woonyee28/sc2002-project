@@ -11,9 +11,9 @@ public class Movie{
     private String showingStatus;
     private String director;
     private ArrayList<String> cast;
-    private ArrayList<int> reviewsID;
+    private ArrayList<Integer> reviewsID;
 
-    public Movie(int movieID, String title, String type, String synopsis, int rating, String showingStatus, String director, ArrayList<String> cast, ArrayList<int> reviewsID)
+    public Movie(int movieID, String title, String type, String synopsis, int rating, String showingStatus, String director, ArrayList<String> cast, ArrayList<Integer> reviewsID)
     {
         this.movieID = movieID;
         this.title = title;
@@ -25,4 +25,78 @@ public class Movie{
         this.cast = cast;
         this.reviewsID = reviewsID;   
     }
+
+    //get methods
+    public int getMovieID(){
+        return this.movieID;
+    }
+
+    public String getTitle(){
+        return this.title;
+    }
+
+    public String getType(){
+        return this.type;
+    }
+
+    public String getSynopsis(){
+        return this.synopsis;
+    }
+
+    public int getRating(){
+        return this.rating;
+    }
+
+    public String getShowingStatus(){
+        return this.showingStatus;
+    }
+
+    public String getDirector(){
+        return this.director;
+    }
+
+	public ArrayList<String> getCasts() {
+		return this.cast;
+	}
+
+	public ArrayList<Integer> getReviewsID() {
+		return this.reviewsID;
+	}
+
+    //set methods
+	public void setMovieID(int movieID) {
+		this.movieID = movieID;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public void setShowingStatus(String showingStatus) {
+		this.showingStatus = showingStatus;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public void setCast(ArrayList<String> cast) {
+		this.cast = cast;
+	}
+
+	public void setReviewID(ArrayList<Integer> reviewsID) {
+		this.reviewsID = reviewsID;
+	}
 }
