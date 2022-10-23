@@ -99,4 +99,29 @@ public class Movie{
 	public void setReviewID(ArrayList<Integer> reviewsID) {
 		this.reviewsID = reviewsID;
 	}
+
+    // Generate String representation of the Object
+    private static final String CSV_SEPARATOR = ",";
+    public String toString()
+    {
+        StringBuffer oneLine = new StringBuffer();
+        oneLine.append(this.getMovieID());
+        oneLine.append(CSV_SEPARATOR);
+        oneLine.append(this.getTitle());
+        oneLine.append(CSV_SEPARATOR);
+        oneLine.append(this.getType());
+        oneLine.append(CSV_SEPARATOR);
+        oneLine.append(this.getSynopsis());
+        oneLine.append(CSV_SEPARATOR);
+        oneLine.append(this.getRating());
+        oneLine.append(CSV_SEPARATOR);
+        oneLine.append(this.getShowingStatus());
+        oneLine.append(CSV_SEPARATOR);
+        oneLine.append(this.getDirector());
+        oneLine.append(CSV_SEPARATOR);
+        oneLine.append(cast);
+        oneLine.append(CSV_SEPARATOR);
+        oneLine.append(reviewsID); 
+        return oneLine.toString();
+    }
 }

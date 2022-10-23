@@ -15,5 +15,9 @@ class testMovie {
         id.add(2);
         Movie movie = new Movie(1,"TestingMovieCSV","Type","This is a synopsis",4,"Coming Soon","Woon",str,id);
         MovieSerializer.writeToMovieCSV(movie);
+        for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+            m.toString();
+            System.out.println(m); 
+        }
     }
 }
