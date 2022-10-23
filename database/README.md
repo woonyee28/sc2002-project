@@ -16,6 +16,7 @@
 1. (int) movieGoersID - Foreign Key to MovieGoers' Column 0 - movieGoersID
 2. (double) rating
 3. (String) reviews
+4. (int) movieID - Foreign Key to Movies' Column 0 - movieID
 
 ## Staffs
 0. (int) staffID - Primary Key
