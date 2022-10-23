@@ -40,6 +40,7 @@
 4. (String) cinemaCode
 5. (int) seatingNum
 6. (double) price
+7. (int) movieID - Foreign Key to Movies' Column 0 - movieID
 
 ## Cineplexes
 0. (String) cineplexCode
