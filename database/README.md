@@ -31,7 +31,7 @@
 3. (int) age
 4. (String) passwordHashed - Using .hashCode() function
 5. (int) mobileNumber
-6. (String) TID
+6. (String) TID_List
 
 ## Transactions
 0. (String) TID
