@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import models.Movie;
 import serializers.MovieSerializer;
-
+ 
 class testMovie {
     public static void main(String[] args) {
         ArrayList<String> str = new ArrayList<String>();

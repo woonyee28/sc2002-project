@@ -46,7 +46,7 @@ public class MovieSerializer{
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
-
+ 
     public static ArrayList<Movie> readFromMovieCSV()
     {
         try {

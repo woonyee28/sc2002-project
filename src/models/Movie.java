@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Movie{
     private int movieID;
-    private String title;
+    private String title; 
     private String type;
     private String synopsis;
     private int rating;
