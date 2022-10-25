@@ -63,3 +63,10 @@
 ## HolidayData
 0. (String) name
 1. (String) date
+
+## TicketData
+0. (String) movieType
+1. (String) cineplexCode
+2. (String) ageCat
+3. (String) time
+4. (int) price
