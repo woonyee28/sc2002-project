@@ -1,5 +1,5 @@
 package tests;
-import 
+
 import java.util.ArrayList;
 import models.Cineplexes;
 import serializers.CineplexSerializer;

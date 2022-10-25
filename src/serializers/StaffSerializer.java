@@ -10,7 +10,7 @@ public class StaffSerializer {
 
     
 
-    public static void writeToStaffsDataCSV(Staff admin)
+    public static void writeToStaffCSV(Staff admin)
     {
         try
         {
@@ -34,7 +34,7 @@ public class StaffSerializer {
         catch (IOException e){e.printStackTrace();}
     }
 
-    public static ArrayList<Staff> readFromStaffsDataCSV()
+    public static ArrayList<Staff> readFromStaffCSV()
     {
         try {
             ArrayList<Staff> adminList = new ArrayList<Staff>();
@@ -84,27 +84,27 @@ public class StaffSerializer {
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
 	
-}
+    }
 
-public static void updateStaffFromCSV(int staffID, String name, String email,String hash) {
-	ArrayList<Staff> aList = StaffSerializer.readFromStaffsDataCSV();
-	int flag =0;
-	for (Staff a:aList) {
-		if (a.getName().equals(name) && a.getStaffID()==staffID ) {
-			a.setEmail(email);
-			a.setPasswordHashed(hash);
-			flag=1;
-			break;
-		}
-	}
-	if (flag==1){
-	StaffSerializer.overwriteStaffCSV(aList);
-	System.out.println("Staff record, name = " +name+" id = "+ staffID+" successfully updated!");
-	} else System.out.println("Staff record, name = " +name+" id = "+ staffID+" update unsuccessful!");
+    public static void updateStaffFromCSV(int staffID, String name, String email,String hash) {
+	    ArrayList<Staff> aList = StaffSerializer.readFromStaffCSV();
+	    int flag =0;
+	    for (Staff a:aList) {
+		    if (a.getName().equals(name) && a.getStaffID()==staffID ) {
+		    	a.setEmail(email);
+		    	a.setPasswordHashed(hash);
+		    	flag=1;
+		    	break;
+	    	}
+	    }
+	    if (flag==1){
+	        StaffSerializer.overwriteStaffCSV(aList);
+	        System.out.println("Staff record, name = " +name+" id = "+ staffID+" successfully updated!");
+	    } else System.out.println("Staff record, name = " +name+" id = "+ staffID+" update unsuccessful!");
 }
 
 public static void deleteStaffFromCSV(int staffID, String name) {
-	ArrayList<Staff> aList = StaffSerializer.readFromStaffsDataCSV();
+	ArrayList<Staff> aList = StaffSerializer.readFromStaffCSV();
 	int index=0,flag=0;
 	for (Staff a:aList) {
 		if (a.getName().equals(name) && a.getStaffID()==staffID) {
@@ -121,5 +121,5 @@ public static void deleteStaffFromCSV(int staffID, String name) {
 	else System.out.println("Staff record, name = " +name+" id = "+ staffID+" deletion unsuccessful!");
 
 	
-}
+    }
 }
