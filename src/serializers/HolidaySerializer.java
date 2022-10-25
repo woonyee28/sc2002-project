@@ -87,11 +87,11 @@ public static void updateHolidayFromCSV(String name, String newDate) {
     } else System.out.println("update of "+ name + " holiday unsuccessful!");
 }
 
-public static void deleteHolidayFromCSV(String name,String date) {
+public static void deleteHolidayFromCSV(String name) {
     ArrayList<Holiday> hList = HolidaySerializer.readFromHolidayCSV();
     int index=0,flag=0;
     for (Holiday h:hList) {
-        if (h.getName().equals(name) && h.getDate().equals(date)) {
+        if (h.getName().equals(name)) {
             flag=1;
             break;
         }

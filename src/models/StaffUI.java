@@ -1,11 +1,12 @@
 package models;
 import java.util.*;
+
 import serializers.StaffSerializer;
 
-public class StaffCreate implements logIn {
-    private ArrayList<Staff> sList;
+public class StaffUI  implements logIn {
+	private ArrayList<Staff> sList;
 
-    public StaffCreate(){
+    public StaffUI(){
         this.sList= StaffSerializer.readFromStaffCSV();
     }
 
@@ -34,6 +35,17 @@ public class StaffCreate implements logIn {
         return exists;
     }
 
+	public boolean checkExistenceName(String name){
+		boolean exists = false;
+		for (Staff s: this.sList){
+			if (s.getName().equals(name)){
+				exists =true;
+				break;
+			}
+		}
+		return exists;
+	}
+
     public boolean checkExistenceID(int id){
         boolean exists =false;
 		for (Staff s:this.sList ) {
@@ -46,8 +58,8 @@ public class StaffCreate implements logIn {
 
     }
 
-    public int run(){
-        StaffCreate create = new StaffCreate();
+	public static void createNewStaff(){
+        StaffUI create = new StaffUI();
 		String email=null,name=null,password=null,hashedPassword =null;
 		int staffID =0;
 		Scanner sc = new Scanner(System.in).useDelimiter("\n");
@@ -76,22 +88,51 @@ public class StaffCreate implements logIn {
 			Staff newStaff = new Staff(staffID,name,email,hashedPassword); 
 			StaffSerializer.writeToStaffCSV(newStaff);
 			System.out.println("New Staff user succesfully added");
-            return 1;
 		}
 		else {
 			System.out.print("Email already exists!");
-            return 0;
 		}
+	
 	}
 		else {
 			System.out.println("StaffID alread exists!");
-      	 	return 0;
+		}
+	}
+
+		public static void deleteStaff(){
+			StaffUI delete = new StaffUI();
+			String name =null;
+			int staffID =0;
+			Scanner sc = new Scanner(System.in).useDelimiter("\n");
+			System.out.println("Deleting Staff...");
+			System.out.println("Please enter id of Staff to be deleted:");
+			if (sc.hasNextInt()) {
+				staffID = sc.nextInt();
+			}
+			if (delete.checkExistenceID(staffID)) {
+				System.out.println("Please enter name of Staff to be deleted:");
+				if (sc.hasNext()) {
+					name = sc.next();
+				}
+				if (delete.checkExistenceName(name)) {
+					StaffSerializer.deleteStaffFromCSV(staffID, name);
+				}else System.out.println("Staff "+ name+ " not found!");
+			}else System.out.println("Staff id " + staffID +" not found!" );
+		}
+
+		public static void printStaffList(){
+			for(Staff s:StaffSerializer.readFromStaffCSV()){
+				s.toString();
+				System.out.println(s);
+			}
 		}
 
     }
 
 
 
+
+
      
     
-}
+
