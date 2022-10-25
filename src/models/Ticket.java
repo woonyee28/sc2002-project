@@ -5,8 +5,10 @@ public class Ticket {
         private String movieType;
         private String cineplexCode;
         private String ageCat;
-        private String time;
+        private String dayType;
+        private boolean afterSix;
         private int price;
+
         public String getMovieType() {
             return movieType;
         }
@@ -25,11 +27,11 @@ public class Ticket {
         public void setAgeCat(String ageCat) {
             this.ageCat = ageCat;
         }
-        public String getTime() {
-            return time;
+        public String getDayType() {
+            return dayType;
         }
-        public void setTime(String time) {
-            this.time = time;
+        public void setTime(String dayType) {
+            this.dayType = dayType;
         }
         public int getPrice() {
             return price;
@@ -38,6 +40,14 @@ public class Ticket {
             this.price = price;
         }
         
+        public boolean getAfterSix(){
+            return afterSix;
+        }
+
+        public void setAfterSix(boolean afterSix){
+            this.afterSix=afterSix;
+        }
+
         private static final String CSV_SEPARATOR =",";
         
         public String toString() {
@@ -48,7 +58,9 @@ public class Ticket {
             oneLine.append(CSV_SEPARATOR);
             oneLine.append(this.getAgeCat());
             oneLine.append(CSV_SEPARATOR);
-            oneLine.append(this.getTime());
+            oneLine.append(this.getDayType());
+            oneLine.append(CSV_SEPARATOR);
+            oneLine.append(this.getAfterSix())
             oneLine.append(CSV_SEPARATOR);
             oneLine.append(this.getPrice());
             return oneLine.toString();
