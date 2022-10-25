@@ -73,8 +73,8 @@ public class StaffCreate implements logIn {
 			
 				hashedPassword = String.valueOf(password.hashCode());
 			
-			Staff newAdmin = new Staff(staffID,name,email,hashedPassword); 
-			StaffSerializer.writeToStaffCSV(newAdmin);
+			Staff newStaff = new Staff(staffID,name,email,hashedPassword); 
+			StaffSerializer.writeToStaffCSV(newStaff);
 			System.out.println("New Staff user succesfully added");
             return 1;
 		}
@@ -83,8 +83,10 @@ public class StaffCreate implements logIn {
             return 0;
 		}
 	}
-		else System.out.println("StaffID alread exists!");
-        return 0;
+		else {
+			System.out.println("StaffID alread exists!");
+      	 	return 0;
+		}
 
     }
 
