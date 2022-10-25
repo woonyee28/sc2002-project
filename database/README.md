@@ -16,6 +16,7 @@
 1. (int) movieGoersID - Foreign Key to MovieGoers' Column 0 - movieGoersID
 2. (double) rating
 3. (String) reviews
+4. (int) movieID - Foreign Key to Movies' Column 0 - movieID
 
 ## Staffs
 0. (int) staffID - Primary Key
@@ -30,7 +31,7 @@
 3. (int) age
 4. (String) passwordHashed - Using .hashCode() function
 5. (int) mobileNumber
-6. (String) TID
+6. (String) TID_List
 
 ## Transactions
 0. (String) TID
@@ -40,6 +41,7 @@
 4. (String) cinemaCode
 5. (int) seatingNum
 6. (double) price
+7. (int) movieID - Foreign Key to Movies' Column 0 - movieID
 
 ## Cineplexes
 0. (String) cineplexCode
