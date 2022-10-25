@@ -68,5 +68,6 @@
 0. (String) movieType
 1. (String) cineplexCode
 2. (String) ageCat
-3. (String) time
-4. (int) price
+3. (String) dayType (Weekday/Special)
+4. (boolean) afterSix
+5. (int) price
