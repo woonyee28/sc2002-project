@@ -1,3 +1,5 @@
+//@Author ZK
+package models;
 public class MovieSeat {
     private int seatID;
     private boolean assigned;

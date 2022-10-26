@@ -1,6 +1,9 @@
+//@Author ZK
+package models;
+
 import java.io.Serializable;
 
-public class MovieGoer implements Serializable{
+public class MovieGoer_zk implements Serializable{
     int id;
 	String name;
     String email;
@@ -11,7 +14,7 @@ public class MovieGoer implements Serializable{
 
     String membership;
 
-	public MovieGoer(int id)
+	public MovieGoer_zk(int id)
     {
         this.id = id;
     }

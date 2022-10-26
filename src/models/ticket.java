@@ -1,3 +1,5 @@
+//@Author ZK
+package models;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -5,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 
 public class ticket {
-    MovieGoer customer;
+    MovieGoer_zk customer;
     MovieName movie;
     
     private double price;
@@ -18,7 +20,7 @@ public class ticket {
     private int seatNo;
 
 
-    public ticket( MovieGoer cust_id,  MovieName movie){
+    public ticket( MovieGoer_zk cust_id,  MovieName movie){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"); 
         LocalDateTime now = LocalDateTime.now();
         this.customer =  cust_id;
@@ -60,7 +62,7 @@ public class ticket {
 
     }
 
-    public MovieGoer getMoviegoer()
+    public MovieGoer_zk getMoviegoer()
     {
         return customer;
     }
