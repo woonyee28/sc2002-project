@@ -134,8 +134,8 @@ public class MovieGoerSerializer {
         if (flag==1) {
             aList.remove(index);
             MovieGoerSerializer.overwriteMovieGoerCSV(aList);
-            System.out.println("MovieGoer record, name = " + name +" successfully updated!");
-	    } else System.out.println("MovieGoer record, name " + name+" update unsuccessful!");
+            System.out.println("MovieGoer record, name = " + name +" successfully deleted!");
+	    } else System.out.println("MovieGoer record, name " + name+" delete unsuccessful!");
     }
 }
  

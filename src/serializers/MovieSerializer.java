@@ -165,7 +165,7 @@ public class MovieSerializer{
         if (flag==1) {
             aList.remove(index);
             MovieSerializer.overwriteMovieCSV(aList);
-            System.out.println("Movie record, title = " +title+" successfully updated!");
-	    } else System.out.println("Movie record, title = " +title+" update unsuccessful!");
+            System.out.println("Movie record, title = " +title+" successfully deleted!");
+	    } else System.out.println("Movie record, title = " +title+" delete unsuccessful!");
     }
 }

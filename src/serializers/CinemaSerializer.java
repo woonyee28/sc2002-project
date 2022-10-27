@@ -134,7 +134,7 @@ public class CinemaSerializer {
         if (flag==1) {
             aList.remove(index);
             CinemaSerializer.overwriteCinemasCSV(aList);
-            System.out.println("Cinema record, cinemaCode = " +cinemaCode+" successfully updated!");
-	    } else System.out.println("Cinema record, cinemaCode = " +cinemaCode+" update unsuccessful!");
+            System.out.println("Cinema record, cinemaCode = " +cinemaCode+" successfully deleted!");
+	    } else System.out.println("Cinema record, cinemaCode = " +cinemaCode+" delete unsuccessful!");
     }
 }
