@@ -13,6 +13,11 @@ import models.*;
 import serializers.*;
 
 public class UISalesReporting {
+    private final String menuOptions[] = {
+        "Sort By Rating",
+        "Sort By Sales",
+        "Exit Sales Reporting"
+    };
     public static void main(String[] args) {
 		UISalesReporting s = new UISalesReporting();
 		s.run();
@@ -20,17 +25,24 @@ public class UISalesReporting {
 
     public void run(){
         int choice = -1;
-        System.out.println("You are in UI Sales Reporting\n");
+        System.out.println("====================UI Sales Reporting======================");
+        int i;
+        for (i = 1; i <= menuOptions.length; i++) {
+            System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
+        }
         Scanner sc = new Scanner(System.in);
 
         do{
+			
             choice = Integer.valueOf(sc.next());
-			System.out.println();
+			
             switch (choice) {
 				case 1:
+                    System.out.println("sortByRating():");
                     sortByRating();
 					break;
 				case 2:
+                    System.out.println("sortBySales():");
 					sortBySales();
 					break;
 				case 3:
@@ -86,7 +98,12 @@ public class UISalesReporting {
         int c=0;
         while (i.hasNext()) {
             Map.Entry me = (Map.Entry)i.next();
-            System.out.print(me.getValue() + ": ");
+            for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+                if (me.getValue().equals(m.getMovieID())){
+                    System.out.print(m.getTitle() + ": ");
+                    break;
+                }
+            }
             System.out.println(me.getKey());
             c+=1;
             if (c==5){

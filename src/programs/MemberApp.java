@@ -17,7 +17,7 @@ public class MemberApp {
         Scanner sc = new Scanner(System.in);
 
         do{
-            System.out.println("You are in MemberApp\n");
+            System.out.println("====================MemberApp======================\n");
 			choice = Integer.valueOf(sc.next());
 			System.out.println();
 			

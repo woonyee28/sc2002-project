@@ -17,7 +17,7 @@ public class MoblimaMainApp{
         Scanner sc = new Scanner(System.in);
 
         do{
-            System.out.println("You are in MoblimaMainApp\n");
+            System.out.println("====================MoblimaMainApp======================\n");
             choice = Integer.valueOf(sc.next());
             System.out.println();
             switch (choice) {

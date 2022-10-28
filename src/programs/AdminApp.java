@@ -17,7 +17,7 @@ public class AdminApp {
         Scanner sc = new Scanner(System.in);
 
         do{
-            System.out.println("You are in AdminApp\n");
+            System.out.println("====================AdminApp======================\n");
 			choice = Integer.valueOf(sc.next());
 			System.out.println();
 			
