@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Moviebooking",
+            "request": "launch",
+            "mainClass": "tests.Moviebooking",
+            "projectName": "sc2002-project_b5608b9a"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

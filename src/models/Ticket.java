@@ -1,6 +1,6 @@
 package models;
 
-public class Ticket {
+public class Ticket{
    
         private String movieType;
         private String cineplexCode;
