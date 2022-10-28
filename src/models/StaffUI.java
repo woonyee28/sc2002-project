@@ -63,6 +63,7 @@ public class StaffUI  implements logIn {
 		String email=null,name=null,password=null,hashedPassword =null;
 		int staffID =0;
 		Scanner sc = new Scanner(System.in).useDelimiter("\n");
+		try{
 		System.out.println("Creating new Staff...");
 		System.out.println("Please enter staffID:");
 		if(sc.hasNextInt()) {
@@ -97,6 +98,9 @@ public class StaffUI  implements logIn {
 		else {
 			System.out.println("StaffID alread exists!");
 		}
+	}finally{
+		sc.close();
+	}
 	}
 
 		public static void deleteStaff(){
@@ -104,6 +108,7 @@ public class StaffUI  implements logIn {
 			String name =null;
 			int staffID =0;
 			Scanner sc = new Scanner(System.in).useDelimiter("\n");
+			try{
 			System.out.println("Deleting Staff...");
 			System.out.println("Please enter id of Staff to be deleted:");
 			if (sc.hasNextInt()) {
@@ -118,6 +123,9 @@ public class StaffUI  implements logIn {
 					StaffSerializer.deleteStaffFromCSV(staffID, name);
 				}else System.out.println("Staff "+ name+ " not found!");
 			}else System.out.println("Staff id " + staffID +" not found!" );
+		}finally{
+			sc.close();
+		}
 		}
 
 		public static void printStaffList(){
