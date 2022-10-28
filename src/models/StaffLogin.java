@@ -39,17 +39,29 @@ public class StaffLogin implements logIn{
 		return exists;
 	}
 
+	public String checkName(String email){
+        String name = email;
+        for (Staff s: this.sList){
+            if (s.getEmail().equals(email)){
+                name = s.getName();
+                break;
+            }
+        }
+        return name;
+    }
+
 	public static int run(String email, String password){
 		StaffLogin login = new StaffLogin();
 		if(!login.checkExistenceEmail(email)){
-			System.out.println("Email does not exist!");
+			System.out.println("Account does not exist! Approach staff for assistance.");
 			return 0;
 		}
 		else {
 			
 			if(login.checkPassword(email,String.valueOf(password.hashCode()))){
-				System.out.println("succesfully logged in");
-				System.out.println("Welcome "+ email);
+				String name = login.checkName(email);
+				System.out.println("Logging in...");
+				System.out.println("Welcome "+ name);
 				return 1;
 			}
 			else {

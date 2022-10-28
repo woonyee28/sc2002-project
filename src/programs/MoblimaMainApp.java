@@ -16,10 +16,11 @@ public class MoblimaMainApp{
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Are you a:\n\t[1] Moblima Member\t[2] New User\t[3] Moblima Staff");
+        
 
         do{
             System.out.println("====================MoblimaMainApp======================\n");
+            System.out.println("Are you a:\n\t[1] Moblima Member\t[2] New User\t[3] Moblima Staff");
             choice = Integer.valueOf(sc.next());
             System.out.println();
             switch (choice) {
@@ -43,24 +44,37 @@ public class MoblimaMainApp{
     }
     public void memberLogIn(){
         // Verify Password then call MemberApp
-        MemberApp m = new MemberApp();
-        m.run();
         Scanner input = new Scanner(System.in);
         System.out.println("Please key in your email ID:");
         String email = input.nextLine();
         System.out.println("Please key in your password:");
         String password = input.nextLine();
 
+        MemberLogin user = new MemberLogin();
+        int check = user.run(email, password);
+        
+
+        if (check==1){
+            MemberApp m = new MemberApp();
+            m.run();
+        }
+
     }
     
     public void memberSignUp(){
         // Create Account then go back to memberLogIn
+        int check1=0;
+        MemberCreate newUser = new MemberCreate();
+        check1 = newUser.run();
+        if (check1==1){
+            memberLogIn();
+        }
+
     }
 
     public void adminLogIn(){
         // Verify Password then call AdminApp
-        AdminApp m = new AdminApp();
-        m.run();
+        
         Scanner input = new Scanner(System.in);
         System.out.println("Please key in your email ID:");
         String email = input.nextLine();
@@ -68,14 +82,12 @@ public class MoblimaMainApp{
         String password = input.nextLine();
 
         StaffLogin user = new StaffLogin();
-        boolean emailCheck = user.checkExistenceEmail(email);
-        if (emailCheck==true){
-            boolean passCheck = user.checkPassword(email, password);
-            while (passCheck==false && x){
-                System.out.println("Wrong Password! Please key in the correct password:");
-                password = input.nextLine();
-            }
-            if (passCheck==true)
+        int check = user.run(email, password);
+
+
+        if (check==1){
+            AdminApp m = new AdminApp();
+            m.run();
         }
     }
 }
