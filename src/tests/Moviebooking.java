@@ -184,11 +184,11 @@ private static void bookings()
     System.out.println("Here is the seating plan for Cinema " + cinema_code.toUpperCase()+":");
     System.out.println("------------SCREEN------------");
     printSeatingPlan(seatingPlan);
-    // System.out.println("How many seats would you like?");
-    // noOfSeats = sc.nextInt();
+    System.out.println("How many seats would you like?");
+    noOfSeats = sc.nextInt();
     System.out.println("Which seat would you like?");
     int seat = 0;
- 
+    //TO IMPLEMENT NO: OF SeATS
     while(loop_seat)
     {
            int check_seat =0;
@@ -212,8 +212,12 @@ private static void bookings()
         {
             loop_seat = false;
         }
-   
+       
     }
+
+    System.out.println("Ticket price is: ");
+
+
     seatingPlan.add(seat);
 
     // FORMAT OF SESSION ID: DATE+TIME (yyyyMMddHHmm) Year->Month>Day->Hours->Minutes
@@ -371,6 +375,7 @@ private static int getCinemaClass(String cinema_code)
 
 //This V1 version able to get directly from CSV, CINEPLEX cinema code.
 //It is not hard coded
+
 private static String getCineCode_V1(String cineplex_choice)
 {
     String cinema_choice ="";
@@ -403,8 +408,11 @@ private static String getCineCode_V1(String cineplex_choice)
 
 }
 
+
+//Deprecated function, hard coded the section of row
 // gets the Cineplex choice and returns the cinema choice in small case format
 //returns aaa,aab,aac/ bba,bbb,bbc, cca,ccb,ccc
+
 private static String getCineCode(String cineplex_Choice)
 {
     String cinema_choice ="";
