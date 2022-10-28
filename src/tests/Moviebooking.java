@@ -369,6 +369,8 @@ private static int getCinemaClass(String cinema_code)
 }
 
 
+//This V1 version able to get directly from CSV, CINEPLEX cinema code.
+//It is not hard coded
 private static String getCineCode_V1(String cineplex_choice)
 {
     String cinema_choice ="";
