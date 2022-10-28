@@ -19,8 +19,9 @@ public class MoblimaMainApp{
         System.out.println("Are you a:\n\t[1] Moblima Member\t[2] New User\t[3] Moblima Staff");
 
         do{
+            System.out.println("====================MoblimaMainApp======================\n");
             choice = Integer.valueOf(sc.next());
-			System.out.println();
+            System.out.println();
             switch (choice) {
 				case 1:
                     memberLogIn();
@@ -42,6 +43,8 @@ public class MoblimaMainApp{
     }
     public void memberLogIn(){
         // Verify Password then call MemberApp
+        MemberApp m = new MemberApp();
+        m.run();
         Scanner input = new Scanner(System.in);
         System.out.println("Please key in your email ID:");
         String email = input.nextLine();
@@ -56,6 +59,8 @@ public class MoblimaMainApp{
 
     public void adminLogIn(){
         // Verify Password then call AdminApp
+        AdminApp m = new AdminApp();
+        m.run();
         Scanner input = new Scanner(System.in);
         System.out.println("Please key in your email ID:");
         String email = input.nextLine();

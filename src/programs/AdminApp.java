@@ -17,8 +17,10 @@ public class AdminApp {
         Scanner sc = new Scanner(System.in);
 
         do{
-            choice = Integer.valueOf(sc.next());
+            System.out.println("====================AdminApp======================\n");
+			choice = Integer.valueOf(sc.next());
 			System.out.println();
+			
             switch (choice) {
 				case 1:
                     // Amend Booking, UIAmendBooking

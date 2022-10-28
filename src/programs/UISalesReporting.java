@@ -13,6 +13,11 @@ import models.*;
 import serializers.*;
 
 public class UISalesReporting {
+    private final String menuOptions[] = {
+        "Sort By Rating",
+        "Sort By Sales",
+        "Exit Sales Reporting"
+    };
     public static void main(String[] args) {
 		UISalesReporting s = new UISalesReporting();
 		s.run();
@@ -20,16 +25,24 @@ public class UISalesReporting {
 
     public void run(){
         int choice = -1;
+        System.out.println("====================UI Sales Reporting======================");
+        int i;
+        for (i = 1; i <= menuOptions.length; i++) {
+            System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
+        }
         Scanner sc = new Scanner(System.in);
 
         do{
+			
             choice = Integer.valueOf(sc.next());
-			System.out.println();
+			
             switch (choice) {
 				case 1:
+                    System.out.println("sortByRating():");
                     sortByRating();
 					break;
 				case 2:
+                    System.out.println("sortBySales():");
 					sortBySales();
 					break;
 				case 3:
@@ -63,10 +76,39 @@ public class UISalesReporting {
 
     public void sortBySales(){
         Map<Double, Integer> d = new TreeMap<Double,Integer>(Collections.reverseOrder());
-        for (Transaction m: TransactionSerializer.readFromTransactionCSV()) {           
-            if (d.containsValue(m.getMovieID())){
-                
-            }else{}
+        for (Transaction m: TransactionSerializer.readFromTransactionCSV()) {   
+            int id = m.getMovieID();  
+            Set<Double> prices = d.keySet();      
+            if (d.containsValue(id)){
+                Double ans=0.0;
+                for( Double p : prices ){
+                    if( d.get(p) == id){
+                        ans = p;
+                    }
+                }
+                Double price = ans+m.getPrice();
+                d.remove(ans);
+                d.put(price,id);
+            }else{
+                d.put(m.getPrice(),id);
+            }
+        }
+        Set set = d.entrySet();
+        Iterator i = set.iterator();
+        int c=0;
+        while (i.hasNext()) {
+            Map.Entry me = (Map.Entry)i.next();
+            for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+                if (me.getValue().equals(m.getMovieID())){
+                    System.out.print(m.getTitle() + ": ");
+                    break;
+                }
+            }
+            System.out.println(me.getKey());
+            c+=1;
+            if (c==5){
+                break;
+            }
         }
     }
 }
