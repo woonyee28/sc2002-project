@@ -67,7 +67,82 @@ public class TransactionSerializer {
         } 
         catch(IOException e) {
             e.printStackTrace();
-        }
+        } 
         return null;
+    }
+    public static void overwriteTransactionCSV(ArrayList<Transaction> aList) {
+		try {
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/transactionsData.csv",false)));
+			for(Transaction transaction:aList) {
+                StringBuffer oneLine = new StringBuffer();
+                oneLine.append(transaction.getTID());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(transaction.getMovieGoersID());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(transaction.getBookingDate());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(transaction.getBookingTime());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(transaction.getCinemaCode());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(transaction.getSeatingNum());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(transaction.getPrice());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(transaction.getMovieID());
+    
+                bw.write(oneLine.toString());
+                bw.newLine();
+			}
+			bw.flush();
+			bw.close();
+		}
+		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
+        catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
+        catch (IOException e){e.printStackTrace();}
+	
+    }
+
+    public static void updateTransactionFromCSV(String TID, int movieGoersID, String bookingDate, String bookingTime, String cinemaCode, int seatingNum, double price, int movieID ) {
+	    ArrayList<Transaction> aList = TransactionSerializer.readFromTransactionCSV();
+	    int flag =0;
+	    for (Transaction a:aList) {
+		    if (a.getTID().equals(TID) ) {
+		    	a.setMovieGoersID(movieGoersID);
+                a.setBookingDate(bookingDate);
+                a.setBookingTime(bookingTime);
+                a.setCinemaCode(cinemaCode);
+                a.setSeatingNum(seatingNum);
+                a.setPrice(price);
+                a.setMovieID(movieID);
+		    	flag=1;
+		    	break;
+	    	}
+	    }
+	    if (flag==1){
+	        TransactionSerializer.overwriteTransactionCSV(aList);
+	        System.out.println("Transaction record, id = "+ TID+" successfully updated!");
+        }
+        else System.out.println("Transaction record, id = "+ TID+" update unsuccessful!");
+    }
+
+    public static void deleteTransactionFromCSV(String TID) {
+        ArrayList<Transaction> aList = TransactionSerializer.readFromTransactionCSV();
+        int index=0,flag=0;
+        for (Transaction a:aList) {
+            if (a.getTID().equals(TID) ){
+                flag=1;
+                break;
+            }
+            index++;
+        }
+        if (flag==1) {
+            aList.remove(index);
+            TransactionSerializer.overwriteTransactionCSV(aList);
+            System.out.println("Transaction record, id = "+ TID+" successfully deleted!");
+        }
+        else System.out.println("Transaction record, id = "+ TID+" deletion unsuccessful!");
+
+	
     }
 }

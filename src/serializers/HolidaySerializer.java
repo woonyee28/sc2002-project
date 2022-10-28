@@ -52,4 +52,58 @@ public class HolidaySerializer {
         }
         return null;
     }
+    public static void overwriteHolidayCSV(ArrayList<Holiday> hList) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/holidayData.csv",false)));
+            for(Holiday h:hList) {
+                StringBuffer oneLine = new StringBuffer();
+                oneLine.append(h.getName());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(h.getDate());
+                bw.write(oneLine.toString());
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+        }
+        catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
+        catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
+        catch (IOException e){e.printStackTrace();}
+    
+    }
+
+    public static void updateHolidayFromCSV(String name, String newDate) {
+        ArrayList<Holiday> hList = HolidaySerializer.readFromHolidayCSV();
+        int flag =0;
+        for (Holiday h:hList) {
+            if (h.getName().equals(name)) {
+                h.setDate(newDate);
+                flag=1;
+            }
+        }
+        if (flag==1){
+        HolidaySerializer.overwriteHolidayCSV(hList);
+        System.out.println(name + " Holiday succesfully updated!");
+        } else System.out.println("update of "+ name + " holiday unsuccessful!");
+    }
+
+    public static void deleteHolidayFromCSV(String name,String date) {
+        ArrayList<Holiday> hList = HolidaySerializer.readFromHolidayCSV();
+        int index=0,flag=0;
+        for (Holiday h:hList) {
+            if (h.getName().equals(name) && h.getDate().equals(date)) {
+                flag=1;
+                break;
+            }
+            index++;
+        }
+        if (flag==1) {
+            hList.remove(index);
+            HolidaySerializer.overwriteHolidayCSV(hList);
+            System.out.println(name + " Holiday succesfully deleted");
+        }
+        else System.out.println("Deletion of" +name+" holiday unsuccesful!");
+
+        
+    }
 }
