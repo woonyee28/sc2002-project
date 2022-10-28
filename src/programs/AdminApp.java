@@ -27,7 +27,8 @@ public class AdminApp {
 					// Show movie listing + Book ticket, UIListingAndBooking
 					break;
 				case 3:
-					// Sales Reporting, UISalesReporting
+					UISalesReporting s = new UISalesReporting();
+					s.run();
 					break;
                 case 4:
 					// Create new movie listing / new session / change movie details, UINewListingSession

@@ -7,13 +7,13 @@ public class Movie{
     private String title; 
     private String type;
     private String synopsis;
-    private int rating;
+    private Double rating;
     private String showingStatus;
     private String director;
     private ArrayList<String> cast;
     private ArrayList<Integer> reviewsID;
 
-    public Movie(int movieID, String title, String type, String synopsis, int rating, String showingStatus, String director, ArrayList<String> cast, ArrayList<Integer> reviewsID)
+    public Movie(int movieID, String title, String type, String synopsis, Double rating, String showingStatus, String director, ArrayList<String> cast, ArrayList<Integer> reviewsID)
     {
         this.movieID = movieID;
         this.title = title;
@@ -43,7 +43,7 @@ public class Movie{
         return this.synopsis;
     }
 
-    public int getRating(){
+    public Double getRating(){
         return this.rating;
     }
 
@@ -80,7 +80,7 @@ public class Movie{
 		this.synopsis = synopsis;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 

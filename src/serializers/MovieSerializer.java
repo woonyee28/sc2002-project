@@ -62,7 +62,7 @@ public class MovieSerializer{
                String title = tempArr[1];
                String type = tempArr[2];
                String synopsis = tempArr[3];
-               int rating = Integer.valueOf(tempArr[4]);
+               Double rating = Double.valueOf(tempArr[4]);
                String showingStatus = tempArr[5];
                String director = tempArr[6];
                ArrayList<String> cast = new ArrayList<String>();
@@ -129,7 +129,7 @@ public class MovieSerializer{
 	
     }
 
-    public static void updateMovieFromCSV(int movieID, String title, String type, String synopsis, int rating, String showingStatus, String director, ArrayList<String> cast, ArrayList<Integer> reviewsID) {
+    public static void updateMovieFromCSV(int movieID, String title, String type, String synopsis, Double rating, String showingStatus, String director, ArrayList<String> cast, ArrayList<Integer> reviewsID) {
 	    ArrayList<Movie> aList = MovieSerializer.readFromMovieCSV();
 	    int flag =0;
 	    for (Movie a:aList) {

@@ -30,7 +30,8 @@ public class MemberApp {
 					// Show movie listing + Book ticket, UIListingAndBooking
 					break;
 				case 4:
-					// Sales Reporting, UISalesReporting
+					UISalesReporting s = new UISalesReporting();
+					s.run();
 					break;
 				case 5:
 					System.out.println("Exiting to the previous level...");

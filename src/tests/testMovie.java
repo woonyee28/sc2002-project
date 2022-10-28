@@ -20,6 +20,6 @@ class testMovie {
         //     System.out.println(m); 
         // }
         MovieSerializer.deleteMovieFromCSV("HeyYo");
-        MovieSerializer.updateMovieFromCSV(1,"TestingMovieCSV","Type","This is a synopsis - changed",4,"Coming Soon","Woon",str,id);
+        MovieSerializer.updateMovieFromCSV(1,"TestingMovieCSV","Type","This is a synopsis - changed",4.0,"Coming Soon","Woon",str,id);
     }
 }
