@@ -60,7 +60,7 @@ public class Ticket {
             oneLine.append(CSV_SEPARATOR);
             oneLine.append(this.getDayType());
             oneLine.append(CSV_SEPARATOR);
-            oneLine.append(this.getAfterSix())
+            oneLine.append(this.getAfterSix());
             oneLine.append(CSV_SEPARATOR);
             oneLine.append(this.getPrice());
             return oneLine.toString();

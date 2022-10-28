@@ -85,11 +85,6 @@ public class StaffCreate implements logIn {
 	}
 		else System.out.println("StaffID alread exists!");
         return 0;
-
     }
-
-
-
-     
     
 }

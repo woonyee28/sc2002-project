@@ -73,4 +73,68 @@ public class CinemaSerializer {
         }
         return null;
     }
+
+    public static void overwriteCinemasCSV(ArrayList<Cinemas> aList) {
+		try {
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/cinemasData.csv",false)));
+			for(Cinemas cinema:aList) {
+                StringBuffer oneLine = new StringBuffer();
+                oneLine.append(cinema.getCinemaCode());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(cinema.getCinemaClass());
+                oneLine.append(CSV_SEPARATOR);
+                String cast = cinema.getSeatingPlan().toString();
+                cast = cast.replace(',', ';').substring(1, cast.length() - 1);
+                oneLine.append(cast);
+                oneLine.append(CSV_SEPARATOR);
+                String reviewsID = cinema.getSessionsID().toString();
+                reviewsID = reviewsID.replace(',', ';').substring(1, reviewsID.length() - 1);
+                oneLine.append(reviewsID);
+    
+                bw.write(oneLine.toString());
+                bw.newLine();
+			}
+			bw.flush();
+			bw.close();
+		}
+		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
+        catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
+        catch (IOException e){e.printStackTrace();}
+	
+    }
+
+    public static void updateCinemasFromCSV(String cinemaCode, String cinemaClass, ArrayList<Integer> seatingPlan, ArrayList<String> sessionsID) {
+	    ArrayList<Cinemas> aList = CinemaSerializer.readFromCinemaCSV();
+	    int flag =0;
+	    for (Cinemas a:aList) {
+		    if (a.getCinemaCode().equals(cinemaCode)) {
+		    	a.setCinemaClass(cinemaClass);
+                a.setSeatingPlan(seatingPlan);
+                a.setSessionsID(sessionsID);
+		    	flag=1;
+		    	break;
+	    	}
+	    }
+	    if (flag==1){
+	        CinemaSerializer.overwriteCinemasCSV(aList);
+	        System.out.println("Cinema record, cinemaCode = " +cinemaCode+" successfully updated!");
+	    } else System.out.println("Cinema record, cinemaCode = " +cinemaCode+" update unsuccessful!");
+    }
+
+    public static void deleteCinemasFromCSV(String cinemaCode) {
+        ArrayList<Cinemas> aList = CinemaSerializer.readFromCinemaCSV();
+        int index=0,flag=0;
+        for (Cinemas a:aList) {
+            if (a.getCinemaCode().equals(cinemaCode)) {
+                flag=1;
+                break;
+            }
+            index++;
+        }
+        if (flag==1) {
+            aList.remove(index);
+            CinemaSerializer.overwriteCinemasCSV(aList);
+            System.out.println("Cinema record, cinemaCode = " +cinemaCode+" successfully deleted!");
+	    } else System.out.println("Cinema record, cinemaCode = " +cinemaCode+" delete unsuccessful!");
+    }
 }
