@@ -17,8 +17,9 @@ public class MoblimaMainApp{
         Scanner sc = new Scanner(System.in);
 
         do{
+            System.out.println("You are in MoblimaMainApp\n");
             choice = Integer.valueOf(sc.next());
-			System.out.println();
+            System.out.println();
             switch (choice) {
 				case 1:
                     memberLogIn();
@@ -40,6 +41,8 @@ public class MoblimaMainApp{
     }
     public void memberLogIn(){
         // Verify Password then call MemberApp
+        MemberApp m = new MemberApp();
+        m.run();
     }
     
     public void memberSignUp(){
@@ -48,5 +51,7 @@ public class MoblimaMainApp{
 
     public void adminLogIn(){
         // Verify Password then call AdminApp
+        AdminApp m = new AdminApp();
+        m.run();
     }
 }

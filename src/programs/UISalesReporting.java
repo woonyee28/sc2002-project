@@ -20,6 +20,7 @@ public class UISalesReporting {
 
     public void run(){
         int choice = -1;
+        System.out.println("You are in UI Sales Reporting\n");
         Scanner sc = new Scanner(System.in);
 
         do{
@@ -63,10 +64,34 @@ public class UISalesReporting {
 
     public void sortBySales(){
         Map<Double, Integer> d = new TreeMap<Double,Integer>(Collections.reverseOrder());
-        for (Transaction m: TransactionSerializer.readFromTransactionCSV()) {           
-            if (d.containsValue(m.getMovieID())){
-                
-            }else{}
+        for (Transaction m: TransactionSerializer.readFromTransactionCSV()) {   
+            int id = m.getMovieID();  
+            Set<Double> prices = d.keySet();      
+            if (d.containsValue(id)){
+                Double ans=0.0;
+                for( Double p : prices ){
+                    if( d.get(p) == id){
+                        ans = p;
+                    }
+                }
+                Double price = ans+m.getPrice();
+                d.remove(ans);
+                d.put(price,id);
+            }else{
+                d.put(m.getPrice(),id);
+            }
+        }
+        Set set = d.entrySet();
+        Iterator i = set.iterator();
+        int c=0;
+        while (i.hasNext()) {
+            Map.Entry me = (Map.Entry)i.next();
+            System.out.print(me.getValue() + ": ");
+            System.out.println(me.getKey());
+            c+=1;
+            if (c==5){
+                break;
+            }
         }
     }
 }

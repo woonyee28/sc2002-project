@@ -17,8 +17,10 @@ public class MemberApp {
         Scanner sc = new Scanner(System.in);
 
         do{
-            choice = Integer.valueOf(sc.next());
+            System.out.println("You are in MemberApp\n");
+			choice = Integer.valueOf(sc.next());
 			System.out.println();
+			
             switch (choice) {
                 case 1:
                     // Booking History + review rating, UIBookHistAndReview
