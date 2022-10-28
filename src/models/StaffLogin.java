@@ -14,7 +14,7 @@ public class StaffLogin implements logIn{
 
 
 	@Override
-	public   boolean checkPassword(String email, String hashedPassword) {	
+	public  boolean checkPassword(String email, String hashedPassword) {	
 		boolean correct = false;
 		if (checkExistenceEmail(email))
 			for (Staff s :sList) {
