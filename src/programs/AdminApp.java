@@ -18,6 +18,9 @@ public class AdminApp {
 
         do{
             System.out.println("====================AdminApp======================\n");
+			System.out.println("What would you like to do?");
+			System.out.println("\t[1] Amend Bookings\n\t[2] Show movies, Book Tickets\n\t[3] Saales Report\n\t[4] Create new Movie Listing\n\t[5] Configure system settings");
+			System.out.println("\t[6] Create new admin account\t[7] Manage Admins\t[8] Return to previous menu");
 			choice = Integer.valueOf(sc.next());
 			System.out.println();
 			
