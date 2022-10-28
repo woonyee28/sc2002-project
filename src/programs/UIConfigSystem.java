@@ -1,9 +1,10 @@
 package programs;
 
+import java.util.Scanner;
+import models.*;
+import serializers.*;
+
 public class UIConfigSystem {
-<<<<<<< Updated upstream
-    
-=======
     private final String menuOptions[] = {
         "Print Holiday List",
         "Add New Holiday",
@@ -180,5 +181,4 @@ public class UIConfigSystem {
             serializers.TicketSerializer.updateTicketfromCSV(movieType,cineplexCode,ageCat,dayType,afterSix,price);
         } else System.out.println("Ticket: "+ movieType + " "+ cineplexCode+" " + ageCat+ " "+ dayType + " "+ afterSix+ " not found!");
     }
->>>>>>> Stashed changes
 }

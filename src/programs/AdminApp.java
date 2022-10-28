@@ -50,6 +50,8 @@ public class AdminApp {
 					break;
                 case 5:
 					// Config system setting, UIConfigSystem
+					UIConfigSystem configSystem = new UIConfigSystem();
+					configSystem.run();
 					break;
                 case 6:
 					// sign up admin, UIAdminSignUp

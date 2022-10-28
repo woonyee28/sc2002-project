@@ -7,6 +7,10 @@ import models.*;
 import serializers.*;
 
 public class MoblimaMainApp{
+    public static void main(String[] args) {
+		MoblimaMainApp app = new MoblimaMainApp();
+		app.run();
+	}
    
 
     public void run(){
