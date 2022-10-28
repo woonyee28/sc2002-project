@@ -7,10 +7,7 @@ import models.*;
 import serializers.*;
 
 public class MoblimaMainApp{
-    public static void main(String[] args) {
-		MoblimaMainApp app = new MoblimaMainApp();
-		app.run();
-	}
+   
 
     public void run(){
         int choice = -1;
@@ -51,7 +48,19 @@ public class MoblimaMainApp{
 
     public void adminLogIn(){
         // Verify Password then call AdminApp
-        AdminApp m = new AdminApp();
-        m.run();
+        String pass,email;
+        Scanner sc =new Scanner(System.in).useDelimiter("\n");
+        System.out.println("Please enter your Email:");
+        email = sc.next();
+        System.out.println("Please Enter your Password");
+        pass =sc.next();
+        for (Staff s : serializers.StaffSerializer.readFromStaffCSV()){
+            if(s.getEmail().equals(email)){
+                if(s.getPasswordHashed().equals(String.valueOf(pass.hashCode()))){
+                    AdminApp m = new AdminApp();
+                    m.run();
+                }else System.out.println("Invalid email/Wrong password!");
+            }
+        }
     }
 }

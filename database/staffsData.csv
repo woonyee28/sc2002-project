@@ -1,9 +1,7 @@
-AAB,Platinum,2,202211192012
-AAC,Regular,3,202211192021
-BBA,Gold,5,202211192100
-BBB,Platinum,6,202211192143
-BBC,Regular,3,202211181200
-CCA,Gold,7,202211192143
-CCB,Platinum,3; 2,202211192144
-CCC,Regular,10; 8,202211192157
-AAA,Gold,10,202211192000
+<<<<<<< Updated upstream
+0,Tim Sanz,tim@gmail.com,20136356361
+1,Testing,testing@gmail.com,-1422446064
+3,snorlex,snorlex@gmail.com,48690,
+=======
+0,Snorlex,snorlex@gmail.com,-928147210
+>>>>>>> Stashed changes

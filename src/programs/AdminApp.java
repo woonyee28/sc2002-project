@@ -7,17 +7,30 @@ import models.*;
 import serializers.*;
 
 public class AdminApp {
+	private final String menuOptions[] = {
+        "Amend Booking",
+        "Show Movie Listing",
+        "Show Sales Report",
+        "Create New Movie Listing",
+		"Configure System Settings",
+		"Create New Admin",
+		"Manage Admins",
+		"Exit Admin App"
+	};
     public static void main(String[] args) {
 		AdminApp aApp = new AdminApp();
 		aApp.run();
 	}
 
     public void run(){
-        int choice = -1;
+        int i,choice = -1;
         Scanner sc = new Scanner(System.in);
 
         do{
             System.out.println("====================AdminApp======================\n");
+			for (i = 1; i <= menuOptions.length; i++) {
+                System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
+            }
 			choice = Integer.valueOf(sc.next());
 			System.out.println();
 			
@@ -40,8 +53,12 @@ public class AdminApp {
 					break;
                 case 6:
 					// sign up admin, UIAdminSignUp
+					UIAdminSignUp adminSignUp = new UIAdminSignUp();
+					adminSignUp.run();
                 case 7:
 					// manage admin, UIManageAdmin
+					UIManageAdmin manageAdmin = new UIManageAdmin();
+					manageAdmin.run();
 					break;
 				case 8:
 					System.out.println("Exiting to the previous level...");
@@ -52,4 +69,5 @@ public class AdminApp {
 			}
         }while (choice != 8);
     }
+	
 }
