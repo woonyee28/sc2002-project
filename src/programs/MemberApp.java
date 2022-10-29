@@ -18,6 +18,8 @@ public class MemberApp {
 
         do{
             System.out.println("====================MemberApp======================\n");
+			System.out.println("What would you like to do?");
+			System.out.println("\t[1] View your booking history and review ratings\n\t[2] Amend Bookings\n\t[3] View Movies and Book Tickets\n\t[4] View Sales\n\t[5] Go back to previous menu.");
 			choice = Integer.valueOf(sc.next());
 			System.out.println();
 			
