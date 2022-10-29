@@ -12,6 +12,7 @@ public class MoblimaMainApp{
         System.out.println("Welcome to MOBLIMA Booking System!");
 		app.run();
 	}
+   
 
     public void run(){
         int choice = -1;

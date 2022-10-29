@@ -7,20 +7,30 @@ import models.*;
 import serializers.*;
 
 public class AdminApp {
+	private final String menuOptions[] = {
+        "Amend Booking",
+        "Show Movie Listing",
+        "Show Sales Report",
+        "Create New Movie Listing",
+		"Configure System Settings",
+		"Create New Admin",
+		"Manage Admins",
+		"Exit Admin App"
+	};
     public static void main(String[] args) {
 		AdminApp aApp = new AdminApp();
 		aApp.run();
 	}
 
     public void run(){
-        int choice = -1;
+        int i,choice = -1;
         Scanner sc = new Scanner(System.in);
 
         do{
             System.out.println("====================AdminApp======================\n");
-			System.out.println("What would you like to do?");
-			System.out.println("\t[1] Amend Bookings\n\t[2] Show movies, Book Tickets\n\t[3] Saales Report\n\t[4] Create new Movie Listing\n\t[5] Configure system settings");
-			System.out.println("\t[6] Create new admin account\t[7] Manage Admins\t[8] Return to previous menu");
+			for (i = 1; i <= menuOptions.length; i++) {
+                System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
+            }
 			choice = Integer.valueOf(sc.next());
 			System.out.println();
 			
@@ -40,11 +50,17 @@ public class AdminApp {
 					break;
                 case 5:
 					// Config system setting, UIConfigSystem
+					UIConfigSystem configSystem = new UIConfigSystem();
+					configSystem.run();
 					break;
                 case 6:
 					// sign up admin, UIAdminSignUp
+					UIAdminSignUp adminSignUp = new UIAdminSignUp();
+					adminSignUp.run();
                 case 7:
 					// manage admin, UIManageAdmin
+					UIManageAdmin manageAdmin = new UIManageAdmin();
+					manageAdmin.run();
 					break;
 				case 8:
 					System.out.println("Exiting to the previous level...");
@@ -55,4 +71,5 @@ public class AdminApp {
 			}
         }while (choice != 8);
     }
+	
 }
