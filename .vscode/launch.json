@@ -1,0 +1,98 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Moviebooking",
+            "request": "launch",
+            "mainClass": "tests.Moviebooking",
+            "projectName": "sc2002-project_b5608b9a"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch mainPage",
+            "request": "launch",
+            "mainClass": "mainPage",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch Moviebooking",
+            "request": "launch",
+            "mainClass": "tests.Moviebooking",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch testCinema",
+            "request": "launch",
+            "mainClass": "tests.testCinema",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch testCineplex",
+            "request": "launch",
+            "mainClass": "tests.testCineplex",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch testHoliday",
+            "request": "launch",
+            "mainClass": "tests.testHoliday",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch testMovie",
+            "request": "launch",
+            "mainClass": "tests.testMovie",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch testMovieGoer",
+            "request": "launch",
+            "mainClass": "tests.testMovieGoer",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch testReview",
+            "request": "launch",
+            "mainClass": "tests.testReview",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch testSession",
+            "request": "launch",
+            "mainClass": "tests.testSession",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch testStaff",
+            "request": "launch",
+            "mainClass": "tests.testStaff",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
+            "name": "Launch testTransaction",
+            "request": "launch",
+            "mainClass": "tests.testTransaction",
+            "projectName": "sc2002-project_cd3e2a63"
+        }
+    ]
+}

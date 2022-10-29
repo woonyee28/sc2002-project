@@ -90,6 +90,7 @@ public class CinemaSerializer {
                 String reviewsID = cinema.getSessionsID().toString();
                 reviewsID = reviewsID.replace(',', ';').substring(1, reviewsID.length() - 1);
                 oneLine.append(reviewsID);
+
     
                 bw.write(oneLine.toString());
                 bw.newLine();
