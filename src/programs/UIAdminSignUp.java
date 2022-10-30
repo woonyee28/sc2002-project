@@ -44,10 +44,12 @@ public class UIAdminSignUp {
 		String email=null,name=null,password=null,hashedPassword =null;
 		int staffID ,flag=-1;
         
-		Scanner sc = new Scanner(System.in).useDelimiter("\n");
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Creating new Staff...");
 		System.out.println("Please enter staffID:");
 		staffID =sc.nextInt();
+        System.out.println("Please enter your name:");
+        name =sc.next();
         System.out.println("Please enter email:");
         email =sc.next();
         System.out.println("Please enter password:");

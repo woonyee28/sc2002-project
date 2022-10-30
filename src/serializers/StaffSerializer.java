@@ -23,7 +23,6 @@ public class StaffSerializer {
             oneLine.append(admin.getEmail());
             oneLine.append(CSV_SEPARATOR);
             oneLine.append(admin.getPasswordHashed());
-            oneLine.append(CSV_SEPARATOR);
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();

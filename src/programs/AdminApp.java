@@ -37,9 +37,11 @@ public class AdminApp {
             switch (choice) {
 				case 1:
                     // Amend Booking, UIAmendBooking
+					// Zheng Kai
 					break;
 				case 2:
 					// Show movie listing + Book ticket, UIListingAndBooking
+					// Zheng Kai
 					break;
 				case 3:
 					UISalesReporting s = new UISalesReporting();
@@ -47,6 +49,7 @@ public class AdminApp {
 					break;
                 case 4:
 					// Create new movie listing / new session / change movie details, UINewListingSession
+					// Woon Yee
 					break;
                 case 5:
 					// Config system setting, UIConfigSystem

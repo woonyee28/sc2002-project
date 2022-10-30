@@ -26,12 +26,15 @@ public class MemberApp {
             switch (choice) {
                 case 1:
                     // Booking History + review rating, UIBookHistAndReview
+					// Woon Yee
                     break;
 				case 2:
                     // Amend Booking, UIAmendBooking
+					// Zheng Kai
 					break;
 				case 3:
 					// Show movie listing + Book ticket, UIListingAndBooking
+					// Zheng Kai
 					break;
 				case 4:
 					UISalesReporting s = new UISalesReporting();

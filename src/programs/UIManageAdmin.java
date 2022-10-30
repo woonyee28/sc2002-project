@@ -101,7 +101,7 @@ public class UIManageAdmin {
 		String name =null;
 		int staffID =0;
         int flag =-1;
-		Scanner sc = new Scanner(System.in).useDelimiter("\n");
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Deleting Staff...");
 		System.out.println("Please enter id of Staff to be deleted:");
 		staffID = sc.nextInt();
