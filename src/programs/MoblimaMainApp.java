@@ -75,20 +75,19 @@ public class MoblimaMainApp{
 
     public void adminLogIn(){
         // Verify Password then call AdminApp
-        
-        Scanner input = new Scanner(System.in);
-        System.out.println("Please key in your email ID:");
-        String email = input.nextLine();
-        System.out.println("Please key in your password:");
-        String password = input.nextLine();
-
-        StaffLogin user = new StaffLogin();
-        int check = user.run(email, password);
-
-
-        if (check==1){
-            AdminApp m = new AdminApp();
-            m.run();
+        String pass,email;
+        Scanner sc =new Scanner(System.in).useDelimiter("\n");
+        System.out.println("Please enter your Email:");
+        email = sc.next();
+        System.out.println("Please Enter your Password");
+        pass =sc.next();
+        for (Staff s : serializers.StaffSerializer.readFromStaffCSV()){
+            if(s.getEmail().equals(email)){
+                if(s.getPasswordHashed().equals(String.valueOf(pass.hashCode()))){
+                    AdminApp m = new AdminApp();
+                    m.run();
+                }else System.out.println("Invalid email/Wrong password!");
+            }
         }
     }
 }
