@@ -78,14 +78,14 @@ public class MoblimaMainApp{
         String pass,email;
         Scanner sc =new Scanner(System.in).useDelimiter("\n");
         System.out.println("Please enter your Email:");
-        email = sc.next();
+        email = sc.nextLine();
         System.out.println("Please Enter your Password");
-        pass =sc.next();
+        pass =sc.nextLine();
         for (Staff s : serializers.StaffSerializer.readFromStaffCSV()){
             if(s.getEmail().equals(email)){
                 if(s.getPasswordHashed().equals(String.valueOf(pass.hashCode()))){
-                    AdminApp m = new AdminApp();
-                    m.run();
+                    AdminApp n = new AdminApp();
+                    n.run();
                 }else System.out.println("Invalid email/Wrong password!");
             }
         }

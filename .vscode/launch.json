@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MoblimaMainApp",
+            "request": "launch",
+            "mainClass": "programs.MoblimaMainApp",
+            "projectName": "sc2002-project_24a72851"
+        },
+        {
+            "type": "java",
             "name": "Launch Moviebooking",
             "request": "launch",
             "mainClass": "tests.Moviebooking",

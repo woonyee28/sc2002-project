@@ -68,7 +68,7 @@ public class TicketSerializer {
     
     public static void overwriteTicketCSV(ArrayList<Ticket> tList) {
 		try {
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/staffsData.csv",false)));
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/ticketData.csv",false)));
 			for(Ticket t:tList) {
                 StringBuffer oneLine = new StringBuffer();
                 oneLine.append(t.getMovieType());
