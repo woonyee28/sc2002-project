@@ -190,7 +190,7 @@ private static void bookings()
     while(true)
     {
         noOfSeats = sc.nextInt();
-        System.out.println(seatingPlan.size());
+        // System.out.println(seatingPlan.size());
         if (noOfSeats<1)
         {
             System.out.println("Please select at least 1 seat..");
