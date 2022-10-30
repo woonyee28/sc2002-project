@@ -184,42 +184,61 @@ private static void bookings()
     System.out.println("Here is the seating plan for Cinema " + cinema_code.toUpperCase()+":");
     System.out.println("------------SCREEN------------");
     printSeatingPlan(seatingPlan);
-    // System.out.println("How many seats would you like?");
-    // noOfSeats = sc.nextInt();
-    System.out.println("Which seat would you like?");
+    System.out.println("How many seats would you like?");
+    
     int seat = 0;
- 
-    while(loop_seat)
+    while(true)
     {
-           int check_seat =0;
-        seat = sc.nextInt();
-        if(seat>70 || seat <1)
+        noOfSeats = sc.nextInt();
+        System.out.println(seatingPlan.size());
+        if (noOfSeats<1)
         {
-            System.out.println("Please choose seat that are available");
+            System.out.println("Please select at least 1 seat..");
+            // seat = 0;
             continue;
         }
-        for(Integer i : seatingPlan)
+        else if(noOfSeats >= 70-seatingPlan.size())
         {
-            if(seat == i)
-            {
-                check_seat++;
-                System.out.println("Seat Taken. Please select another seat");
-                break;
-            }
-                        
+            System.out.println("No of seat exceeded remaining seats left, Please select again");
+            // seat = 0;
+            continue;
         }
-        if(check_seat == 0)
-        {
-            loop_seat = false;
-        }
-   
+        break;
+
     }
-    seatingPlan.add(seat);
+   
+    if (noOfSeats == 1)
+    {
+        System.out.println("Which seat would you like?");
+        seat = bookSeats(seatingPlan);
+        seatingPlan.add(seat);
+        LocalDateTime now = LocalDateTime.now();
+        SessionID.add(dtf.format(now));
+        //TO IMPLEMENT NO: OF SeATS
+    }
+    else
+    {
+        //If seats is more than 1, allow user to book multiple seats
+        for(int z =1; z<=noOfSeats; z++)
+        {
+            // display which seat user is selecting
+            System.out.println("Please select the seat you would like for seat "+ z  );
+            seat = bookSeats(seatingPlan);
+            seatingPlan.add(seat);
+            LocalDateTime now = LocalDateTime.now();
+            SessionID.add(dtf.format(now));
+        }
+    }
+   
+    System.out.println("Ticket price is: xxx");
+
+
+  
 
     // FORMAT OF SESSION ID: DATE+TIME (yyyyMMddHHmm) Year->Month>Day->Hours->Minutes
-    LocalDateTime now = LocalDateTime.now();
+    
     //adds current time to SessionID
-    SessionID.add(dtf.format(now));
+
     //Update data into CSV
     CinemaSerializer.updateCinemasFromCSV(cinema_code.toUpperCase(),toStringClass(cinema_class), seatingPlan,SessionID);
     System.out.println("Successfully booked the seat you requested");
@@ -228,6 +247,39 @@ private static void bookings()
     //at this point can either call the function again or go back main page.
 
     }
+
+private static int bookSeats( ArrayList<Integer> seatingPlan)
+{
+    Boolean loop_seat = true;
+    Scanner sc = new Scanner(System.in);
+    int seat = 0;
+    while(loop_seat)
+        {
+               int check_seat =0;
+            seat = sc.nextInt();
+            if(seat>70 || seat <1)
+            {
+                System.out.println("Please choose seat that are available");
+                continue;
+            }
+            for(Integer i : seatingPlan)
+            {
+                if(seat == i)
+                {
+                    check_seat++;
+                    System.out.println("Seat Taken. Please select another seat");
+                    break;
+                }
+                            
+            }
+            if(check_seat == 0)
+            {
+                loop_seat = false;
+            }
+           
+        }
+        return seat;
+}
 
 private static String toStringClass(int cinema_class)
 {
@@ -369,6 +421,9 @@ private static int getCinemaClass(String cinema_code)
 }
 
 
+//This V1 version able to get directly from CSV, CINEPLEX cinema code.
+//It is not hard coded
+
 private static String getCineCode_V1(String cineplex_choice)
 {
     String cinema_choice ="";
@@ -401,8 +456,11 @@ private static String getCineCode_V1(String cineplex_choice)
 
 }
 
+
+//Deprecated function, hard coded the section of row
 // gets the Cineplex choice and returns the cinema choice in small case format
 //returns aaa,aab,aac/ bba,bbb,bbc, cca,ccb,ccc
+
 private static String getCineCode(String cineplex_Choice)
 {
     String cinema_choice ="";
