@@ -71,3 +71,7 @@
 3. (String) dayType (Weekday/Special)
 4. (boolean) afterSix
 5. (int) price
+
+##PriceData
+0.(String) Cat - e.g. Student/Adult/SeniorCitizen/Special* - refers to eve of PH and PH
+1.(double) Price
