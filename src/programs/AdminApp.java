@@ -8,14 +8,14 @@ import serializers.*;
 
 public class AdminApp {
 	private final String menuOptions[] = {
-        "Amend Booking",
-        "Show Movie Listing",
-        "Show Sales Report",
-        "Create New Movie Listing",
-		"Configure System Settings",
-		"Create New Admin",
-		"Manage Admins",
-		"Exit Admin App"
+        "[1] Amend Booking",
+        "[2] Show Movie Listing",
+        "[3] Show Sales Report",
+        "[4] Create New Movie Listing",
+		"[5] Configure System Settings",
+		"[6] Create New Admin",
+		"[7] Manage Admins",
+		"[8] Exit Admin App"
 	};
     public static void main(String[] args) {
 		AdminApp aApp = new AdminApp();

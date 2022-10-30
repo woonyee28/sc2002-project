@@ -106,7 +106,7 @@ public class UIConfigSystem {
         Scanner sc =new Scanner(System.in).useDelimiter("\n");
         System.out.println("Updating Holiday...");
         System.out.println("Please enter name of Holiday to be updated:");
-        name =sc.next();
+        name =sc.nextLine();
         for (Holiday h: serializers.HolidaySerializer.readFromHolidayCSV()){
             if (h.getName().equals(name)){
                 flag =1;
@@ -116,7 +116,7 @@ public class UIConfigSystem {
 
         if(flag==1){
             System.out.println("Please enter new date of Holiday (dd-mm-yyy):");
-            date =sc.next();
+            date =sc.nextLine();
             HolidaySerializer.updateHolidayFromCSV(name, date);
         }else System.out.println(name + " Holiday does not exists!");
     }

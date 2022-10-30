@@ -46,7 +46,7 @@ public class MoblimaMainApp{
     public void memberLogIn(){
         // Verify Password then call MemberApp
         Scanner input = new Scanner(System.in);
-        System.out.println("Please key in your email ID:");
+        System.out.println("Please key in your email:");
         String email = input.nextLine();
         System.out.println("Please key in your password:");
         String password = input.nextLine();
@@ -78,9 +78,9 @@ public class MoblimaMainApp{
         String pass,email;
         Scanner sc =new Scanner(System.in).useDelimiter("\n");
         System.out.println("Please enter your Email:");
-        email = sc.next();
+        email = sc.nextLine();
         System.out.println("Please Enter your Password");
-        pass =sc.next();
+        pass =sc.nextLine();
         for (Staff s : serializers.StaffSerializer.readFromStaffCSV()){
             if(s.getEmail().equals(email)){
                 if(s.getPasswordHashed().equals(String.valueOf(pass.hashCode()))){
