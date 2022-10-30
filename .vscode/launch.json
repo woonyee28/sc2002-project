@@ -9,6 +9,20 @@
             "name": "Launch Moviebooking",
             "request": "launch",
             "mainClass": "tests.Moviebooking",
+            "projectName": "sc2002-project_985b3ca0"
+        },
+        {
+            "type": "java",
+            "name": "Launch AmendBooking",
+            "request": "launch",
+            "mainClass": "tests.AmendBooking",
+            "projectName": "sc2002-project_985b3ca0"
+        },
+        {
+            "type": "java",
+            "name": "Launch Moviebooking",
+            "request": "launch",
+            "mainClass": "tests.Moviebooking",
             "projectName": "sc2002-project_b5608b9a"
         },
         {
