@@ -1,3 +1,6 @@
+//Author Zheng Kai
+//last modified - 30/10/22
+
 package tests;
 import models.*;
 
@@ -44,6 +47,7 @@ public class Moviebooking {
                     break;
                 case 1: 
                     System.out.println("Now Showing:");
+                    System.out.println("To be added...");
                     //insert function to show movie listing
                     break;
     
@@ -52,7 +56,7 @@ public class Moviebooking {
                     bookings();
                     break;
                 case 3:
-                    System.out.println("Please select a cineplex:  (Currently dont work)");
+                    System.out.println("Please select a cineplex: ");
                     showSeatPlan();
                     break;
                 default:
@@ -256,7 +260,9 @@ private static int bookSeats( ArrayList<Integer> seatingPlan)
     while(loop_seat)
         {
                int check_seat =0;
-            seat = sc.nextInt();
+               if(sc.hasNextInt())
+               {
+                seat = sc.nextInt();
             if(seat>70 || seat <1)
             {
                 System.out.println("Please choose seat that are available");
@@ -275,6 +281,16 @@ private static int bookSeats( ArrayList<Integer> seatingPlan)
             if(check_seat == 0)
             {
                 loop_seat = false;
+            }
+               }
+            
+
+            else
+            {
+                sc.nextLine();
+                System.out.println("Enter a valid Integer value");
+                // System.out.println("Please enter the valid integer");
+
             }
            
         }
