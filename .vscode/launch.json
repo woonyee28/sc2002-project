@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch UISalesReporting",
+            "request": "launch",
+            "mainClass": "programs.UISalesReporting",
+            "projectName": "sc2002-project_24a72851"
+        },
+        {
+            "type": "java",
+            "name": "Launch Moviebooking",
+            "request": "launch",
+            "mainClass": "tests.Moviebooking",
+            "projectName": "sc2002-project_24a72851"
+        },
+        {
+            "type": "java",
             "name": "Launch UIAdminSignUp",
             "request": "launch",
             "mainClass": "programs.UIAdminSignUp",
