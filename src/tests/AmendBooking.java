@@ -103,22 +103,27 @@ public class AmendBooking {
     //     }
     // }
     int getIndex;
-
+    int check_seat;
         while(true)
         {
             if (noOfSeats == 1)
             {
-                amendSeat(seatingPlan, SessionID);
+                check_seat = amendSeat(seatingPlan, SessionID);
+                
                 //if not in db, means user selected a seat that is already empty
             }
             else
             {
                 for (int i=1; i<=noOfSeats; i++)
                 {
-                    System.out.println("Selecting seat" + i + "..");
-                    amendSeat(seatingPlan, SessionID);
+                    System.out.println("Selecting seat " + i + "..");
+                    check_seat = amendSeat(seatingPlan, SessionID);
+              
+                    
                 }
             }
+
+            
 
             break;
         }
@@ -138,7 +143,7 @@ public class AmendBooking {
     
 
     
-
+//Wil ask user for which seat do they wan to remove , and remove the data locally
 private static int amendSeat(ArrayList<Integer> seatingPlan, ArrayList<String> SessionID)
 {
     int seat;
@@ -156,10 +161,17 @@ private static int amendSeat(ArrayList<Integer> seatingPlan, ArrayList<String> S
             seatingPlan.remove(getIndex);
             SessionID.remove(getIndex);
             // seatingPlan.remove(Integer.valueOf(seat));
-            System.out.println("Successfully remove seat");
+            // System.out.println("Successfully remove seat");
             return 1;
         }
-
+        else
+        {
+            System.out.println("The seat you selected is already empty");
+            System.out.println("Please select the seats with 'X' ");
+            amendSeat(seatingPlan, SessionID);
+            // break;
+        }
+        // return -1
 
 }
     return -1;
