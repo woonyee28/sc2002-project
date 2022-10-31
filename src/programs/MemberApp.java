@@ -2,10 +2,6 @@ package programs;
 
 import java.util.Scanner;
 
-import managers.*;
-import models.*;
-import serializers.*;
-
 public class MemberApp {
 	private int movieGoerID;
 
@@ -39,6 +35,7 @@ public class MemberApp {
 					// Zheng Kai
 					break;
 				case 4:
+					// Woon Yee
 					UISalesReporting s = new UISalesReporting();
 					s.run();
 					break;
@@ -50,5 +47,6 @@ public class MemberApp {
 					break;
 			}
         }while (choice != 5);
+		sc.close();
     }
 }

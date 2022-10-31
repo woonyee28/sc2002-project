@@ -3,8 +3,6 @@ package programs;
 import java.util.Scanner;
 
 import managers.SettingsManager;
-import models.*;
-import serializers.*;
 
 public class UIConfigSystem {
     private final String menuOptions[] = {
@@ -16,10 +14,6 @@ public class UIConfigSystem {
         "Edit Prices",
         "Exit System Config"
     };
-    public static void main(String[] args) {
-		UIConfigSystem app = new UIConfigSystem();
-        app.run();
-	}
 
     public void run(){
         int i,choice = -1;

@@ -12,7 +12,7 @@ public class MemberManager implements logIn {
     
 
     public MemberManager(){
-        this.mList = MovieGoerSerializer.readFromMovieGoerCSV();
+        MemberManager.mList = MovieGoerSerializer.readFromMovieGoerCSV();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MemberManager implements logIn {
     @Override
     public boolean checkExistenceEmail(String email){
         boolean exists = false;
-        for (MovieGoer m: this.mList){
+        for (MovieGoer m: MemberManager.mList){
             if (m.getEmail().equals(email)){
                 exists = true;
                 break;
@@ -45,7 +45,7 @@ public class MemberManager implements logIn {
 
     public String checkName(String email){
         String name = email;
-        for (MovieGoer m: this.mList){
+        for (MovieGoer m: MemberManager.mList){
             if (m.getEmail().equals(email)){
                 name = m.getName();
                 break;
@@ -61,6 +61,7 @@ public class MemberManager implements logIn {
         String email = input.nextLine();
         System.out.println("Please key in your password:");
         String password = input.nextLine();
+        input.close();
         if(!login.checkExistenceEmail(email)){
 			System.out.println("Email does not exist!");
 			return -1;
@@ -78,11 +79,12 @@ public class MemberManager implements logIn {
 				return -1;
 			}
 		}
+    
     }
 
     public int checkExistenceID(){
         int largest = 0;
-		for (MovieGoer m:this.mList) {
+		for (MovieGoer m:MemberManager.mList) {
 			if (largest < m.getMovieGoersID()) {
 				largest = m.getMovieGoersID();
 			}
@@ -118,7 +120,7 @@ public class MemberManager implements logIn {
             Scanner input2 = new Scanner(System.in); 
             System.out.println("Please enter your password:");
             password = input2.nextLine();
-            
+            input2.close();
             passwordHashed = String.valueOf(password.hashCode());
 
             MovieGoer newMem = new MovieGoer(movieGoerID, name, email, age, passwordHashed, mobile, null);
@@ -129,6 +131,7 @@ public class MemberManager implements logIn {
         else{
             System.out.println("Account already exists!");
         }
+        input1.close();
         return 0;
 		
     }

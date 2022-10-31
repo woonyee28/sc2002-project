@@ -69,6 +69,7 @@ public class SettingsManager {
             HolidaySerializer.writeToHolidayCSV(newH);
             printHolidayList();
         }else System.out.println(name +" holiday not found!");
+        input1.close();
 
     }
 
@@ -88,6 +89,7 @@ public class SettingsManager {
                 HolidaySerializer.updateHolidayFromCSV(name, newDate);
                 printHolidayList();
             }else System.out.println(name +" holiday not found!");
+            input1.close();
     }
 
     public static void deleteHoliday(){
@@ -102,6 +104,7 @@ public class SettingsManager {
             HolidaySerializer.deleteHolidayFromCSV(name);
             printHolidayList();
         }else System.out.println(name +" holiday not found!");
+        input1.close();
     }
 
     public static void printPriceList(){
@@ -129,6 +132,8 @@ public class SettingsManager {
             PriceSerializer.updatePriceFromCSV(cat, newPrice);
             printPriceList();
         }else System.out.println(cat +" type not found!");
+        input1.close();
+        input2.close();
     }
     
 

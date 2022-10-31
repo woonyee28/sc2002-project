@@ -3,18 +3,13 @@ package programs;
 import java.util.Scanner;
 
 import managers.AdminManager;
-import models.*;
-import serializers.*;
+
 
 public class UIAdminSignUp {
      private final String menuOptions[] = {
         "Create New Admin",
         "Exit Admin Signup"
     };
-    public static void main(String[] args) {
-		UIAdminSignUp app = new UIAdminSignUp();
-		app.run();
-	}
 
     public void run(){
         int i,choice = -1;

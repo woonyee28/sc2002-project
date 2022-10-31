@@ -1,17 +1,17 @@
 package managers;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeMap;
 
-import managers.*;
-import models.*;
-import serializers.*;
+import models.Movie;
+import models.MovieGoer;
+import models.Review;
+import models.Transaction;
+import serializers.MovieGoerSerializer;
+import serializers.MovieSerializer;
+import serializers.ReviewSerializer;
+import serializers.TransactionSerializer;
+
 
 public class BookingHistManager {
     public static void showBookingHistory(int movieGoerID){
@@ -70,6 +70,7 @@ public class BookingHistManager {
         }
         if (movieid==-1){
             System.out.println("Movie doesn't exist!");   
+            sc.close();
             return;
         }
         System.out.println("Input the review without comma: ");
@@ -91,12 +92,16 @@ public class BookingHistManager {
             if (movieid == m.getMovieID()){
                 ArrayList<Integer> reviewsID;
                 reviewsID = m.getReviewsID();
+                if (reviewsID.contains(-1)){
+                    reviewsID.remove(-1);
+                }
                 reviewsID.add(maxx+1);
                 MovieSerializer.updateMovieFromCSV(movieid,m.getTitle(),m.getType(),m.getSynopsis(),score,m.getShowingStatus(),m.getDirector(),m.getCasts(),reviewsID);
                 break;
             }
         }
-        System.out.println("Update successful!");        
+        System.out.println("Update successful!");   
+        sc.close();     
     }
     
 }

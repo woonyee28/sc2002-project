@@ -1,16 +1,19 @@
 package managers;
 
 import java.util.Collections;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
-import managers.*;
-import models.*;
-import serializers.*;
+import models.Movie;
+import models.Review;
+import models.Transaction;
+import serializers.MovieSerializer;
+import serializers.ReviewSerializer;
+import serializers.TransactionSerializer;
 
 public class SalesManager {
     public static void sortByRating(){
@@ -18,8 +21,8 @@ public class SalesManager {
         for (Movie m: MovieSerializer.readFromMovieCSV()) {           
             d.put(m.getRating(),m.getTitle());
         }
-        Set set = d.entrySet();
-        Iterator i = set.iterator();
+        Set<Entry<Double, String>> set = d.entrySet();
+        Iterator<Entry<Double, String>> i = set.iterator();
         int c=0;
         while (i.hasNext()) {
             Map.Entry me = (Map.Entry)i.next();
@@ -33,7 +36,7 @@ public class SalesManager {
     }
 
     public static void sortBySales(){
-        Map<Double, Integer> d = new TreeMap<Double,Integer>(Collections.reverseOrder());
+        final Map<Double, Integer> d = new TreeMap<Double,Integer>(Collections.reverseOrder());
         for (Transaction m: TransactionSerializer.readFromTransactionCSV()) {   
             int id = m.getMovieID();  
             Set<Double> prices = d.keySet();      
@@ -91,5 +94,6 @@ public class SalesManager {
         if (check==0){
             System.out.println("The movie has no review yet.");
         }
+        sc.close();
     }
 }

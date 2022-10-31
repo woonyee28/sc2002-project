@@ -8,7 +8,6 @@ import models.Cinemas;
 import models.Cineplexes;
 import serializers.CinemaSerializer;
 import serializers.CineplexSerializer;
-import tests.Moviebooking;
 
 public class AmendBooking {
 
@@ -17,7 +16,6 @@ public class AmendBooking {
     
 
     public static void main(String[] args) {
-        String cineplex;
         String cineplex_choice;
         String cinema_code =null;
         int cinema_class;
@@ -91,8 +89,7 @@ public class AmendBooking {
         // System.out.println("Please select Which seat would you like to cancel?");
 
         // seat = sc.nextInt();
-
-
+        sc.close();
         
         
 
@@ -214,7 +211,8 @@ private static String getCineCode_V1(String cineplex_choice)
 {
     String cinema_choice ="";
     Scanner sc = new Scanner(System.in);
-    int error  =0;
+    
+    
     //Prints entire CinemaCode in the Cineplex
     System.out.println(Cineplex.size());
     for(int i =0; i<Cineplex.size(); i++)
@@ -235,10 +233,14 @@ private static String getCineCode_V1(String cineplex_choice)
             }
         }
     }
+    
     //if nothing is triggered, likely error, not found in DB or user enter incorrectly
 
     System.out.println("Some error occured");
+    
+    
     return null;
+    
 
 }
 

@@ -2,11 +2,12 @@ package programs;
 
 import java.util.Scanner;
 
+import managers.AdminManager;
+import managers.MemberManager;
+
 // import com.apple.laf.resources.aqua;
 
-import managers.*;
-import models.*;
-import serializers.*;
+
 
 public class MoblimaMainApp{
     public static void main(String[] args) {
@@ -53,5 +54,6 @@ public class MoblimaMainApp{
 					break;
 			}
         }while (choice != 4);
+        sc.close();
     }
 }

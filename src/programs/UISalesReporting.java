@@ -1,17 +1,8 @@
 package programs;
 
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeMap;
 
-import managers.*;
-import models.*;
-import serializers.*;
-import managers.*;
+import managers.SalesManager;
 
 public class UISalesReporting {
     private final String menuOptions[] = {
@@ -20,10 +11,6 @@ public class UISalesReporting {
         "Show Reviews",
         "Exit Sales Reporting"
     };
-    public static void main(String[] args) {
-		UISalesReporting s = new UISalesReporting();
-		s.run();
-	}
 
     public void run(){
         int choice = -1;
@@ -59,5 +46,6 @@ public class UISalesReporting {
 					break;
 			}
         }while (choice != 4);
+        sc.close();
     }
 }

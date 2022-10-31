@@ -1,10 +1,9 @@
 package programs;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import managers.AdminManager;
-import models.*;
-import serializers.*;
+
 
 public class UIManageAdmin {
     private int adminID;
@@ -58,5 +57,6 @@ public class UIManageAdmin {
 					break;
 			}
         }while (choice != 4);
+        sc.close();
     }
 }

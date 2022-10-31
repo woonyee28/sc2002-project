@@ -2,22 +2,18 @@ package programs;
 
 import java.util.Scanner;
 
-import managers.*;
-import models.*;
-import serializers.*;
-
 public class AdminApp {
 
 	private int adminID;
 	private final String menuOptions[] = {
-        "[1] Amend Booking",
-        "[2] Show Movie Listing",
-        "[3] Show Sales Report",
-        "[4] Create New Movie Listing",
-		"[5] Configure System Settings",
-		"[6] Create New Admin",
-		"[7] Manage Admins",
-		"[8] Exit Admin App"
+        "Amend Booking",
+        "Show Movie Listing",
+        "Show Sales Report",
+        "Create New Movie/Session Listing",
+		"Configure System Settings",
+		"Create New Admin",
+		"Manage Admins",
+		"Exit Admin App"
 	};
 
 	public AdminApp(int adminID){
@@ -57,6 +53,8 @@ public class AdminApp {
                 case 4:
 					// Create new movie listing / new session / change movie details, UINewListingSession
 					// Woon Yee
+					UINewListingSession l = new UINewListingSession();
+					l.run();
 					break;
                 case 5:
 					// Config system setting, UIConfigSystem
@@ -80,6 +78,7 @@ public class AdminApp {
 					break;
 			}
         }while (choice != 8);
+		sc.close();
     }
 	
 }
