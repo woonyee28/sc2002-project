@@ -1,5 +1,6 @@
 package managers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -76,7 +77,23 @@ public class BookingHistManager {
         System.out.println("Input the rating in 1 decimal: ");
         Double rating = sc.nextDouble();
         ReviewSerializer.updateReviewFromCSV(maxx+1, movieGoerID, rating, review, movieid);
-        
+        int count=0;
+        Double score=0.0;
+        for (Review r: ReviewSerializer.readFromReviewCSV()){
+            if (r.getMovieID()==movieid){
+                count+=1;
+                score+=r.getRating();
+            }
+        }
+        for (Movie m: MovieSerializer.readFromMovieCSV()) {    
+            if (movieid == m.getMovieID()){
+                ArrayList<Integer> reviewsID;
+                reviewsID = m.getReviewsID();
+                reviewsID.add(maxx+1);
+                MovieSerializer.updateMovieFromCSV(movieid,m.getTitle(),m.getType(),m.getSynopsis(),score,m.getShowingStatus(),m.getDirector(),m.getCasts(),reviewsID);
+                break;
+            }
+        }
         System.out.println("Update successful!");        
     }
     
