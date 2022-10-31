@@ -5,7 +5,7 @@
 1. (String) title
 2. (String) type
 3. (String) synopsis
-4. (int) rating
+4. (Double) rating
 5. (String) showingStatus
 6. (String) director
 7. (ArrayList< String >) cast
