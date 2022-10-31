@@ -80,7 +80,7 @@ public class SessionSerializer {
                 String cast = session.getSeatingPlan().toString();
                 cast = cast.replace(',', ';').substring(1, cast.length() - 1);
                 oneLine.append(cast);
-                oneLine.append(CSV_SEPARATOR);
+        
     
                 bw.write(oneLine.toString());
                 bw.newLine();

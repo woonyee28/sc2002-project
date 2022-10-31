@@ -104,22 +104,21 @@ public class MovieManager {
                 case 2:
                     System.out.println("Enter New Type: ");
                     type = sc.nextLine();
-                    sc.nextLine();
+                    
                     break;                
 				case 3:
                     System.out.println("Enter New Synopsis: ");
                     synopsis = sc.nextLine();
-                    sc.nextLine();
+                    
 					break;
 				case 4:
                     System.out.println("Enter New Showing Status (No Longer Showing, Now Showing, Coming Soon): ");
 					showingStatus = sc.nextLine();
-                    sc.nextLine();
+                
 					break;
                 case 5:
                     System.out.println("Enter New Director: ");
-                    sc.nextLine();
-                    
+                
                     director = sc.nextLine();
                     
                     break;

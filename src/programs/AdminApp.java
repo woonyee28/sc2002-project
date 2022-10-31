@@ -13,7 +13,7 @@ public class AdminApp {
         "Amend Booking",
         "Show Movie Listing",
         "Show Sales Report",
-        "Create New Movie Listing",
+        "Create New Movie/Session Listing",
 		"Configure System Settings",
 		"Create New Admin",
 		"Manage Admins",
