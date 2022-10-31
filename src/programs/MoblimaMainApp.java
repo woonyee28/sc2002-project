@@ -2,33 +2,49 @@ package programs;
 
 import java.util.Scanner;
 
-import managers.*;
-import models.*;
-import serializers.*;
+import managers.AdminManager;
+import managers.MemberManager;
+
+// import com.apple.laf.resources.aqua;
+
+
 
 public class MoblimaMainApp{
     public static void main(String[] args) {
 		MoblimaMainApp app = new MoblimaMainApp();
+        System.out.println("Welcome to MOBLIMA Booking System!");
 		app.run();
 	}
+   
 
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);
+        int adminID=0;
+        
 
         do{
             System.out.println("====================MoblimaMainApp======================\n");
+            System.out.println("Are you a:\n\t[1] Moblima Member\t[2] New User\t[3] Moblima Staff");
             choice = Integer.valueOf(sc.next());
             System.out.println();
             switch (choice) {
 				case 1:
-                    memberLogIn();
+                    int movieGoerID = MemberManager.logIn();
+                    if(movieGoerID!=-1){
+                        MemberApp m = new MemberApp(movieGoerID);
+                        m.run();
+                    }
 					break;
 				case 2:
-					memberSignUp();
+					MemberManager.signUp();
 					break;
 				case 3:
-					adminLogIn();
+                    adminID = AdminManager.logIn();
+                    if(adminID!=-1){
+                        AdminApp a = new AdminApp(adminID);
+                        a.run();
+                    }
 					break;
 				case 4:
 					System.out.println("Program exiting...");
@@ -38,20 +54,6 @@ public class MoblimaMainApp{
 					break;
 			}
         }while (choice != 4);
-    }
-    public void memberLogIn(){
-        // Verify Password then call MemberApp
-        MemberApp m = new MemberApp();
-        m.run();
-    }
-    
-    public void memberSignUp(){
-        // Create Account then go back to memberLogIn
-    }
-
-    public void adminLogIn(){
-        // Verify Password then call AdminApp
-        AdminApp m = new AdminApp();
-        m.run();
+        sc.close();
     }
 }

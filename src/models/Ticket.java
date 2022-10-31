@@ -9,6 +9,15 @@ public class Ticket{
         private boolean afterSix;
         private int price;
 
+        public Ticket(String movieType,String cineplexCode,String ageCat,String dayType,boolean afterSix,int price){
+            this.movieType=movieType;
+            this.cineplexCode=cineplexCode;
+            this.ageCat=ageCat;
+            this.dayType=dayType;
+            this.afterSix=afterSix;
+            this.price=price;
+        }
+
         public String getMovieType() {
             return movieType;
         }
