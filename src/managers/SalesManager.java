@@ -24,6 +24,7 @@ public class SalesManager {
         Set<Entry<Double, String>> set = d.entrySet();
         Iterator<Entry<Double, String>> i = set.iterator();
         int c=0;
+        
         while (i.hasNext()) {
             Map.Entry me = (Map.Entry)i.next();
             System.out.print(me.getValue() + ": ");
@@ -33,6 +34,7 @@ public class SalesManager {
                 break;
             }
         }
+        
     }
 
     public static void sortBySales(){
