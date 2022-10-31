@@ -7,11 +7,7 @@ import models.*;
 import serializers.*;
 
 public class MemberApp {
-    public static void main(String[] args) {
-		MemberApp mApp = new MemberApp();
-		mApp.run();
-	}
-
+    
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);

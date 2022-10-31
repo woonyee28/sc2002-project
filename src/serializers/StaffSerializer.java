@@ -98,8 +98,8 @@ public class StaffSerializer {
 	    }
 	    if (flag==1){
 	        StaffSerializer.overwriteStaffCSV(aList);
-	        System.out.println("Staff record, name = " +name+" id = "+ staffID+" successfully updated!");
-	    } else System.out.println("Staff record, name = " +name+" id = "+ staffID+" update unsuccessful!");
+	        System.out.println("Admin account: name = " +name+" id = "+ staffID+" successfully updated!");
+	    } else System.out.println("Admin account: name = " +name+" id = "+ staffID+" update unsuccessful!");
 }
 
 public static void deleteStaffFromCSV(int staffID, String name) {
@@ -115,7 +115,7 @@ public static void deleteStaffFromCSV(int staffID, String name) {
 	if (flag==1) {
 		aList.remove(index);
 		StaffSerializer.overwriteStaffCSV(aList);
-		System.out.println("Staff record, name = " +name+" id = "+ staffID+" successfully deleted!");
+		System.out.println("Admin account: name = " +name+" id = "+ staffID+" successfully deleted!");
 	}
 	else System.out.println("Staff record, name = " +name+" id = "+ staffID+" deletion unsuccessful!");
 
