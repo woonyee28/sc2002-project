@@ -27,15 +27,15 @@ public class UISalesReporting {
 
     public void run(){
         int choice = -1;
-        System.out.println("====================UI Sales Reporting======================");
-        int i;
-        for (i = 1; i <= menuOptions.length; i++) {
-            System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
-        }
+
         Scanner sc = new Scanner(System.in);
 
         do{
-			
+            System.out.println("====================UI Sales Reporting======================");
+            int i;
+            for (i = 1; i <= menuOptions.length; i++) {
+                System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
+            }
             choice = Integer.valueOf(sc.next());
 			
             switch (choice) {

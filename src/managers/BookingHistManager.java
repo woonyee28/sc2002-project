@@ -76,7 +76,8 @@ public class BookingHistManager {
         String review = sc.nextLine();
         System.out.println("Input the rating in 1 decimal: ");
         Double rating = sc.nextDouble();
-        ReviewSerializer.updateReviewFromCSV(maxx+1, movieGoerID, rating, review, movieid);
+        Review rrr= new Review(maxx+1, movieGoerID, rating, review, movieid);
+        ReviewSerializer.writeToReviewCSV(rrr);
         int count=0;
         Double score=0.0;
         for (Review r: ReviewSerializer.readFromReviewCSV()){
@@ -85,6 +86,7 @@ public class BookingHistManager {
                 score+=r.getRating();
             }
         }
+        score/=count;
         for (Movie m: MovieSerializer.readFromMovieCSV()) {    
             if (movieid == m.getMovieID()){
                 ArrayList<Integer> reviewsID;
