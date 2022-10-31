@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch AmendBooking",
+            "request": "launch",
+            "mainClass": "tests.AmendBooking",
+            "projectName": "sc2002-project_cd3e2a63"
+        },
+        {
+            "type": "java",
             "name": "Launch UINewListingSession",
             "request": "launch",
             "mainClass": "programs.UINewListingSession",

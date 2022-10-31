@@ -169,7 +169,7 @@ private static int amendSeat(ArrayList<Integer> seatingPlan, ArrayList<String> S
             System.out.println("The seat you selected is already empty");
             System.out.println("Please select the seats with 'X' ");
             amendSeat(seatingPlan, SessionID);
-            // break;
+            break;
         }
         // return -1
 
