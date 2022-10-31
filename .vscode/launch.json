@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch UINewListingSession",
+            "request": "launch",
+            "mainClass": "programs.UINewListingSession",
+            "projectName": "sc2002-project_24a72851"
+        },
+        {
+            "type": "java",
             "name": "Launch testAdminApp",
             "request": "launch",
             "mainClass": "tests.testAdminApp",

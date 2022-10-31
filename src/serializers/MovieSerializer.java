@@ -133,8 +133,8 @@ public class MovieSerializer{
 	    ArrayList<Movie> aList = MovieSerializer.readFromMovieCSV();
 	    int flag =0;
 	    for (Movie a:aList) {
-		    if (a.getTitle().equals(title)) {
-		    	a.setMovieID(movieID);
+		    if (a.getMovieID()==movieID) {
+		    	a.setTitle(title);
                 a.setType(type);
                 a.setSynopsis(synopsis);
                 a.setRating(rating);

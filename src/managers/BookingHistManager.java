@@ -91,6 +91,9 @@ public class BookingHistManager {
             if (movieid == m.getMovieID()){
                 ArrayList<Integer> reviewsID;
                 reviewsID = m.getReviewsID();
+                if (reviewsID.contains(-1)){
+                    reviewsID.remove(-1);
+                }
                 reviewsID.add(maxx+1);
                 MovieSerializer.updateMovieFromCSV(movieid,m.getTitle(),m.getType(),m.getSynopsis(),score,m.getShowingStatus(),m.getDirector(),m.getCasts(),reviewsID);
                 break;

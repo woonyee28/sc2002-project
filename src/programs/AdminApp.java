@@ -57,6 +57,8 @@ public class AdminApp {
                 case 4:
 					// Create new movie listing / new session / change movie details, UINewListingSession
 					// Woon Yee
+					UINewListingSession l = new UINewListingSession();
+					l.run();
 					break;
                 case 5:
 					// Config system setting, UIConfigSystem
