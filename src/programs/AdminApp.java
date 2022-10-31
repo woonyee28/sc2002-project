@@ -2,10 +2,6 @@ package programs;
 
 import java.util.Scanner;
 
-import managers.*;
-import models.*;
-import serializers.*;
-
 public class AdminApp {
 
 	private int adminID;
@@ -82,6 +78,7 @@ public class AdminApp {
 					break;
 			}
         }while (choice != 8);
+		sc.close();
     }
 	
 }

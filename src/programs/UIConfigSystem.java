@@ -3,8 +3,6 @@ package programs;
 import java.util.Scanner;
 
 import managers.SettingsManager;
-import models.*;
-import serializers.*;
 
 public class UIConfigSystem {
     private final String menuOptions[] = {

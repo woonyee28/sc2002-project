@@ -1,17 +1,9 @@
 package programs;
 
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeMap;
 
-import managers.*;
-import models.*;
-import serializers.*;
-import managers.*;
+import managers.BookingHistManager;
+
 
 public class UIBookHistAndReview {
     private int movieGoerID;
@@ -59,5 +51,6 @@ public class UIBookHistAndReview {
 					break;
 			}
         }while (choice != 3);
+        sc.close();
     }
 }

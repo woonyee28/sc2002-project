@@ -25,6 +25,8 @@ public class SessionManager {
         seatingPlan.add(-1);
         Sessions sess = new Sessions(movieID, sessionDate, sessionTime, seatingPlan);
         SessionSerializer.writeToSessionCSV(sess);
+        ii.close();
+        sc.close();
     }
     
     public static void modifySession(){
@@ -89,5 +91,7 @@ public class SessionManager {
         SessionSerializer.deleteSessionsFromCSV(movieID, sessionDate, sessionTime);
         Sessions sa = new Sessions(newMovieID,newSessionDate,newSessionTime,seatingPlan);
         SessionSerializer.writeToSessionCSV(sa);
+        sc.close();
+        ii.close();
     }
 }

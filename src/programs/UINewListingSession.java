@@ -1,17 +1,9 @@
 package programs;
 
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeMap;
 
-import managers.*;
-import models.*;
-import serializers.*;
-import managers.*;
+import managers.MovieManager;
+import managers.SessionManager;
 
 public class UINewListingSession {
     private final String menuOptions[] = {
@@ -74,5 +66,6 @@ public class UINewListingSession {
 					break;
 			}
         }while (choice != 7);
+        sc.close();
     }
 }

@@ -4,8 +4,6 @@ import models.*;
 import serializers.*;
 import java.util.*;
 
-import javax.management.relation.RoleList;
-
 public class MovieManager {
     public static void printAllMovies(){
         for (Movie m: MovieSerializer.readFromMovieCSV()){
@@ -46,6 +44,7 @@ public class MovieManager {
         Movie m = new Movie(movieID+1, title, type, synopsis, rating, showingStatus, director, cast, reviewsID);
         MovieSerializer.writeToMovieCSV(m);
         System.out.println("Movie Recorded!");
+        sc.close();
     }
 
     public static void modifyMovie(){
@@ -142,5 +141,7 @@ public class MovieManager {
 			}
         }while (choice != 7);
         MovieSerializer.updateMovieFromCSV(movieID, title, type, synopsis, rating, showingStatus, director, cast, reviewsID);
+        sc.close();
+        ii.close();
     }
 }

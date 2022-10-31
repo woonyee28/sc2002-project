@@ -2,10 +2,6 @@ package programs;
 
 import java.util.Scanner;
 
-import managers.*;
-import models.*;
-import serializers.*;
-
 public class MemberApp {
 	private int movieGoerID;
 
@@ -51,5 +47,6 @@ public class MemberApp {
 					break;
 			}
         }while (choice != 5);
+		sc.close();
     }
 }

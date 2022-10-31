@@ -1,10 +1,12 @@
 package managers;
 
-import models.*;
-import serializers.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class AdminManager implements logIn{
+import models.Staff;
+import serializers.StaffSerializer;
+
+public class AdminManager{
     private ArrayList<Staff> sList;
 
     public AdminManager(){
@@ -15,7 +17,6 @@ public class AdminManager implements logIn{
         return this.sList;
     }
 
-    @Override
     public boolean checkPassword(String email, String hashedPassword){
         boolean correct = false;
         if (checkExistenceEmail(email)){
@@ -30,7 +31,6 @@ public class AdminManager implements logIn{
         return correct;
     }
 
-    @Override
     public boolean checkExistenceEmail(String email){
         boolean exists = false;
         for (Staff s: this.sList){
@@ -106,6 +106,7 @@ public class AdminManager implements logIn{
         String email = input.nextLine();
         System.out.println("Please key in your password:");
         String password = input.nextLine();
+        input.close();
         if(!login.checkExistenceEmail(email)){
 			System.out.println("Email does not exist!");
 			return -1;
@@ -123,6 +124,7 @@ public class AdminManager implements logIn{
 				return -1;
 			}
 		}
+
     }
 
     
@@ -151,7 +153,7 @@ public class AdminManager implements logIn{
             password = input2.nextLine();
             
             passwordHashed = String.valueOf(password.hashCode());
-
+            input2.close();
             Staff newStaff = new Staff(staffID, name, email, passwordHashed);
             serializers.StaffSerializer.writeToStaffCSV(newStaff);
             System.out.println("Admin account successfully created.");
@@ -160,6 +162,7 @@ public class AdminManager implements logIn{
         else{
             System.out.println("Account already exists!");
         }
+        input1.close();
         return 0;
 		
     }
@@ -207,6 +210,8 @@ public class AdminManager implements logIn{
                 }else System.out.println("Admin email does not found!");
             }else System.out.println("Admin name does not found!");
         }else System.out.println("Admin ID does not found!");
+        input1.close();
+        input2.close();
     }
 
     public static void deleteAdmin(int accountHolderID){
@@ -233,6 +238,7 @@ public class AdminManager implements logIn{
                 }else System.out.println("Admin name not found.");
             }else System.out.println("Error! Cannot delete currently logged in admin!");
         }else System.out.println("Admin ID not found.");
+        input1.close();
+        input2.close();
     }
-    
 }
