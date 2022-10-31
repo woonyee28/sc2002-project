@@ -7,11 +7,11 @@ import models.*;
 import serializers.*;
 
 public class MemberApp {
-    public static void main(String[] args) {
-		MemberApp mApp = new MemberApp();
-		mApp.run();
-	}
+	private int movieGoerID;
 
+	public MemberApp(int movieGoerID){
+		this.movieGoerID = movieGoerID;
+	}
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);
@@ -26,12 +26,17 @@ public class MemberApp {
             switch (choice) {
                 case 1:
                     // Booking History + review rating, UIBookHistAndReview
+					// Woon Yee
+					UIBookHistAndReview h = new UIBookHistAndReview(movieGoerID);
+					h.run();
                     break;
 				case 2:
                     // Amend Booking, UIAmendBooking
+					// Zheng Kai
 					break;
 				case 3:
 					// Show movie listing + Book ticket, UIListingAndBooking
+					// Zheng Kai
 					break;
 				case 4:
 					UISalesReporting s = new UISalesReporting();

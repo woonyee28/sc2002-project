@@ -7,6 +7,8 @@ import models.*;
 import serializers.*;
 
 public class AdminApp {
+
+	private int adminID;
 	private final String menuOptions[] = {
         "[1] Amend Booking",
         "[2] Show Movie Listing",
@@ -17,10 +19,15 @@ public class AdminApp {
 		"[7] Manage Admins",
 		"[8] Exit Admin App"
 	};
-    public static void main(String[] args) {
-		AdminApp aApp = new AdminApp();
-		aApp.run();
+
+	public AdminApp(int adminID){
+		this.adminID=adminID;
 	}
+
+	public int getAdminID(){
+		return this.adminID;
+	}
+
 
     public void run(){
         int i,choice = -1;
@@ -37,9 +44,11 @@ public class AdminApp {
             switch (choice) {
 				case 1:
                     // Amend Booking, UIAmendBooking
+					// Zheng Kai
 					break;
 				case 2:
 					// Show movie listing + Book ticket, UIListingAndBooking
+					// Zheng Kai
 					break;
 				case 3:
 					UISalesReporting s = new UISalesReporting();
@@ -47,6 +56,7 @@ public class AdminApp {
 					break;
                 case 4:
 					// Create new movie listing / new session / change movie details, UINewListingSession
+					// Woon Yee
 					break;
                 case 5:
 					// Config system setting, UIConfigSystem
@@ -59,7 +69,7 @@ public class AdminApp {
 					adminSignUp.run();
                 case 7:
 					// manage admin, UIManageAdmin
-					UIManageAdmin manageAdmin = new UIManageAdmin();
+					UIManageAdmin manageAdmin = new UIManageAdmin(this.adminID);
 					manageAdmin.run();
 					break;
 				case 8:

@@ -6,10 +6,59 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch testAdminApp",
+            "request": "launch",
+            "mainClass": "tests.testAdminApp",
+            "projectName": "sc2002-project_2dbc79e8"
+        },
+        {
+            "type": "java",
+            "name": "Launch UIManageAdmin",
+            "request": "launch",
+            "mainClass": "programs.UIManageAdmin",
+            "projectName": "sc2002-project_2dbc79e8"
+        },
+        {
+            "type": "java",
+            "name": "Launch UIAdminSignUp",
+            "request": "launch",
+            "mainClass": "programs.UIAdminSignUp",
+            "projectName": "sc2002-project_2dbc79e8"
+        },
+        {
+            "type": "java",
             "name": "Launch MoblimaMainApp",
             "request": "launch",
             "mainClass": "programs.MoblimaMainApp",
-            "projectName": "sc2002-project_69ac6e3e"
+            "projectName": "sc2002-project_2dbc79e8"
+        },
+        {
+            "type": "java",
+            "name": "Launch UISalesReporting",
+            "request": "launch",
+            "mainClass": "programs.UISalesReporting",
+            "projectName": "sc2002-project_24a72851"
+        },
+        {
+            "type": "java",
+            "name": "Launch Moviebooking",
+            "request": "launch",
+            "mainClass": "tests.Moviebooking",
+            "projectName": "sc2002-project_24a72851"
+        },
+        {
+            "type": "java",
+            "name": "Launch UIAdminSignUp",
+            "request": "launch",
+            "mainClass": "programs.UIAdminSignUp",
+            "projectName": "sc2002-project_24a72851"
+        },
+        {
+            "type": "java",
+            "name": "Launch MoblimaMainApp",
+            "request": "launch",
+            "mainClass": "programs.MoblimaMainApp",
+            "projectName": "sc2002-project_24a72851"
         },
         {
             "type": "java",
