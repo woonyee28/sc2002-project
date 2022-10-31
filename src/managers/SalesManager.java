@@ -69,4 +69,27 @@ public class SalesManager {
             }
         }
     }
+
+    public static void showReview(){
+        System.out.println("Input the movie name: ");
+        Scanner sc = new Scanner(System.in);
+        int movieid = -1;
+        String movieName = sc.nextLine();
+        for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+            if (movieName.equals(m.getTitle())){
+                movieid = m.getMovieID();
+                break;
+            }
+        }
+        int check = 0;
+        for (Review r: ReviewSerializer.readFromReviewCSV()){
+            if (movieid == r.getMovieID()){
+                System.out.println(r.getReviews());
+                check=1;
+            }
+        }
+        if (check==0){
+            System.out.println("The movie has no review yet.");
+        }
+    }
 }

@@ -8,7 +8,8 @@ import java.util.Scanner;
 import models.*;
 
 public class MemberManager implements logIn {
-    private ArrayList<MovieGoer> mList;
+    private static ArrayList<MovieGoer> mList;
+    
 
     public MemberManager(){
         this.mList = MovieGoerSerializer.readFromMovieGoerCSV();
@@ -62,7 +63,7 @@ public class MemberManager implements logIn {
         String password = input.nextLine();
         if(!login.checkExistenceEmail(email)){
 			System.out.println("Email does not exist!");
-			return 0;
+			return -1;
 		}
 		else {
 			
@@ -70,11 +71,11 @@ public class MemberManager implements logIn {
 				String name = login.checkName(email);
                 System.out.println("Logging in...");
 				System.out.println("Welcome "+ name);
-				return 1;
+				return MemberManager.checkMovieGoerID(email);
 			}
 			else {
 				System.out.println("Wrong password!");
-				return 0;
+				return -1;
 			}
 		}
     }
@@ -140,5 +141,16 @@ public class MemberManager implements logIn {
         }
 
     }
+
+    public static int checkMovieGoerID(String email){
+        for (MovieGoer m: mList){
+            if (m.getEmail().equals(email)){
+                return m.getMovieGoersID();
+            }
+        }
+        return -1;
+    }
+
+    
     
 }

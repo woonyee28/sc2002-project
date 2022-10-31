@@ -7,7 +7,11 @@ import models.*;
 import serializers.*;
 
 public class MemberApp {
-    
+	private int movieGoerID;
+
+	public MemberApp(int movieGoerID){
+		this.movieGoerID = movieGoerID;
+	}
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);
@@ -23,6 +27,8 @@ public class MemberApp {
                 case 1:
                     // Booking History + review rating, UIBookHistAndReview
 					// Woon Yee
+					UIBookHistAndReview h = new UIBookHistAndReview(movieGoerID);
+					h.run();
                     break;
 				case 2:
                     // Amend Booking, UIAmendBooking

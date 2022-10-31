@@ -2,7 +2,7 @@ package programs;
 
 import java.util.Scanner;
 
-import com.apple.laf.resources.aqua;
+// import com.apple.laf.resources.aqua;
 
 import managers.*;
 import models.*;
@@ -29,8 +29,9 @@ public class MoblimaMainApp{
             System.out.println();
             switch (choice) {
 				case 1:
-                    if(MemberManager.logIn()==1){
-                        MemberApp m = new MemberApp();
+                    int movieGoerID = MemberManager.logIn();
+                    if(movieGoerID!=-1){
+                        MemberApp m = new MemberApp(movieGoerID);
                         m.run();
                     }
 					break;

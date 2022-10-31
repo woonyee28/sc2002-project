@@ -66,7 +66,6 @@ public class MemberLogin implements logIn{
 				System.out.println("Wrong password!");
 				return 0;
 			}
-			
 		}
 
     }

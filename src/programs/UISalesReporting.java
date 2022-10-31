@@ -17,6 +17,7 @@ public class UISalesReporting {
     private final String menuOptions[] = {
         "Sort By Rating",
         "Sort By Sales",
+        "Show Reviews",
         "Exit Sales Reporting"
     };
     public static void main(String[] args) {
@@ -46,13 +47,17 @@ public class UISalesReporting {
                     System.out.println("sortBySales():");
 					SalesManager.sortBySales();
 					break;
-				case 3:
+                case 3:
+                    System.out.println("showReview()");
+                    SalesManager.showReview();
+                    break;
+				case 4:
 					System.out.println("Program exiting...");
 					break;
 				default:
 					System.out.println("Please input a valid option.");
 					break;
 			}
-        }while (choice != 3);
+        }while (choice != 4);
     }
 }
