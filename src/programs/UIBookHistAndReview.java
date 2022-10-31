@@ -17,10 +17,6 @@ public class UIBookHistAndReview {
         "Input Review And Rating",
         "Exit to previous level"
     };
-    public static void main(String[] args) {
-		UISalesReporting s = new UISalesReporting();
-		s.run();
-	}
 
     public void run(){
         int choice = -1; 

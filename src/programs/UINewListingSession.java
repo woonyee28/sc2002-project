@@ -15,10 +15,6 @@ public class UINewListingSession {
         "Modify Session Detail",
         "Exit New Listing Session"
     };
-    public static void main(String[] args) {
-		UINewListingSession n = new UINewListingSession();
-		n.run();
-	}
 
     public void run(){
         int choice = -1;

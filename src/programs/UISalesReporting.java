@@ -11,10 +11,6 @@ public class UISalesReporting {
         "Show Reviews",
         "Exit Sales Reporting"
     };
-    public static void main(String[] args) {
-		UISalesReporting s = new UISalesReporting();
-		s.run();
-	}
 
     public void run(){
         int choice = -1;

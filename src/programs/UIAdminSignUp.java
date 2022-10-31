@@ -10,10 +10,6 @@ public class UIAdminSignUp {
         "Create New Admin",
         "Exit Admin Signup"
     };
-    public static void main(String[] args) {
-		UIAdminSignUp app = new UIAdminSignUp();
-		app.run();
-	}
 
     public void run(){
         int i,choice = -1;

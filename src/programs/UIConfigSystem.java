@@ -14,10 +14,6 @@ public class UIConfigSystem {
         "Edit Prices",
         "Exit System Config"
     };
-    public static void main(String[] args) {
-		UIConfigSystem app = new UIConfigSystem();
-        app.run();
-	}
 
     public void run(){
         int i,choice = -1;
