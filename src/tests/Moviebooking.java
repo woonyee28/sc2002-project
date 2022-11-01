@@ -52,20 +52,21 @@ public class Moviebooking {
                     System.out.println("Now Showing:");
                     
                     showMovieListing();
-                    System.out.println("Would you like to book a movie?");
+                    System.out.println("Would you like to book a movie?(Y/N)");
                     book_choice = sc.next().toLowerCase();
                     if(book_choice.equals("y") || book_choice.equals("yes"))
                     {
                         bookings();
+                        break;
                     }
                     else
                     {
                         System.out.println("Going back to main page..");
                         //call for main page function
+                        break;
                     }
                     
-                    
-                    break;
+
     
                 case 2: 
                     System.out.println("Welcome to booking ticket page: ");
@@ -117,7 +118,7 @@ private static void showMovieListing()
 {
     for (Movie m: MovieSerializer.readFromMovieCSV()) {           
         m.toString();
-        System.out.println(m.getTitle()); 
+        System.out.println(m.getMovieID()+1 +": " +  m.getTitle()); 
     }
 }
 
@@ -193,6 +194,7 @@ private static void bookings()
     // System.out.println(cinema_code);
     //show moving listings:
     System.out.println("Which movie would you like to book?");
+    showMovieListing();
     movie_choice = sc.nextInt();
     cinema_class = getCinemaClass(cinema_code);
     if (cinema_class == -1)
