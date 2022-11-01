@@ -47,6 +47,6 @@ public class UIBookHistAndReview {
 					break;
 			}
         }while (choice != 3);
-        sc.close();
+        ;
     }
 }

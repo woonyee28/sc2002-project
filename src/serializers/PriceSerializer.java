@@ -19,7 +19,7 @@ public class PriceSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -43,7 +43,7 @@ public class PriceSerializer {
                pList.add(p);
                
             }
-            br.close();
+            ;
             return pList;
         } 
         catch(IOException e) {
@@ -64,7 +64,7 @@ public class PriceSerializer {
 	            bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }

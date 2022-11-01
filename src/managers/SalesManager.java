@@ -96,6 +96,6 @@ public class SalesManager {
         if (check==0){
             System.out.println("The movie has no review yet.");
         }
-        sc.close();
+        ;
     }
 }

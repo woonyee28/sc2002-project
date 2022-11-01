@@ -46,6 +46,6 @@ public class UISalesReporting {
 					break;
 			}
         }while (choice != 4);
-        sc.close();
+        ;
     }
 }

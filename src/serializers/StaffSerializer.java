@@ -26,7 +26,7 @@ public class StaffSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -52,7 +52,7 @@ public class StaffSerializer {
                adminList.add(admin);
                
             }
-            br.close();
+            ;
             return adminList;
         } 
         catch(IOException e) {
@@ -77,7 +77,7 @@ public class StaffSerializer {
 	            bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }

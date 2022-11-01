@@ -57,6 +57,6 @@ public class UIManageAdmin {
 					break;
 			}
         }while (choice != 4);
-        sc.close();
+        ;
     }
 }

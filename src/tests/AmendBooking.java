@@ -89,7 +89,7 @@ public class AmendBooking {
         // System.out.println("Please select Which seat would you like to cancel?");
 
         // seat = sc.nextInt();
-        sc.close();
+        ;
         
         
 

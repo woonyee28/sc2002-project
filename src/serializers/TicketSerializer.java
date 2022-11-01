@@ -29,7 +29,7 @@ public class TicketSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -57,7 +57,7 @@ public class TicketSerializer {
                adminList.add(newT);
                
             }
-            br.close();
+            ;
             return adminList;
         } 
         catch(IOException e) {
@@ -86,7 +86,7 @@ public class TicketSerializer {
 	            bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }

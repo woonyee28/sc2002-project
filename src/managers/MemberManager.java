@@ -61,7 +61,7 @@ public class MemberManager implements logIn {
         String email = input.nextLine();
         System.out.println("Please key in your password:");
         String password = input.nextLine();
-        input.close();
+        ;
         if(!login.checkExistenceEmail(email)){
 			System.out.println("Email does not exist!");
 			return -1;
@@ -120,7 +120,7 @@ public class MemberManager implements logIn {
             Scanner input2 = new Scanner(System.in); 
             System.out.println("Please enter your password:");
             password = input2.nextLine();
-            input2.close();
+            ;
             passwordHashed = String.valueOf(password.hashCode());
 
             MovieGoer newMem = new MovieGoer(movieGoerID, name, email, age, passwordHashed, mobile, null);
@@ -131,7 +131,7 @@ public class MemberManager implements logIn {
         else{
             System.out.println("Account already exists!");
         }
-        input1.close();
+        ;
         return 0;
 		
     }

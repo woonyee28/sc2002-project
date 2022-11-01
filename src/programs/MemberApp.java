@@ -47,6 +47,6 @@ public class MemberApp {
 					break;
 			}
         }while (choice != 5);
-		sc.close();
+		;
     }
 }

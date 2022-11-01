@@ -73,7 +73,7 @@ public class MemberCreate implements logIn {
             Scanner input2 = new Scanner(System.in); 
             System.out.println("Please enter your password:");
             password = input2.nextLine();
-            input2.close();
+            ;
             
             passwordHashed = String.valueOf(password.hashCode());
 
@@ -85,7 +85,7 @@ public class MemberCreate implements logIn {
         else{
             System.out.println("Account already exists!");
         }
-        input1.close();
+        ;
     
         return 0;
 		

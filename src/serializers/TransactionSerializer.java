@@ -33,7 +33,7 @@ public class TransactionSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -62,7 +62,7 @@ public class TransactionSerializer {
                Transaction m = new Transaction(TID,movieGoersID,bookingDate,bookingTime,cinemaCode,seatingNum, price, movieID);
                transactionList.add(m);
             }
-            br.close();
+            ;
             return transactionList;
         } 
         catch(IOException e) {
@@ -95,7 +95,7 @@ public class TransactionSerializer {
                 bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }

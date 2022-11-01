@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MoblimaMainApp",
+            "request": "launch",
+            "mainClass": "programs.MoblimaMainApp",
+            "projectName": "sc2002-project_15e1bfac"
+        },
+        {
+            "type": "java",
             "name": "Launch UINewListingSession",
             "request": "launch",
             "mainClass": "programs.UINewListingSession",

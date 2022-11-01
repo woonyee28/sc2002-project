@@ -78,7 +78,7 @@ public class AdminApp {
 					break;
 			}
         }while (choice != 8);
-		sc.close();
+		;
     }
 	
 }

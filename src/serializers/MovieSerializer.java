@@ -40,7 +40,7 @@ public class MovieSerializer{
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -81,7 +81,7 @@ public class MovieSerializer{
                movieList.add(m);
                
             }
-            br.close();
+            ;
             return movieList;
         } 
         catch(IOException e) {
@@ -121,7 +121,7 @@ public class MovieSerializer{
                 bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }

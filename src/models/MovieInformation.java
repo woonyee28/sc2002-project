@@ -44,7 +44,7 @@ public class MovieInformation {
         Scanner sc = new Scanner(System.in);
         System.out.println("What would you like to do?\n\t[1] Book tickets\t[2] Return to Movie Listings");
         int choice = sc.nextInt();
-        sc.close();
+        ;
         return choice;
     }
     

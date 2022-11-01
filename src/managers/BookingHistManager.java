@@ -70,7 +70,7 @@ public class BookingHistManager {
         }
         if (movieid==-1){
             System.out.println("Movie doesn't exist!");   
-            sc.close();
+            ;
             return;
         }
         System.out.println("Input the review without comma: ");
@@ -101,7 +101,7 @@ public class BookingHistManager {
             }
         }
         System.out.println("Update successful!");   
-        sc.close();     
+        ;     
     }
     
 }

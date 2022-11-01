@@ -21,7 +21,7 @@ public class HolidaySerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -44,7 +44,7 @@ public class HolidaySerializer {
                Holiday m = new Holiday(name,date);
                holidayList.add(m);
             }
-            br.close();
+            ;
             return holidayList;
         } 
         catch(IOException e) {
@@ -64,7 +64,7 @@ public class HolidaySerializer {
                 bw.newLine();
             }
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }

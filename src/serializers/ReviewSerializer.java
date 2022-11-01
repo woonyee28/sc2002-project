@@ -27,7 +27,7 @@ public class ReviewSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -53,7 +53,7 @@ public class ReviewSerializer {
                Review m = new Review(reviewsID,movieGoersID,rating,reviews,movieID);
                reviewList.add(m);
             }
-            br.close();
+            ;
             return reviewList;
         } 
         catch(IOException e) {
@@ -81,7 +81,7 @@ public class ReviewSerializer {
                 bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }

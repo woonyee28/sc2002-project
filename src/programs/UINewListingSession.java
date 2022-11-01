@@ -62,6 +62,6 @@ public class UINewListingSession {
 					break;
 			}
         }while (choice != 7);
-        sc.close();
+        ;
     }
 }
