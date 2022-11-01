@@ -14,6 +14,8 @@ import serializers.CineplexSerializer;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;    
+import models.Movie;
+import serializers.MovieSerializer;
 
 import javax.lang.model.element.Element;
 // this class defines the movie booking of movies selected
@@ -30,6 +32,7 @@ public class Moviebooking {
 	public static void main(String[] args) {
 		double price=0;
         int selection_choice;
+        String book_choice;
         
        
         Scanner sc = new Scanner(System.in);
@@ -47,8 +50,21 @@ public class Moviebooking {
                     break;
                 case 1: 
                     System.out.println("Now Showing:");
-                    System.out.println("To be added...");
-                    //insert function to show movie listing
+                    
+                    showMovieListing();
+                    System.out.println("Would you like to book a movie?");
+                    book_choice = sc.next().toLowerCase();
+                    if(book_choice.equals("y") || book_choice.equals("yes"))
+                    {
+                        bookings();
+                    }
+                    else
+                    {
+                        System.out.println("Going back to main page..");
+                        //call for main page function
+                    }
+                    
+                    
                     break;
     
                 case 2: 
@@ -95,6 +111,14 @@ public class Moviebooking {
         
 
 
+}
+
+private static void showMovieListing()
+{
+    for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+        m.toString();
+        System.out.println(m.getTitle()); 
+    }
 }
 
 private static void showSeatPlan()
