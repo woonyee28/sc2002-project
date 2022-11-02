@@ -164,17 +164,16 @@ private static int amendSeat(ArrayList<Integer> seatingPlan, ArrayList<String> S
             // System.out.println("Successfully remove seat");
             return 1;
         }
-        else
-        {
-            System.out.println("The seat you selected is already empty");
-            System.out.println("Please select the seats with 'X' ");
-            amendSeat(seatingPlan, SessionID);
-            break;
-        }
         // return -1
-
 }
+
+// seat not in db
+    System.out.println("The seat you selected is already empty");
+    System.out.println("Please select the seats with 'X' ");
+    amendSeat(seatingPlan, SessionID);
     return -1;
+
+    // return -1;
 }
 //function not correct yet.
 // private static int amendSeats(ArrayList<Integer> seatingPlan)
