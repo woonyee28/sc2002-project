@@ -9,6 +9,8 @@ public class MovieGoer {
     private int mobileNumber; 
     private String TID_List;
 
+    public MovieGoer(){}
+    
     public MovieGoer(int movieGoersID, String name, String email, int age, String passwordHashed, int mobileNumber, String TID_List){
         this.movieGoersID = movieGoersID;
         this.name = name;

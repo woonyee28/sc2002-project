@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import models.Movie;
 
-public class MovieSerializer{
+public class MovieSerializer implements InterfaceSerializer<Movie>{
 
     private static final String CSV_SEPARATOR = ",";
-
-    public static void writeToMovieCSV(Movie movie)
+    @Override
+    public void writeToCSV(Movie movie)
     {
         try
         {
@@ -46,8 +46,8 @@ public class MovieSerializer{
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
- 
-    public static ArrayList<Movie> readFromMovieCSV()
+    @Override
+    public ArrayList<Movie> readFromCSV()
     {
         try {
             ArrayList<Movie> movieList = new ArrayList<Movie>();
@@ -89,8 +89,8 @@ public class MovieSerializer{
         }
         return null;
     }
-
-    public static void overwriteMovieCSV(ArrayList<Movie> aList) {
+    @Override
+    public void overwriteCSV(ArrayList<Movie> aList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/moviesData.csv",false)));
 			for(Movie movie:aList) {
@@ -128,35 +128,37 @@ public class MovieSerializer{
         catch (IOException e){e.printStackTrace();}
 	
     }
-
-    public static void updateMovieFromCSV(int movieID, String title, String type, String synopsis, Double rating, String showingStatus, String director, ArrayList<String> cast, ArrayList<Integer> reviewsID) {
-	    ArrayList<Movie> aList = MovieSerializer.readFromMovieCSV();
+    @Override
+    public void updateFromCSV(Movie m) {
+	    MovieSerializer ms = new MovieSerializer();
+        ArrayList<Movie> aList = ms.readFromCSV();
 	    int flag =0;
 	    for (Movie a:aList) {
-		    if (a.getMovieID()==movieID) {
-		    	a.setTitle(title);
-                a.setType(type);
-                a.setSynopsis(synopsis);
-                a.setRating(rating);
-                a.setShowingStatus(showingStatus);
-                a.setDirector(director);
-                a.setCast(cast);
-                a.setReviewID(reviewsID);
+		    if (a.getMovieID()==m.getMovieID()) {
+		    	a.setTitle(m.getTitle());
+                a.setType(m.getType());
+                a.setSynopsis(m.getSynopsis());
+                a.setRating(m.getRating());
+                a.setShowingStatus(m.getShowingStatus());
+                a.setDirector(m.getDirector());
+                a.setCast(m.getCasts());
+                a.setReviewID(m.getReviewsID());
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        MovieSerializer.overwriteMovieCSV(aList);
-	        System.out.println("Movie record, title = " +title+" successfully updated!");
-	    } else System.out.println("Movie record, title = " +title+" update unsuccessful!");
+	        ms.overwriteCSV(aList);
+	        System.out.println("Movie record, title = " +m.getTitle()+" successfully updated!");
+	    } else System.out.println("Movie record, title = " +m.getTitle()+" update unsuccessful!");
     }
-
-    public static void deleteMovieFromCSV(String title) {
-        ArrayList<Movie> aList = MovieSerializer.readFromMovieCSV();
+    @Override
+    public void deleteFromCSV(Movie m) {
+	    MovieSerializer ms = new MovieSerializer();
+        ArrayList<Movie> aList = ms.readFromCSV();
         int index=0,flag=0;
         for (Movie a:aList) {
-            if (a.getTitle().equals(title)) {
+            if (a.getTitle().equals(m.getTitle())) {
                 flag=1;
                 break;
             }
@@ -164,8 +166,8 @@ public class MovieSerializer{
         }
         if (flag==1) {
             aList.remove(index);
-            MovieSerializer.overwriteMovieCSV(aList);
-            System.out.println("Movie record, title = " +title+" successfully deleted!");
-	    } else System.out.println("Movie record, title = " +title+" delete unsuccessful!");
+            ms.overwriteCSV(aList);
+            System.out.println("Movie record, title = " +m.getTitle()+" successfully deleted!");
+	    } else System.out.println("Movie record, title = " + m.getTitle() +" delete unsuccessful!");
     }
 }

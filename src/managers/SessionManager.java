@@ -5,8 +5,10 @@ import serializers.*;
 import java.util.*;
 
 public class SessionManager {
+    static SessionSerializer ss = new SessionSerializer();
+
     public static void printAllSessions(){
-        for (Sessions m: SessionSerializer.readFromSessionCSV()) {           
+        for (Sessions m: ss.readFromCSV()) {           
             System.out.println(m.toString()); 
         }
     }
@@ -24,7 +26,7 @@ public class SessionManager {
         ArrayList<Integer> seatingPlan = new ArrayList<Integer>();
         seatingPlan.add(-1);
         Sessions sess = new Sessions(movieID, sessionDate, sessionTime, seatingPlan);
-        SessionSerializer.writeToSessionCSV(sess);
+        ss.writeToCSV(sess);
         ;
         ;
     }
@@ -48,7 +50,7 @@ public class SessionManager {
             "Session Time",
             "Exit ChangeOptions"
         };
-        for (Sessions s: SessionSerializer.readFromSessionCSV()){
+        for (Sessions s: ss.readFromCSV()){
             if (s.getMovieID()==movieID && s.getSessionDate().equals(sessionDate) && s.getSessionTime().equals(sessionTime)){
                 seatingPlan = s.getSeatingPlan();
             }
@@ -88,9 +90,13 @@ public class SessionManager {
 					break;
 			}
         }while (choice != 4);
-        SessionSerializer.deleteSessionsFromCSV(movieID, sessionDate, sessionTime);
+        Sessions aa = new Sessions();
+        aa.setSessionTime(sessionTime);
+        aa.setSessionDate(sessionDate);
+        aa.setMovieID(movieID);
+        ss.deleteFromCSV(aa);
         Sessions sa = new Sessions(newMovieID,newSessionDate,newSessionTime,seatingPlan);
-        SessionSerializer.writeToSessionCSV(sa);
+        ss.writeToCSV(sa);
         ;
         ;
     }

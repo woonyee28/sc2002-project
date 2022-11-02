@@ -7,10 +7,12 @@ import java.util.*;
 public class SettingsManager {  
     private ArrayList<Holiday> hList;
     private ArrayList<Price> pList;
+    static HolidaySerializer hs = new HolidaySerializer();
+    static PriceSerializer ps = new PriceSerializer();
 
     public SettingsManager(){
-        this.hList=HolidaySerializer.readFromHolidayCSV();
-        this.pList=PriceSerializer.readFromPriceCSV();
+        this.hList=hs.readFromCSV();
+        this.pList=ps.readFromCSV();
     }
 
     public ArrayList<Holiday> getHList(){
@@ -66,7 +68,7 @@ public class SettingsManager {
             System.out.println("Please enter date (dd-mm-yyyy):");
             date=input1.nextLine();
             Holiday newH = new Holiday(name, date);
-            HolidaySerializer.writeToHolidayCSV(newH);
+            hs.writeToCSV(newH);
             printHolidayList();
         }else System.out.println(name +" holiday not found!");
         ;
@@ -86,7 +88,10 @@ public class SettingsManager {
             if(update.checkExistenceHol(name)){
                 System.out.println("Please enter new date (dd-mm-yyyy):");
                 newDate=input1.nextLine();
-                HolidaySerializer.updateHolidayFromCSV(name, newDate);
+                Holiday up = new Holiday();
+                up.setDate(newDate);
+                up.setName(name);
+                hs.updateFromCSV(up);
                 printHolidayList();
             }else System.out.println(name +" holiday not found!");
             ;
@@ -101,7 +106,9 @@ public class SettingsManager {
         System.out.println("Please enter name of holiday to be deleted:");
         name=input1.nextLine();
         if(delete.checkExistenceHol(name)){
-            HolidaySerializer.deleteHolidayFromCSV(name);
+            Holiday up = new Holiday();
+            up.setName(name);
+            hs.deleteFromCSV(up);
             printHolidayList();
         }else System.out.println(name +" holiday not found!");
         ;
@@ -129,7 +136,8 @@ public class SettingsManager {
         if(edit.checkExistencePrice(cat)){
             System.out.println("Please enter new price:");
             newPrice=input2.nextDouble();
-            PriceSerializer.updatePriceFromCSV(cat, newPrice);
+            Price p =new Price(cat, newPrice);
+            ps.updateFromCSV(p);
             printPriceList();
         }else System.out.println(cat +" type not found!");
         ;

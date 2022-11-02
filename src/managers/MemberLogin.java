@@ -1,12 +1,16 @@
-package models;
+package managers;
 
 import serializers.MovieGoerSerializer;
-import java.util.*;;
+import java.util.*;
+
+import models.MovieGoer;;
 public class MemberLogin implements logIn{
     private ArrayList<MovieGoer> mList;
+    static MovieGoerSerializer mgs = new MovieGoerSerializer();
+    
 
     public MemberLogin(){
-        this.mList = MovieGoerSerializer.readFromMovieGoerCSV();
+        this.mList = mgs.readFromCSV();
     }
 
     @Override

@@ -13,6 +13,9 @@ public class Movie{
     private ArrayList<String> cast;
     private ArrayList<Integer> reviewsID;
 
+
+    public Movie(){};
+    
     public Movie(int movieID, String title, String type, String synopsis, Double rating, String showingStatus, String director, ArrayList<String> cast, ArrayList<Integer> reviewsID)
     {
         this.movieID = movieID;

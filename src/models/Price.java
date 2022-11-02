@@ -4,6 +4,8 @@ public class Price {
     private String cat;
     private double price;
 
+    public Price(){}
+    
     public Price(String cat, double price){
         this.cat=cat;
         this.price=price;

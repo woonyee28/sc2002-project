@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 import models.Cinemas;
 
-public class CinemaSerializer {
+public class CinemaSerializer implements InterfaceSerializer<Cinemas>{
     private static final String CSV_SEPARATOR = ",";
 
-    public static void writeToCinemaCSV(Cinemas cinema)
+    @Override
+    public void writeToCSV(Cinemas cinema)
     {
         try
         {
@@ -35,8 +36,8 @@ public class CinemaSerializer {
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
- 
-    public static ArrayList<Cinemas> readFromCinemaCSV()
+    @Override
+    public ArrayList<Cinemas> readFromCSV()
     {
         try {
             ArrayList<Cinemas> cinemaList = new ArrayList<Cinemas>();
@@ -73,8 +74,8 @@ public class CinemaSerializer {
         }
         return null;
     }
-
-    public static void overwriteCinemasCSV(ArrayList<Cinemas> aList) {
+    @Override
+    public void overwriteCSV(ArrayList<Cinemas> aList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/cinemasData.csv",false)));
 			for(Cinemas cinema:aList) {
@@ -103,30 +104,32 @@ public class CinemaSerializer {
         catch (IOException e){e.printStackTrace();}
 	
     }
-
-    public static void updateCinemasFromCSV(String cinemaCode, String cinemaClass, ArrayList<Integer> seatingPlan, ArrayList<String> sessionsID) {
-	    ArrayList<Cinemas> aList = CinemaSerializer.readFromCinemaCSV();
+    @Override
+    public void updateFromCSV(Cinemas m) {
+	    CinemaSerializer cs = new CinemaSerializer();
+        ArrayList<Cinemas> aList = cs.readFromCSV();
 	    int flag =0;
 	    for (Cinemas a:aList) {
-		    if (a.getCinemaCode().equals(cinemaCode)) {
-		    	a.setCinemaClass(cinemaClass);
-                a.setSeatingPlan(seatingPlan);
-                a.setSessionsID(sessionsID);
+		    if (a.getCinemaCode().equals(m.getCinemaCode())) {
+		    	a.setCinemaClass(m.getCinemaClass());
+                a.setSeatingPlan(m.getSeatingPlan());
+                a.setSessionsID(m.getSessionsID());
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        CinemaSerializer.overwriteCinemasCSV(aList);
-	        System.out.println("Cinema record, cinemaCode = " +cinemaCode+" successfully updated!");
-	    } else System.out.println("Cinema record, cinemaCode = " +cinemaCode+" update unsuccessful!");
+	        cs.overwriteCSV(aList);
+	        System.out.println("Cinema record, cinemaCode = " +m.getCinemaCode()+" successfully updated!");
+	    } else System.out.println("Cinema record, cinemaCode = " +m.getCinemaCode()+" update unsuccessful!");
     }
-
-    public static void deleteCinemasFromCSV(String cinemaCode) {
-        ArrayList<Cinemas> aList = CinemaSerializer.readFromCinemaCSV();
+    @Override
+    public void deleteFromCSV(Cinemas m) {
+        CinemaSerializer cs = new CinemaSerializer();
+        ArrayList<Cinemas> aList = cs.readFromCSV();
         int index=0,flag=0;
         for (Cinemas a:aList) {
-            if (a.getCinemaCode().equals(cinemaCode)) {
+            if (a.getCinemaCode().equals(m.getCinemaCode())) {
                 flag=1;
                 break;
             }
@@ -134,8 +137,8 @@ public class CinemaSerializer {
         }
         if (flag==1) {
             aList.remove(index);
-            CinemaSerializer.overwriteCinemasCSV(aList);
-            System.out.println("Cinema record, cinemaCode = " +cinemaCode+" successfully deleted!");
-	    } else System.out.println("Cinema record, cinemaCode = " +cinemaCode+" delete unsuccessful!");
+            cs.overwriteCSV(aList);
+            System.out.println("Cinema record, cinemaCode = " +m.getCinemaCode()+" successfully deleted!");
+	    } else System.out.println("Cinema record, cinemaCode = " +m.getCinemaCode()+" delete unsuccessful!");
     }
 }

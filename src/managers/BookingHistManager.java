@@ -14,9 +14,14 @@ import serializers.TransactionSerializer;
 
 
 public class BookingHistManager {
+    static MovieGoerSerializer mgs = new MovieGoerSerializer();
+    static TransactionSerializer ts = new TransactionSerializer();
+    static MovieSerializer ms = new MovieSerializer();
+    static ReviewSerializer rr = new ReviewSerializer();
+
     public static void showBookingHistory(int movieGoerID){
         String tid = "";
-        for (MovieGoer mg: MovieGoerSerializer.readFromMovieGoerCSV()) {
+        for (MovieGoer mg: mgs.readFromCSV()) {
             if (mg.getMovieGoersID()==movieGoerID){
                 tid = mg.getTID_List();
             }
@@ -24,14 +29,14 @@ public class BookingHistManager {
         String[] tempArr;
         tempArr = tid.split("; ");
         for (String s: tempArr){
-            for (Transaction t: TransactionSerializer.readFromTransactionCSV()){
+            for (Transaction t: ts.readFromCSV()){
                 if (t.getTID().equals(s)){
                     System.out.println("\n"); 
                     System.out.println("Your Booking TID: "); 
                     System.out.println(t.getTID());   
                     System.out.println("Movie Name: ");   
                     int movieid = t.getMovieID();
-                    for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+                    for (Movie m: ms.readFromCSV()) {           
                         if (m.getMovieID() == movieid){
                             System.out.println(m.getTitle());  
                         }
@@ -55,14 +60,14 @@ public class BookingHistManager {
 
     public static void inputReviewAndRating(int movieGoerID){
         int maxx = 0;
-        for (Review r: ReviewSerializer.readFromReviewCSV()) {
+        for (Review r: rr.readFromCSV()) {
             maxx = Math.max(r.getReviewsID(),maxx);
         }
         System.out.println("Input the movie name: ");
         Scanner sc = new Scanner(System.in);
         int movieid = -1;
         String movieName = sc.nextLine();
-        for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+        for (Movie m: ms.readFromCSV()) {           
             if (movieName.equals(m.getTitle())){
                 movieid = m.getMovieID();
                 break;
@@ -78,17 +83,17 @@ public class BookingHistManager {
         System.out.println("Input the rating in 1 decimal: ");
         Double rating = sc.nextDouble();
         Review rrr= new Review(maxx+1, movieGoerID, rating, review, movieid);
-        ReviewSerializer.writeToReviewCSV(rrr);
+        rr.writeToCSV(rrr);
         int count=0;
         Double score=0.0;
-        for (Review r: ReviewSerializer.readFromReviewCSV()){
+        for (Review r: rr.readFromCSV()){
             if (r.getMovieID()==movieid){
                 count+=1;
                 score+=r.getRating();
             }
         }
         score/=count;
-        for (Movie m: MovieSerializer.readFromMovieCSV()) {    
+        for (Movie m: ms.readFromCSV()) {    
             if (movieid == m.getMovieID()){
                 ArrayList<Integer> reviewsID;
                 reviewsID = m.getReviewsID();
@@ -96,7 +101,8 @@ public class BookingHistManager {
                     reviewsID.remove(-1);
                 }
                 reviewsID.add(maxx+1);
-                MovieSerializer.updateMovieFromCSV(movieid,m.getTitle(),m.getType(),m.getSynopsis(),score,m.getShowingStatus(),m.getDirector(),m.getCasts(),reviewsID);
+                m.setReviewID(reviewsID);
+                ms.updateFromCSV(m);
                 break;
             }
         }

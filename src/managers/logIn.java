@@ -1,4 +1,4 @@
-package models;
+package managers;
 
 public interface logIn {
     public boolean checkPassword(String email,String hashedPassword);

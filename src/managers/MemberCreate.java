@@ -1,12 +1,15 @@
-package models;
+package managers;
 import java.util.*;
+
+import models.MovieGoer;
 import serializers.MovieGoerSerializer;
 
 public class MemberCreate implements logIn {
     private ArrayList<MovieGoer> mList;
+    static MovieGoerSerializer mgs = new MovieGoerSerializer();
 
     public MemberCreate(){
-        this.mList= MovieGoerSerializer.readFromMovieGoerCSV();
+        this.mList= mgs.readFromCSV();
     }
 
     @Override
@@ -78,7 +81,7 @@ public class MemberCreate implements logIn {
             passwordHashed = String.valueOf(password.hashCode());
 
             MovieGoer newMem = new MovieGoer(movieGoerID, name, email, age, passwordHashed, mobile, null);
-            MovieGoerSerializer.writeToMovieGoerCSV(newMem);
+            mgs.writeToCSV(newMem);
             System.out.println("Account successfully created. Please log in again");
             return 1;
         }

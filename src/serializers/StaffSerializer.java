@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 import models.Staff;
 
-public class StaffSerializer {
+public class StaffSerializer implements InterfaceSerializer<Staff>{
+
     private static final String CSV_SEPARATOR = ",";
-
     
-
-    public static void writeToStaffCSV(Staff admin)
+    @Override
+    public void writeToCSV(Staff admin)
     {
         try
         {
@@ -33,7 +33,8 @@ public class StaffSerializer {
         catch (IOException e){e.printStackTrace();}
     }
 
-    public static ArrayList<Staff> readFromStaffCSV()
+    @Override
+    public ArrayList<Staff> readFromCSV()
     {
         try {
             ArrayList<Staff> adminList = new ArrayList<Staff>();
@@ -60,8 +61,9 @@ public class StaffSerializer {
         }
         return null;
     }
-    
-    public static void overwriteStaffCSV(ArrayList<Staff> aList) {
+
+    @Override
+    public void overwriteCSV(ArrayList<Staff> aList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/staffsData.csv",false)));
 			for(Staff a:aList) {
@@ -85,39 +87,43 @@ public class StaffSerializer {
 	
     }
 
-    public static void updateStaffFromCSV(int staffID, String name, String email,String hash) {
-	    ArrayList<Staff> aList = StaffSerializer.readFromStaffCSV();
+    @Override
+    public void updateFromCSV(Staff o) {
+        StaffSerializer ss = new StaffSerializer();
+	    ArrayList<Staff> aList = ss.readFromCSV();
 	    int flag =0;
 	    for (Staff a:aList) {
-		    if (a.getName().equals(name) && a.getStaffID()==staffID ) {
-		    	a.setEmail(email);
-		    	a.setPasswordHashed(hash);
+		    if (a.getName().equals(o.getName()) && a.getStaffID()==o.getStaffID() ) {
+		    	a.setEmail(o.getEmail());
+		    	a.setPasswordHashed(o.getPasswordHashed());
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        StaffSerializer.overwriteStaffCSV(aList);
-	        System.out.println("Admin account: name = " +name+" id = "+ staffID+" successfully updated!");
-	    } else System.out.println("Admin account: name = " +name+" id = "+ staffID+" update unsuccessful!");
-}
+	        ss.overwriteCSV(aList);
+	        System.out.println("Admin account: name = " +o.getName()+" id = "+ o.getStaffID()+" successfully updated!");
+	    } else System.out.println("Admin account: name = " +o.getName()+" id = "+ o.getStaffID()+" update unsuccessful!");
+    }
 
-public static void deleteStaffFromCSV(int staffID, String name) {
-	ArrayList<Staff> aList = StaffSerializer.readFromStaffCSV();
-	int index=0,flag=0;
-	for (Staff a:aList) {
-		if (a.getName().equals(name) && a.getStaffID()==staffID) {
-			flag=1;
-			break;
-		}
-		index++;
-	}
-	if (flag==1) {
-		aList.remove(index);
-		StaffSerializer.overwriteStaffCSV(aList);
-		System.out.println("Admin account: name = " +name+" id = "+ staffID+" successfully deleted!");
-	}
-	else System.out.println("Staff record, name = " +name+" id = "+ staffID+" deletion unsuccessful!");
+    @Override
+    public void deleteFromCSV(Staff o) {
+        StaffSerializer ss = new StaffSerializer();
+        ArrayList<Staff> aList = ss.readFromCSV();
+        int index=0,flag=0;
+        for (Staff a:aList) {
+            if (a.getName().equals(o.getName()) && a.getStaffID()==o.getStaffID() ) {
+                flag=1;
+                break;
+            }
+            index++;
+        }
+        if (flag==1) {
+            aList.remove(index);
+            ss.overwriteCSV(aList);
+            System.out.println("Admin account: name = " +o.getName()+" id = "+ o.getStaffID()+" successfully deleted!");
+        }
+        else System.out.println("Staff record, name = " +o.getName()+" id = "+ o.getStaffID()+" deletion unsuccessful!");
 
 	
     }

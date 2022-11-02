@@ -5,9 +5,10 @@ import serializers.MovieSerializer;
 public class MovieInformation {
 
     private ArrayList<Movie> movList;
-
+    static MovieSerializer ms = new MovieSerializer();
+    
     public MovieInformation(){
-        this.movList = MovieSerializer.readFromMovieCSV();
+        this.movList = ms.readFromCSV();
     }
 
     public int returnMovInfo(int MovieID){

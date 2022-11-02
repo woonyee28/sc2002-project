@@ -8,9 +8,10 @@ import serializers.StaffSerializer;
 
 public class AdminManager{
     private ArrayList<Staff> sList;
+    static StaffSerializer ss = new StaffSerializer();
 
     public AdminManager(){
-        this.sList =StaffSerializer.readFromStaffCSV();
+        this.sList =ss.readFromCSV();
     }
 
     public ArrayList<Staff> getList(){
@@ -155,7 +156,7 @@ public class AdminManager{
             passwordHashed = String.valueOf(password.hashCode());
             ;
             Staff newStaff = new Staff(staffID, name, email, passwordHashed);
-            serializers.StaffSerializer.writeToStaffCSV(newStaff);
+            ss.writeToCSV(newStaff);
             System.out.println("Admin account successfully created.");
             return 1;
         }
@@ -205,7 +206,12 @@ public class AdminManager{
                     password=input2.nextLine();
 
                     passwordHashed = String.valueOf(password.hashCode());
-                    serializers.StaffSerializer.updateStaffFromCSV(staffID, name, email, passwordHashed);
+                    Staff upd = new Staff();
+                    upd.setEmail(email);
+                    upd.setName(name);
+                    upd.setPasswordHashed(passwordHashed);
+                    upd.setStaffID(staffID);
+                    ss.updateFromCSV(upd);
 
                 }else System.out.println("Admin email does not found!");
             }else System.out.println("Admin name does not found!");
@@ -233,7 +239,10 @@ public class AdminManager{
                     System.out.println("Press y/n to confirm deletion ");
                     confirm =input2.next();
                     if(confirm.equals("y")){
-                        serializers.StaffSerializer.deleteStaffFromCSV(staffID, name);
+                        Staff del = new Staff();
+                        del.setName(name);
+                        del.setStaffID(staffID);
+                        ss.deleteFromCSV(del);
                     } else System.out.println("Deletion aborted.");
                 }else System.out.println("Admin name not found.");
             }else System.out.println("Error! Cannot delete currently logged in admin!");

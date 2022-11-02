@@ -7,6 +7,7 @@ import serializers.MovieSerializer;
  
 class testMovie {
     public static void main(String[] args) {
+        MovieSerializer ms = new MovieSerializer();
         ArrayList<String> str = new ArrayList<String>();
         str.add("Yee");
         str.add("Ng");
@@ -18,8 +19,8 @@ class testMovie {
         // for (Movie m: MovieSerializer.readFromMovieCSV()) {           
         //     m.toString();
         //     System.out.println(m); 
-        // }
-        MovieSerializer.deleteMovieFromCSV("HeyYo");
-        MovieSerializer.updateMovieFromCSV(1,"TestingMovieCSV","Type","This is a synopsis - changed",4.0,"Coming Soon","Woon",str,id);
+        // // }
+        // ms.deleteFromCSV("HeyYo");
+        // ms.updateFromCSV(1,"TestingMovieCSV","Type","This is a synopsis - changed",4.0,"Coming Soon","Woon",str,id);
     }
 }

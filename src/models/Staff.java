@@ -6,6 +6,8 @@ public class Staff {
     private String email;
     private String passwordHashed;
     
+    public Staff(){}
+    
     public Staff(int staffID, String name, String email, String passwordHashed){
         this.staffID = staffID;
         this.name = name;

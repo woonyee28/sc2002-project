@@ -22,8 +22,10 @@ public class Moviebooking {
 
 
     private int amountofTicket;
-    private static ArrayList<Cineplexes> Cineplex = CineplexSerializer.readFromCineplexesCSV();
-    private static ArrayList<Cinemas> Cinema = CinemaSerializer.readFromCinemaCSV();
+    static CinemaSerializer cs = new CinemaSerializer();
+    static CineplexSerializer cps = new CineplexSerializer();
+    private static ArrayList<Cineplexes> Cineplex = cps.readFromCSV();
+    private static ArrayList<Cinemas> Cinema = cs.readFromCSV();
 	public static void main(String[] args) {
 		double price=0;
         int selection_choice;
@@ -240,7 +242,12 @@ private static void bookings()
     //adds current time to SessionID
 
     //Update data into CSV
-    CinemaSerializer.updateCinemasFromCSV(cinema_code.toUpperCase(),toStringClass(cinema_class), seatingPlan,SessionID);
+    Cinemas up = new Cinemas();
+    up.setCinemaClass(toStringClass(cinema_class));
+    up.setCinemaCode(cinema_code.toUpperCase());
+    up.setSeatingPlan(seatingPlan);
+    up.setSessionsID(SessionID);
+    cs.updateFromCSV(up);
     System.out.println("Successfully booked the seat you requested");
 
 

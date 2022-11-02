@@ -9,10 +9,11 @@ import models.*;
 
 public class MemberManager implements logIn {
     private static ArrayList<MovieGoer> mList;
+    static MovieGoerSerializer mgs = new MovieGoerSerializer(); 
     
 
     public MemberManager(){
-        MemberManager.mList = MovieGoerSerializer.readFromMovieGoerCSV();
+        MemberManager.mList = mgs.readFromCSV();
     }
 
     @Override
@@ -124,7 +125,7 @@ public class MemberManager implements logIn {
             passwordHashed = String.valueOf(password.hashCode());
 
             MovieGoer newMem = new MovieGoer(movieGoerID, name, email, age, passwordHashed, mobile, null);
-            MovieGoerSerializer.writeToMovieGoerCSV(newMem);
+            mgs.writeToCSV(newMem);
             System.out.println("Account successfully created. Please log in again");
             return 1;
         }

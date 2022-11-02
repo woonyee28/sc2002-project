@@ -16,9 +16,13 @@ import serializers.ReviewSerializer;
 import serializers.TransactionSerializer;
 
 public class SalesManager {
+    static TransactionSerializer ts = new TransactionSerializer();
+    static MovieSerializer ms = new MovieSerializer();
+    static ReviewSerializer rs = new ReviewSerializer();
+
     public static void sortByRating(){
         Map<Double,String> d = new TreeMap<Double,String>(Collections.reverseOrder());
-        for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+        for (Movie m: ms.readFromCSV()) {           
             d.put(m.getRating(),m.getTitle());
         }
         Set<Entry<Double, String>> set = d.entrySet();
@@ -39,7 +43,7 @@ public class SalesManager {
 
     public static void sortBySales(){
         final Map<Double, Integer> d = new TreeMap<Double,Integer>(Collections.reverseOrder());
-        for (Transaction m: TransactionSerializer.readFromTransactionCSV()) {   
+        for (Transaction m: ts.readFromCSV()) {   
             int id = m.getMovieID();  
             Set<Double> prices = d.keySet();      
             if (d.containsValue(id)){
@@ -61,7 +65,7 @@ public class SalesManager {
         int c=0;
         while (i.hasNext()) {
             Map.Entry me = (Map.Entry)i.next();
-            for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+            for (Movie m: ms.readFromCSV()) {           
                 if (me.getValue().equals(m.getMovieID())){
                     System.out.print(m.getTitle() + ": ");
                     break;
@@ -80,14 +84,14 @@ public class SalesManager {
         Scanner sc = new Scanner(System.in);
         int movieid = -1;
         String movieName = sc.nextLine();
-        for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+        for (Movie m: ms.readFromCSV()) {           
             if (movieName.equals(m.getTitle())){
                 movieid = m.getMovieID();
                 break;
             }
         }
         int check = 0;
-        for (Review r: ReviewSerializer.readFromReviewCSV()){
+        for (Review r: rs.readFromCSV()){
             if (movieid == r.getMovieID()){
                 System.out.println(r.getReviews());
                 check=1;
