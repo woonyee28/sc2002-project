@@ -5,15 +5,20 @@ import serializers.*;
 import java.util.*;
 
 public class MovieManager {
+    private int adminID;
     static MovieSerializer ms = new MovieSerializer();
 
-    public static void printAllMovies(){
+    public MovieManager(int adminID){
+        this.adminID = adminID;
+    }
+
+    public void printAllMovies(){
         for (Movie m: ms.readFromCSV()){
             System.out.println(m.toString());
         }
     }
 
-    public static void createNewMovie(){
+    public void createNewMovie(){
         Scanner sc = new Scanner(System.in);
         int movieID=-1;
         for (Movie m: ms.readFromCSV()){
@@ -49,7 +54,7 @@ public class MovieManager {
         ;
     }
 
-    public static void modifyMovie(){
+    public void modifyMovie(){
         Scanner sc = new Scanner(System.in);
         Scanner ii = new Scanner(System.in);
         System.out.println("Which Movie ID would you like to change? ");

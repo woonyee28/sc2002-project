@@ -7,11 +7,13 @@ import models.Staff;
 import serializers.StaffSerializer;
 
 public class AdminManager{
+    private int adminID;
     private ArrayList<Staff> sList;
     static StaffSerializer ss = new StaffSerializer();
 
-    public AdminManager(){
+    public AdminManager(int adminID){
         this.sList =ss.readFromCSV();
+        this.adminID = adminID;
     }
 
     public ArrayList<Staff> getList(){
@@ -100,8 +102,8 @@ public class AdminManager{
         return exists;
     }
 
-    public static int logIn(){
-        AdminManager login = new AdminManager();
+    public int logIn(){
+        AdminManager login = new AdminManager(this.adminID);
         Scanner input = new Scanner(System.in);
         System.out.println("Please key in your email:");
         String email = input.nextLine();
@@ -130,8 +132,8 @@ public class AdminManager{
 
     
 
-    public static int createAdmin(){
-        AdminManager create = new AdminManager();
+    public int createAdmin(){
+        AdminManager create = new AdminManager(this.adminID);
         int staffID = 0;
         String name=null;
         String email=null;
@@ -168,8 +170,8 @@ public class AdminManager{
 		
     }
 
-    public static void printAdminList(){
-        AdminManager print = new AdminManager();
+    public void printAdminList(){
+        AdminManager print = new AdminManager(this.adminID);
         System.out.println("--------- Admin list ---------");
         for (Staff s:print.getList()){
             StringBuffer oneLine = new StringBuffer();
@@ -182,10 +184,10 @@ public class AdminManager{
         }
     }
 
-    public static void updateAdminPassword(){
+    public void updateAdminPassword(){
         String email=null,password,passwordHashed=null,name;
         int staffID;
-        AdminManager update = new AdminManager();
+        AdminManager update = new AdminManager(this.adminID);
         Scanner input1 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
 
@@ -220,10 +222,10 @@ public class AdminManager{
         ;
     }
 
-    public static void deleteAdmin(int accountHolderID){
+    public void deleteAdmin(int accountHolderID){
         int staffID;
         String name,confirm;
-        AdminManager delete = new AdminManager();
+        AdminManager delete = new AdminManager(this.adminID);
         Scanner input1 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
 

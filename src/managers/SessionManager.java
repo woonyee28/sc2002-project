@@ -7,14 +7,21 @@ import java.util.*;
 public class SessionManager {
     static SessionSerializer ss = new SessionSerializer();
 
-    public static void printAllSessions(){
+    private int adminID;
+
+    public SessionManager(int adminID){
+        this.adminID = adminID;
+    }
+
+    public void printAllSessions(){
         for (Sessions m: ss.readFromCSV()) {           
             System.out.println(m.toString()); 
         }
     }
 
-    public static void createNewSession(){
-        MovieManager.printAllMovies();
+    public void createNewSession(){
+        MovieManager mm = new MovieManager(this.adminID);
+        mm.printAllMovies();
         Scanner ii = new Scanner(System.in);
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Movie Id: ");
@@ -31,7 +38,7 @@ public class SessionManager {
         ;
     }
     
-    public static void modifySession(){
+    public void modifySession(){
         Scanner ii = new Scanner(System.in);
         Scanner sc = new Scanner(System.in);
         int movieID = -1;

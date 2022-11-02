@@ -5,42 +5,135 @@ import java.util.Scanner;
 import managers.SalesManager;
 
 public class UISalesReporting {
-    private final String menuOptions[] = {
+
+    private int adminOrmember; // 1 == admin, 0 == member, -1 == Guest
+    private int id; // -1 == Member
+    public static int displaySortByRating = 1;
+    public static int displaySortBySales = 1;
+    public static int displayReview = 1;
+
+    public UISalesReporting(int id, int adminOrmember){
+        this.id = id;
+        this.adminOrmember = adminOrmember;
+    }
+
+
+    protected String menuOptions[] = {
         "Sort By Rating",
         "Sort By Sales",
         "Show Reviews",
-        "Exit Sales Reporting"
+        "Exit Sales Reporting",
+        "Edit MovieGoers Permission"
+    };
+
+    protected String adminOptions[] = {
+        "Hide SortByRating",
+        "Hide SortBySales",
+        "Hide Review",
+        "Display SortByRating",
+        "Display SortBySales",
+        "Display Review",
+        "Done and Exit"
     };
 
     public void run(){
         int choice = -1;
 
         Scanner sc = new Scanner(System.in);
-
+        if (adminOrmember==-1){
+            adminOrmember=0; //same permission for member and guest
+        }
         do{
             System.out.println("====================UI Sales Reporting======================");
             int i;
-            for (i = 1; i <= menuOptions.length; i++) {
-                System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
+            if (adminOrmember==1 || (adminOrmember==0 && displaySortByRating==1)){
+                System.out.printf("(%d) %s \n", 1, menuOptions[0]);
+            }
+            if (adminOrmember==1 || (adminOrmember==0 && displaySortBySales==1)){
+                System.out.printf("(%d) %s \n", 2, menuOptions[1]);
+            }
+            if (adminOrmember==1 || (adminOrmember==0 && displayReview==1)){
+                System.out.printf("(%d) %s \n", 3, menuOptions[2]);
+            }
+            System.out.printf("(%d) %s \n", 4, menuOptions[3]);
+            if (adminOrmember==1){
+                System.out.printf("(%d) %s \n", 5, menuOptions[4]);
             }
             choice = Integer.valueOf(sc.next());
-			
+			SalesManager sm = new SalesManager(this.id, this.adminOrmember);
             switch (choice) {
 				case 1:
-                    System.out.println("sortByRating():");
-                    SalesManager.sortByRating();
+                    if (adminOrmember==0 && displaySortByRating==0){
+                        System.out.println("Please input a valid option.");
+                    }else{
+                        System.out.println("sortByRating():");
+                        sm.sortByRating();
+                    }
 					break;
 				case 2:
-                    System.out.println("sortBySales():");
-					SalesManager.sortBySales();
+                    if (adminOrmember==0 && displaySortBySales==0){
+                        System.out.println("Please input a valid option.");
+                    }else{
+                        System.out.println("sortBySales():");
+                        sm.sortBySales();
+                    }
 					break;
                 case 3:
-                    System.out.println("showReview()");
-                    SalesManager.showReview();
+                    if (adminOrmember==0 && displayReview==0){
+                        System.out.println("Please input a valid option.");
+                    }else{
+                        System.out.println("showReview()");
+                        sm.showReview();
+                    }
                     break;
 				case 4:
 					System.out.println("Program exiting...");
 					break;
+                case 5:
+                    if (adminOrmember==1){
+                        do{
+                            System.out.println("Please input your preferred change: ");
+                            for (i = 1; i <= adminOptions.length; i++) {
+                                System.out.printf("(%d) %s \n", i, adminOptions[i-1]);
+                            }
+                            choice = Integer.valueOf(sc.next());
+                            switch(choice){
+                                case 1:
+                                    displaySortByRating = 0;
+                                    System.out.println("SortByRating has been hidden for MovieGoer and Guest! ");
+                                    break;
+                                case 2:
+                                    displaySortBySales = 0;
+                                    System.out.println("SortBySales has been hidden for MovieGoer and Guest! ");
+                                    break;
+                                case 3:
+                                    displayReview = 0;
+                                    System.out.println("Review has been hidden for MovieGoer and Guest! ");
+                                    break;
+                                case 4:
+                                    displaySortByRating = 1;
+                                    System.out.println("SortByRating has been shown for MovieGoer and Guest! ");
+                                    break;
+                                case 5:
+                                    displaySortBySales = 1;
+                                    System.out.println("SortBySales has been shown for MovieGoer and Guest! ");
+                                    break;
+                                case 6:
+                                    displayReview = 1;
+                                    System.out.println("Review has been shown for MovieGoer and Guest! ");
+                                    break;
+                                case 7:
+                                    System.out.println("Program exiting...");
+                                    System.out.println("Program exiting...");
+                                default:
+                                    System.out.println("Please input a valid option.");
+                                    break;
+                            }
+                        }while (choice!=7);
+                    }else{
+    					System.out.println("Please input a valid option.");
+                    }
+                    break;
 				default:
 					System.out.println("Please input a valid option.");
 					break;

@@ -5,6 +5,13 @@ import java.util.Scanner;
 import managers.SettingsManager;
 
 public class UIConfigSystem {
+
+    private int adminID;
+
+    public UIConfigSystem(int adminID){
+        this.adminID = adminID;
+    }
+    
     private final String menuOptions[] = {
         "Print Holiday List",
         "Add New Holiday",
@@ -26,31 +33,31 @@ public class UIConfigSystem {
             }
 			choice = Integer.valueOf(sc.next());
 			System.out.println();
-            
+            SettingsManager sm = new SettingsManager(this.adminID);
 			
             switch (choice) {
 				case 1:
-                    SettingsManager.printHolidayList();
+                    sm.printHolidayList();
                     // Print Holiday List
                     break;
 				case 2:
 					// Create Holiday
-                    SettingsManager.addHoliday();
+                    sm.addHoliday();
 					break;
                 case 3:
-                    SettingsManager.updateHoliday();
+                    sm.updateHoliday();
                     // Update Holiday  
                     break;
                 case 4:
-                    SettingsManager.deleteHoliday();
+                    sm.deleteHoliday();
                     // Delete Holiday
                     break;
                 case 5:
-                    SettingsManager.printPriceList();
+                    sm.printPriceList();
                     // Print Price List
                     break;
                 case 6:
-                    SettingsManager.editPrices();
+                    sm.editPrices();
                     // Edit Prices
                     break;
                 case 7:

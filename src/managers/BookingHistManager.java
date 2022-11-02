@@ -14,12 +14,18 @@ import serializers.TransactionSerializer;
 
 
 public class BookingHistManager {
+    private int movieGoerID;
+
     static MovieGoerSerializer mgs = new MovieGoerSerializer();
     static TransactionSerializer ts = new TransactionSerializer();
     static MovieSerializer ms = new MovieSerializer();
     static ReviewSerializer rr = new ReviewSerializer();
 
-    public static void showBookingHistory(int movieGoerID){
+    public BookingHistManager(int movieGoerID){
+        this.movieGoerID = movieGoerID;
+    }
+
+    public void showBookingHistory(int movieGoerID){
         String tid = "";
         for (MovieGoer mg: mgs.readFromCSV()) {
             if (mg.getMovieGoersID()==movieGoerID){
@@ -58,7 +64,7 @@ public class BookingHistManager {
     }
 
 
-    public static void inputReviewAndRating(int movieGoerID){
+    public void inputReviewAndRating(int movieGoerID){
         int maxx = 0;
         for (Review r: rr.readFromCSV()) {
             maxx = Math.max(r.getReviewsID(),maxx);

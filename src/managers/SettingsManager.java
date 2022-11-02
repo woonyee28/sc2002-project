@@ -5,10 +5,15 @@ import models.*;
 import java.util.*;
 
 public class SettingsManager {  
+    private int adminID;
     private ArrayList<Holiday> hList;
     private ArrayList<Price> pList;
     static HolidaySerializer hs = new HolidaySerializer();
     static PriceSerializer ps = new PriceSerializer();
+
+    public SettingsManager(int adminID){
+        this.adminID = adminID;
+    }
 
     public SettingsManager(){
         this.hList=hs.readFromCSV();
@@ -47,7 +52,7 @@ public class SettingsManager {
         return exists;
     }
 
-    public static void printHolidayList(){
+    public void printHolidayList(){
         SettingsManager print =new SettingsManager();
         System.out.println("--------- Holiday list ---------");
         for (Holiday h:print.getHList()){
@@ -56,7 +61,7 @@ public class SettingsManager {
         }
     }
 
-    public static void addHoliday(){
+    public void addHoliday(){
         String name,date;
         SettingsManager add = new SettingsManager();
         Scanner input1 = new Scanner(System.in);
@@ -77,7 +82,7 @@ public class SettingsManager {
 
    
 
-    public static void updateHoliday(){
+    public void updateHoliday(){
             String name,newDate;
             SettingsManager update = new SettingsManager();
             Scanner input1 = new Scanner(System.in);
@@ -97,7 +102,7 @@ public class SettingsManager {
             ;
     }
 
-    public static void deleteHoliday(){
+    public void deleteHoliday(){
         String name;
         SettingsManager delete = new SettingsManager();
         Scanner input1 = new Scanner(System.in);
@@ -114,7 +119,7 @@ public class SettingsManager {
         ;
     }
 
-    public static void printPriceList(){
+    public void printPriceList(){
         SettingsManager print =new SettingsManager();
         System.out.println("--------- Price list ---------");
         for (Price p:print.getPList()){
@@ -123,7 +128,7 @@ public class SettingsManager {
         }
     }
 
-    public static void editPrices(){
+    public void editPrices(){
         String cat;
         double newPrice;
         SettingsManager edit = new SettingsManager();
@@ -143,8 +148,6 @@ public class SettingsManager {
         ;
         ;
     }
-    
 
-    
 }
 
