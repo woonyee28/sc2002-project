@@ -107,4 +107,35 @@ public class SessionManager {
         ;
         ;
     }
+
+    public void deleteSession(){
+        Scanner ii = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        int flag=-1;
+        int found=-1;
+        System.out.println("--------- Delete session ---------");
+        System.out.println("Enter Movie Id: ");
+        int movieID = ii.nextInt();
+        System.out.println("Enter Session Date YYYYMMDD: ");
+        String sessionDate = sc.nextLine();
+        System.out.println("Enter Session Time HHMM: ");
+        String sessionTime = sc.nextLine();
+        ArrayList<Integer> empty = new ArrayList<Integer>();
+        empty.add(-1);
+        for (Sessions s:ss.readFromCSV()){
+            if(s.getMovieID()==movieID && s.getSessionDate().equals(sessionDate) && s.getSessionTime().equals(sessionTime)){
+                found =1;
+                if(s.getSeatingPlan().equals(empty)){
+                    flag =1;
+                    break;
+                }
+            }
+        }
+        if (found==1){
+            if(flag==1){
+                Sessions target = new Sessions(movieID,sessionDate,sessionTime,empty);
+                ss.deleteFromCSV(target);
+            }else System.out.print("Session has bookings!");
+        } else System.out.println("Session not found!");
+    }
 }

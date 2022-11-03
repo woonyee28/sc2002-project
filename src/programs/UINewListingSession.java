@@ -19,6 +19,7 @@ public class UINewListingSession {
         "Create New Session",
         "Modify Movie Detail",
         "Modify Session Detail",
+        "Delete Session",
         "Exit New Listing Session"
     };
 
@@ -62,13 +63,17 @@ public class UINewListingSession {
                     sm.modifySession();
                     break;
                 case 7:
+                    System.out.println("deleteSession()");
+                    sm.deleteSession();
+                    break;
+                case 8:
                     System.out.println("Program exiting...");
                     break;
 				default:
 					System.out.println("Please input a valid option.");
 					break;
 			}
-        }while (choice != 7);
+        }while (choice != 8);
         ;
     }
 }
