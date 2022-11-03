@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch testSession",
+            "request": "launch",
+            "mainClass": "tests.testSession",
+            "projectName": "sc2002-project_985b3ca0"
+        },
+        {
+            "type": "java",
             "name": "Launch testCineplex",
             "request": "launch",
             "mainClass": "tests.testCineplex",
