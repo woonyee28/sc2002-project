@@ -15,8 +15,7 @@ public class PriceManager {
 
     public void viewPricing(){
         
-        System.out.print("--------- View Pricing ---------");
-        System.out.println(("Movie Type,Category,Price"));
+        System.out.println("---------- View Pricing ----------");
         String Class[]={"Regular","Gold","Platinum"};  
         String bold ="\033[0;1m"; 
         String normal="\033[0m";
@@ -56,5 +55,6 @@ public class PriceManager {
         }
         System.out.println("Prices are inclusive of GST.");
         System.out.println("Friday,Weekends,Eve of Public Holiday and Public Holiday falls under \"Special\" category." );
+        System.out.println();
     }   
 }

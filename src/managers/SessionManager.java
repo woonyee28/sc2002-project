@@ -135,7 +135,7 @@ public class SessionManager {
             if(flag==1){
                 Sessions target = new Sessions(movieID,sessionDate,sessionTime,empty);
                 ss.deleteFromCSV(target);
-            }else System.out.print("Session has bookings!");
+            }else System.out.println("Session has bookings!");
         } else System.out.println("Session not found!");
     }
 }
