@@ -1,11 +1,9 @@
-package managers;
+package programs;
 
 import java.util.Scanner;
 
-import programs.UISalesReporting;
-
-public class GuestManager {
-    public GuestManager(){};
+public class GuestApp {
+    public GuestApp(){};
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);
