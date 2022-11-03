@@ -186,8 +186,7 @@ private static ArrayList<Integer> showMovieListing(String cinema_code)
         if(movieid_selected == m.getMovieID())
         {
             count++;
-            movie_date = m.getSessionDate();
-            movie_time = m.getSessionTime();
+            
             System.out.println(count + ": Date: " + m.getSessionDate() + " Time: " + m.getSessionTime());
         }
     }
@@ -201,6 +200,8 @@ private static ArrayList<Integer> showMovieListing(String cinema_code)
             count++;
             if (movie_time_choice == count)
             {
+                movie_date = m.getSessionDate();
+                 movie_time = m.getSessionTime();
                 System.out.println(m.getSeatingPlan());
                 seatPlan = m.getSeatingPlan();
             }
