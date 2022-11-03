@@ -151,21 +151,7 @@ private static void bookings()
         //cinema_code :aaa,bbb
     }
     
-    //At this point, user selected which Cineplex & Cinema
-
-
-    // System.out.println(cineplex_choice);
-
-    //  cinema_choice = showCinema(cineplex_choice);
-    // if (cinema_choice == null)
-    // {
-    //     System.out.println("Please Select the Cinema again");
-    //     cineplex_choice = sc.next();
-        
-    //     cinema_choice = showCinema(cineplex_choice);
-    // }
-    // System.out.println(cinema_code);
-    //show moving listings:
+    
     System.out.println("Which movie would you like to book?");
     movie_choice = sc.nextInt();
     cinema_class = getCinemaClass(cinema_code);
