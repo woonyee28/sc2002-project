@@ -1,3 +1,6 @@
+//Author Zheng Kai
+//last modified - 30/10/22
+
 package tests;
 import models.*;
 
@@ -11,6 +14,8 @@ import serializers.CineplexSerializer;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;    
+import models.Movie;
+import serializers.MovieSerializer;
 
 import javax.lang.model.element.Element;
 // this class defines the movie booking of movies selected
@@ -29,6 +34,7 @@ public class Moviebooking {
 	public static void main(String[] args) {
 		double price=0;
         int selection_choice;
+        String book_choice;
         
        
         Scanner sc = new Scanner(System.in);
@@ -46,15 +52,30 @@ public class Moviebooking {
                     break;
                 case 1: 
                     System.out.println("Now Showing:");
-                    //insert function to show movie listing
-                    break;
+                    
+                    showMovieListing();
+                    System.out.println("Would you like to book a movie?(Y/N)");
+                    book_choice = sc.next().toLowerCase();
+                    if(book_choice.equals("y") || book_choice.equals("yes"))
+                    {
+                        bookings();
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Going back to main page..");
+                        //call for main page function
+                        break;
+                    }
+                    
+
     
                 case 2: 
                     System.out.println("Welcome to booking ticket page: ");
                     bookings();
                     break;
                 case 3:
-                    System.out.println("Please select a cineplex:  (Currently dont work)");
+                    System.out.println("Please select a cineplex: ");
                     showSeatPlan();
                     break;
                 default:
@@ -93,6 +114,14 @@ public class Moviebooking {
         
 
 
+}
+
+private static void showMovieListing()
+{
+    for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+        m.toString();
+        System.out.println(m.getMovieID()+1 +": " +  m.getTitle()); 
+    }
 }
 
 private static void showSeatPlan()
@@ -153,6 +182,7 @@ private static void bookings()
     
     
     System.out.println("Which movie would you like to book?");
+    showMovieListing();
     movie_choice = sc.nextInt();
     cinema_class = getCinemaClass(cinema_code);
     if (cinema_class == -1)
@@ -178,7 +208,7 @@ private static void bookings()
     while(true)
     {
         noOfSeats = sc.nextInt();
-        System.out.println(seatingPlan.size());
+        // System.out.println(seatingPlan.size());
         if (noOfSeats<1)
         {
             System.out.println("Please select at least 1 seat..");
@@ -249,7 +279,9 @@ private static int bookSeats( ArrayList<Integer> seatingPlan)
     while(loop_seat)
         {
                int check_seat =0;
-            seat = sc.nextInt();
+               if(sc.hasNextInt())
+               {
+                seat = sc.nextInt();
             if(seat>70 || seat <1)
             {
                 System.out.println("Please choose seat that are available");
@@ -268,6 +300,16 @@ private static int bookSeats( ArrayList<Integer> seatingPlan)
             if(check_seat == 0)
             {
                 loop_seat = false;
+            }
+               }
+            
+
+            else
+            {
+                sc.nextLine();
+                System.out.println("Enter a valid Integer value");
+                // System.out.println("Please enter the valid integer");
+
             }
            
         }

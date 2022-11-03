@@ -1,5 +1,10 @@
+//Author Zheng Kai
+//last modified - 30/10/22
+
 package tests;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -8,6 +13,8 @@ import models.Cinemas;
 import models.Cineplexes;
 import serializers.CinemaSerializer;
 import serializers.CineplexSerializer;
+import tests.Moviebooking;
+
 
 public class AmendBooking {
     static CinemaSerializer cs = new CinemaSerializer();
@@ -17,9 +24,11 @@ public class AmendBooking {
     
 
     public static void main(String[] args) {
+        String cineplex;
         String cineplex_choice;
         String cinema_code =null;
         int cinema_class;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");  
 
         ArrayList<String> SessionID = new ArrayList<>();
         ArrayList<Integer> seatingPlan = new ArrayList<>();
@@ -46,40 +55,77 @@ public class AmendBooking {
         }
         seatingPlan = getOccupiedSeats(cinema_code);
         SessionID = getSessionID(cinema_code);
+
         System.out.println("Here is the seating plan for Cinema " + cinema_code.toUpperCase()+":");
         System.out.println("------------SCREEN------------");
         printSeatingPlan(seatingPlan);
         int noOfSeats;
         System.out.println("How many seat would you like to cancel");
-        noOfSeats = sc.nextInt();
         int seat =0;
         System.out.println(seatingPlan);
 
         while(true)
         {
+            noOfSeats = sc.nextInt();
+            // System.out.println(seatingPlan.size());
+            if (noOfSeats<1)
+            {
+                System.out.println("Please select at least 1 seat..");
+                // seat = 0;
+                continue;
+            }
+            else if(noOfSeats >= 70-seatingPlan.size())
+            {
+                System.out.println("No of seat exceeded remaining seats left, Please select again");
+                // seat = 0;
+                continue;
+            }
+            break;
+    
+        }
+    //     if (noOfSeats == 1)
+    // {
+    //     System.out.println("Which seat would you like?");
+    //     seat = amendSeats(seatingPlan);
+    //     seatingPlan.remove(Integer.valueOf(seat));
+    //     //TO IMPLEMENT NO: OF SeATS
+    // }
+    // else
+    // {
+    //     //If seats is more than 1, allow user to book multiple seats
+    //     for(int z =1; z<=noOfSeats; z++)
+    //     {
+    //         // display which seat user is selecting
+    //         System.out.println("Please select the seat you would like for seat "+ z  );
+    //         // seat = bookSeats(seatingPlan);
+    //         seatingPlan.add(seat);
+    //         LocalDateTime now = LocalDateTime.now();
+    //         SessionID.add(dtf.format(now));
+    //     }
+    // }
+    int getIndex;
+    int check_seat;
+        while(true)
+        {
             if (noOfSeats == 1)
             {
-                System.out.println("Please select which seat would you like to cancel");
-                seat = sc.nextInt();
-                for(Integer i : seatingPlan)
-                {
-                    // seat is inside the DB
-                    if (i==seat)
-                    {
-                        seatingPlan.remove(Integer.valueOf(seat));
-                        System.out.println("Successfully remove seat");
-                        break;
-
-                    }
-                    //if not in db, means user selected a seat that is already empty
-                    else
-                    {
-
-                    }
-
-                }
-
+                check_seat = amendSeat(seatingPlan, SessionID);
+                
+                //if not in db, means user selected a seat that is already empty
             }
+            else
+            {
+                for (int i=1; i<=noOfSeats; i++)
+                {
+                    System.out.println("Selecting seat " + i + "..");
+                    check_seat = amendSeat(seatingPlan, SessionID);
+              
+                    
+                }
+            }
+
+            
+
             break;
         }
         System.out.println(seatingPlan);
@@ -94,14 +140,93 @@ public class AmendBooking {
         // System.out.println("Please select Which seat would you like to cancel?");
 
         // seat = sc.nextInt();
-        ;
-        
-        
 
     }
+        
+        
 
     
 
+    
+//Wil ask user for which seat do they wan to remove , and remove the data locally
+private static int amendSeat(ArrayList<Integer> seatingPlan, ArrayList<String> SessionID)
+{
+    int seat;
+    int getIndex;
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Please select which seat would you like to cancel");
+    seat = sc.nextInt();
+    for(Integer i : seatingPlan)
+    {
+        // seat is inside the DB
+        if (i==seat)
+        {
+            //need to add integer.value of to remove that integer value else will remove by the index
+            getIndex = seatingPlan.indexOf(seat);
+            seatingPlan.remove(getIndex);
+            SessionID.remove(getIndex);
+            // seatingPlan.remove(Integer.valueOf(seat));
+            // System.out.println("Successfully remove seat");
+            return 1;
+        }
+        // return -1
+}
+
+// seat not in db
+    System.out.println("The seat you selected is already empty");
+    System.out.println("Please select the seats with 'X' ");
+    amendSeat(seatingPlan, SessionID);
+    return -1;
+
+    // return -1;
+}
+//function not correct yet.
+// private static int amendSeats(ArrayList<Integer> seatingPlan)
+// {
+
+//     Boolean loop_seat = true;
+//     Scanner sc = new Scanner(System.in);
+//     int seat = 0;
+//     while(loop_seat)
+//         {
+//                int check_seat =0;
+//                if(sc.hasNextInt())
+//                {
+//                 seat = sc.nextInt();
+//             if(seat>70 || seat <1)
+//             {
+//                 System.out.println("Please choose seat that are available");
+//                 continue;
+//             }
+//             for(Integer i : seatingPlan)
+//             {
+//                 if(seat == i)
+//                 {
+//                     check_seat++;
+//                     System.out.println("Seat Taken. Please select another seat");
+//                     break;
+//                 }
+                            
+//             }
+//             if(check_seat == 0)
+//             {
+//                 loop_seat = false;
+//             }
+//                }
+            
+
+//             else
+//             {
+//                 sc.nextLine();
+//                 System.out.println("Enter a valid Integer value");
+//                 // System.out.println("Please enter the valid integer");
+
+//             }
+           
+//         }
+//         return seat;
+
+// }
     
 private static String toStringClass(int cinema_class)
 {
@@ -216,8 +341,7 @@ private static String getCineCode_V1(String cineplex_choice)
 {
     String cinema_choice ="";
     Scanner sc = new Scanner(System.in);
-    
-    
+    int error  =0;
     //Prints entire CinemaCode in the Cineplex
     System.out.println(Cineplex.size());
     for(int i =0; i<Cineplex.size(); i++)
@@ -238,14 +362,10 @@ private static String getCineCode_V1(String cineplex_choice)
             }
         }
     }
-    
     //if nothing is triggered, likely error, not found in DB or user enter incorrectly
 
     System.out.println("Some error occured");
-    
-    
     return null;
-    
 
 }
 
