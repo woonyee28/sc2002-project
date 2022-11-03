@@ -29,6 +29,7 @@ public class Moviebooking {
     private int amountofTicket;
     static CinemaSerializer cs = new CinemaSerializer();
     static CineplexSerializer cps = new CineplexSerializer();
+    static MovieSerializer ms = new MovieSerializer();
     private static ArrayList<Cineplexes> Cineplex = cps.readFromCSV();
     private static ArrayList<Cinemas> Cinema = cs.readFromCSV();
 	public static void main(String[] args) {
@@ -118,7 +119,7 @@ public class Moviebooking {
 
 private static void showMovieListing()
 {
-    for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+    for (Movie m: ms.readFromCSV()) {           
         m.toString();
         System.out.println(m.getMovieID()+1 +": " +  m.getTitle()); 
     }
