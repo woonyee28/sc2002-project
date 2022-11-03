@@ -200,8 +200,6 @@ private static void bookings()
         System.out.println("Which seat would you like?");
         seat = bookSeats(seatingPlan);
         seatingPlan.add(seat);
-        LocalDateTime now = LocalDateTime.now();
-        SessionID.add(dtf.format(now));
         //TO IMPLEMENT NO: OF SeATS
     }
     else
