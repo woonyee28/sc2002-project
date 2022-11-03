@@ -5,16 +5,23 @@ import serializers.*;
 import java.util.*;
 
 public class MovieManager {
-    public static void printAllMovies(){
-        for (Movie m: MovieSerializer.readFromMovieCSV()){
+    private int adminID;
+    static MovieSerializer ms = new MovieSerializer();
+
+    public MovieManager(int adminID){
+        this.adminID = adminID;
+    }
+
+    public void printAllMovies(){
+        for (Movie m: ms.readFromCSV()){
             System.out.println(m.toString());
         }
     }
 
-    public static void createNewMovie(){
+    public void createNewMovie(){
         Scanner sc = new Scanner(System.in);
         int movieID=-1;
-        for (Movie m: MovieSerializer.readFromMovieCSV()){
+        for (Movie m: ms.readFromCSV()){
             movieID = Math.max(m.getMovieID(),movieID);
         }
         System.out.println("Enter Title: ");
@@ -42,12 +49,12 @@ public class MovieManager {
         ArrayList<Integer> reviewsID = new ArrayList<Integer>();
         reviewsID.add(-1);
         Movie m = new Movie(movieID+1, title, type, synopsis, rating, showingStatus, director, cast, reviewsID);
-        MovieSerializer.writeToMovieCSV(m);
+        ms.writeToCSV(m);
         System.out.println("Movie Recorded!");
-        sc.close();
+        ;
     }
 
-    public static void modifyMovie(){
+    public void modifyMovie(){
         Scanner sc = new Scanner(System.in);
         Scanner ii = new Scanner(System.in);
         System.out.println("Which Movie ID would you like to change? ");
@@ -61,7 +68,7 @@ public class MovieManager {
         String director="null";
         ArrayList<String> cast=new ArrayList<String>();
         ArrayList<Integer> reviewsID = new ArrayList<Integer>();
-        for (Movie m: MovieSerializer.readFromMovieCSV()){
+        for (Movie m: ms.readFromCSV()){
             if (m.getMovieID()==id){
                 movieID = id;
                 title = m.getTitle();
@@ -140,8 +147,18 @@ public class MovieManager {
 					break;
 			}
         }while (choice != 7);
-        MovieSerializer.updateMovieFromCSV(movieID, title, type, synopsis, rating, showingStatus, director, cast, reviewsID);
-        sc.close();
-        ii.close();
+        Movie up = new Movie();
+        up.setMovieID(movieID);
+        up.setTitle(title);
+        up.setType(type);
+        up.setShowingStatus(showingStatus);
+        up.setSynopsis(synopsis);
+        up.setRating(rating);
+        up.setDirector(director);
+        up.setCast(cast);
+        up.setReviewID(reviewsID);
+        ms.updateFromCSV(up);
+        ;
+        ;
     }
 }

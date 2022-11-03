@@ -4,10 +4,11 @@ import java.io.*;
 import java.util.ArrayList;
 import models.Price;
 
-public class PriceSerializer {
+public class PriceSerializer implements InterfaceSerializer<Price>{
     private static final String CSV_SEPARATOR = ",";
 
-    public static void writeToStaffCSV(Price p)
+    @Override
+    public void writeToCSV(Price p)
     {
         try
         {
@@ -19,14 +20,14 @@ public class PriceSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
-
-    public static ArrayList<Price> readFromPriceCSV()
+    @Override
+    public ArrayList<Price> readFromCSV()
     {
         try {
             ArrayList<Price> pList = new ArrayList<Price>();
@@ -43,7 +44,7 @@ public class PriceSerializer {
                pList.add(p);
                
             }
-            br.close();
+            ;
             return pList;
         } 
         catch(IOException e) {
@@ -51,8 +52,8 @@ public class PriceSerializer {
         }
         return null;
     }
-    
-    public static void overwriteStaffCSV(ArrayList<Price> pList) {
+    @Override
+    public void overwriteCSV(ArrayList<Price> pList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/priceData.csv",false)));
 			for(Price p:pList) {
@@ -64,28 +65,51 @@ public class PriceSerializer {
 	            bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
 	
     }
-
-    public static void updatePriceFromCSV(String cat, double newPrice) {
-	    ArrayList<Price> pList = PriceSerializer.readFromPriceCSV();
+    @Override
+    public void updateFromCSV(Price m) {
+        PriceSerializer p = new PriceSerializer();
+	    ArrayList<Price> pList = p.readFromCSV();
 	    int flag =0;
-	    for (Price p:pList) {
-		    if (p.getCat().equals(cat)) {
-                p.setPrice(newPrice);
+	    for (Price pp:pList) {
+		    if (pp.getCat().equals(m.getCat())) {
+                pp.setPrice(m.getPrice());
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        PriceSerializer.overwriteStaffCSV(pList);
-	        System.out.printf("%s price succesfully updated to $%.2f!\n",cat,newPrice);
-	    } else System.out.println(cat + " price update unsuccesful!");
-}
+	        p.overwriteCSV(pList);
+	        System.out.printf("%s price succesfully updated to $%.2f!\n", m.getCat() , m.getPrice());
+	    } else System.out.println(m.getCat() + " price update unsuccesful!");
+    }
+
+    @Override
+    public void deleteFromCSV(Price o) {
+        PriceSerializer p = new PriceSerializer();
+	    ArrayList<Price> pList = p.readFromCSV();
+	    int flag =0;
+        int index = 0;
+	    for (Price pp:pList) {
+		    if (pp.getCat().equals(o.getCat())) {
+                pp.setPrice(o.getPrice());
+		    	flag=1;
+		    	break;
+	    	}
+            index++;
+	    }
+        if (flag==1) {
+            pList.remove(index);
+            p.overwriteCSV(pList);
+            System.out.println("Price record, category = " +o.getCat()+" successfully deleted!");
+	    } else System.out.println("Price record, category = " + o.getCat() +" delete unsuccessful!");
+        
+    }
     
 }

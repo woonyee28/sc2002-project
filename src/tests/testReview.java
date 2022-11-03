@@ -11,7 +11,7 @@ public class testReview {
         //     m.toString();
         //     System.out.println(m); 
         // }
-        ReviewSerializer.deleteReviewFromCSV(0);
-        ReviewSerializer.updateReviewFromCSV(0,0,4.9,"Nice changed movie!",0);
+        // ReviewSerializer.deleteReviewFromCSV(0);
+        // ReviewSerializer.updateReviewFromCSV(0,0,4.9,"Nice changed movie!",0);
     }
 }

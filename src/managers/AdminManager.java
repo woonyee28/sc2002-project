@@ -7,10 +7,13 @@ import models.Staff;
 import serializers.StaffSerializer;
 
 public class AdminManager{
+    private int adminID;
     private ArrayList<Staff> sList;
+    static StaffSerializer ss = new StaffSerializer();
 
-    public AdminManager(){
-        this.sList =StaffSerializer.readFromStaffCSV();
+    public AdminManager(int adminID){
+        this.sList =ss.readFromCSV();
+        this.adminID = adminID;
     }
 
     public ArrayList<Staff> getList(){
@@ -99,14 +102,14 @@ public class AdminManager{
         return exists;
     }
 
-    public static int logIn(){
-        AdminManager login = new AdminManager();
+    public int logIn(){
+        AdminManager login = new AdminManager(this.adminID);
         Scanner input = new Scanner(System.in);
         System.out.println("Please key in your email:");
         String email = input.nextLine();
         System.out.println("Please key in your password:");
         String password = input.nextLine();
-        input.close();
+        ;
         if(!login.checkExistenceEmail(email)){
 			System.out.println("Email does not exist!");
 			return -1;
@@ -129,8 +132,8 @@ public class AdminManager{
 
     
 
-    public static int createAdmin(){
-        AdminManager create = new AdminManager();
+    public int createAdmin(){
+        AdminManager create = new AdminManager(this.adminID);
         int staffID = 0;
         String name=null;
         String email=null;
@@ -153,22 +156,22 @@ public class AdminManager{
             password = input2.nextLine();
             
             passwordHashed = String.valueOf(password.hashCode());
-            input2.close();
+            ;
             Staff newStaff = new Staff(staffID, name, email, passwordHashed);
-            serializers.StaffSerializer.writeToStaffCSV(newStaff);
+            ss.writeToCSV(newStaff);
             System.out.println("Admin account successfully created.");
             return 1;
         }
         else{
             System.out.println("Account already exists!");
         }
-        input1.close();
+        ;
         return 0;
 		
     }
 
-    public static void printAdminList(){
-        AdminManager print = new AdminManager();
+    public void printAdminList(){
+        AdminManager print = new AdminManager(this.adminID);
         System.out.println("--------- Admin list ---------");
         for (Staff s:print.getList()){
             StringBuffer oneLine = new StringBuffer();
@@ -181,10 +184,10 @@ public class AdminManager{
         }
     }
 
-    public static void updateAdminPassword(){
+    public void updateAdminPassword(){
         String email=null,password,passwordHashed=null,name;
         int staffID;
-        AdminManager update = new AdminManager();
+        AdminManager update = new AdminManager(this.adminID);
         Scanner input1 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
 
@@ -205,19 +208,24 @@ public class AdminManager{
                     password=input2.nextLine();
 
                     passwordHashed = String.valueOf(password.hashCode());
-                    serializers.StaffSerializer.updateStaffFromCSV(staffID, name, email, passwordHashed);
+                    Staff upd = new Staff();
+                    upd.setEmail(email);
+                    upd.setName(name);
+                    upd.setPasswordHashed(passwordHashed);
+                    upd.setStaffID(staffID);
+                    ss.updateFromCSV(upd);
 
                 }else System.out.println("Admin email does not found!");
             }else System.out.println("Admin name does not found!");
         }else System.out.println("Admin ID does not found!");
-        input1.close();
-        input2.close();
+        ;
+        ;
     }
 
-    public static void deleteAdmin(int accountHolderID){
+    public void deleteAdmin(int accountHolderID){
         int staffID;
         String name,confirm;
-        AdminManager delete = new AdminManager();
+        AdminManager delete = new AdminManager(this.adminID);
         Scanner input1 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
 
@@ -233,12 +241,15 @@ public class AdminManager{
                     System.out.println("Press y/n to confirm deletion ");
                     confirm =input2.next();
                     if(confirm.equals("y")){
-                        serializers.StaffSerializer.deleteStaffFromCSV(staffID, name);
+                        Staff del = new Staff();
+                        del.setName(name);
+                        del.setStaffID(staffID);
+                        ss.deleteFromCSV(del);
                     } else System.out.println("Deletion aborted.");
                 }else System.out.println("Admin name not found.");
             }else System.out.println("Error! Cannot delete currently logged in admin!");
         }else System.out.println("Admin ID not found.");
-        input1.close();
-        input2.close();
+        ;
+        ;
     }
 }

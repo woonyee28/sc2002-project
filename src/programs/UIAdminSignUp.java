@@ -6,7 +6,13 @@ import managers.AdminManager;
 
 
 public class UIAdminSignUp {
-     private final String menuOptions[] = {
+    private int adminID;
+
+    public UIAdminSignUp(int adminID){
+        this.adminID = adminID;
+    }
+
+    private final String menuOptions[] = {
         "Create New Admin",
         "Exit Admin Signup"
     };
@@ -26,7 +32,8 @@ public class UIAdminSignUp {
 			
             switch (choice) {
 				case 1:
-                    AdminManager.createAdmin();
+                    AdminManager m = new AdminManager(this.adminID);
+                    m.createAdmin();
 				case 2:
 					System.out.println("Exiting to the previous level...");
 					break;

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import models.Sessions;
 
-public class SessionSerializer {
+public class SessionSerializer implements InterfaceSerializer<Sessions>{
     private static final String CSV_SEPARATOR = ",";
-
-    public static void writeToSessionCSV(Sessions session)
+    @Override
+    public void writeToCSV(Sessions session)
     {
         try
         {
@@ -27,14 +27,14 @@ public class SessionSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
-  
-    public static ArrayList<Sessions> readFromSessionCSV()
+    @Override
+    public ArrayList<Sessions> readFromCSV()
     {
         try {
             ArrayList<Sessions> sessionList = new ArrayList<Sessions>();
@@ -58,7 +58,7 @@ public class SessionSerializer {
                sessionList.add(m);
                
             }
-            br.close();
+            ;
             return sessionList;
         } 
         catch(IOException e) {
@@ -66,7 +66,8 @@ public class SessionSerializer {
         }
         return null;
     }
-    public static void overwriteSessionsCSV(ArrayList<Sessions> aList) {
+    @Override
+    public void overwriteCSV(ArrayList<Sessions> aList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/sessionsData.csv",false)));
 			for(Sessions session:aList) {
@@ -86,7 +87,7 @@ public class SessionSerializer {
                 bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -94,28 +95,32 @@ public class SessionSerializer {
 	
     }
 
-    public static void updateSessionsFromCSV(int movieID, String sessionDate, String sessionTime, ArrayList<Integer> seatingPlan) {
-	    ArrayList<Sessions> aList = SessionSerializer.readFromSessionCSV();
+    @Override
+    public  void updateFromCSV(Sessions s) {
+        SessionSerializer ss = new SessionSerializer();
+	    ArrayList<Sessions> aList = ss.readFromCSV();
 	    int flag =0;
 	    for (Sessions a:aList) {
-		    if (a.getMovieID()==movieID && a.getSessionDate().equals(sessionDate) && a.getSessionTime().equals(sessionTime)) {
-                a.setSeatingPlan(seatingPlan);
+		    if (a.getMovieID()==s.getMovieID() && a.getSessionDate().equals(s.getSessionDate()) && a.getSessionTime().equals(s.getSessionTime())) {
+                a.setSeatingPlan(s.getSeatingPlan());
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        SessionSerializer.overwriteSessionsCSV(aList);
-	        System.out.println("Sessions record, date = "+sessionDate+" time = " + sessionTime+" successfully updated!");
+	        ss.overwriteCSV(aList);
+	        System.out.println("Sessions record, date = "+s.getSessionDate()+" time = " + s.getSessionTime()+" successfully updated!");
         }
-        else System.out.println("Sessions record, date = "+sessionDate+" time = " + sessionTime+" update unsuccessful!");
+        else System.out.println("Sessions record, date = "+s.getSessionDate()+" time = " + s.getSessionTime()+" update unsuccessful!");
     }
 
-    public static void deleteSessionsFromCSV(int movieID, String sessionDate, String sessionTime) {
-        ArrayList<Sessions> aList = SessionSerializer.readFromSessionCSV();
+    @Override
+    public void deleteFromCSV(Sessions s) {
+        SessionSerializer ss = new SessionSerializer();
+        ArrayList<Sessions> aList = ss.readFromCSV();
         int index=0,flag=0;
         for (Sessions a:aList) {
-            if (a.getMovieID()==movieID && a.getSessionDate().equals(sessionDate) && a.getSessionTime().equals(sessionTime)){
+            if (a.getMovieID()==s.getMovieID() && a.getSessionDate().equals(s.getSessionDate()) && a.getSessionTime().equals(s.getSessionTime())){
                 flag=1;
                 break;
             }
@@ -123,10 +128,10 @@ public class SessionSerializer {
         }
         if (flag==1) {
             aList.remove(index);
-            SessionSerializer.overwriteSessionsCSV(aList);
-            System.out.println("Sessions record, date = "+sessionDate+" time = " + sessionTime+" successfully deleted!");
+            ss.overwriteCSV(aList);
+            System.out.println("Sessions record, date = "+s.getSessionDate()+" time = " + s.getSessionTime()+" successfully deleted!");
         }
-        else System.out.println("Sessions record, date = "+sessionDate+" time = " + sessionTime+" deletion unsuccessful!");
+        else System.out.println("Sessions record, date = "+s.getSessionDate()+" time = " + s.getSessionTime()+" deletion unsuccessful!");
 
 	
     }

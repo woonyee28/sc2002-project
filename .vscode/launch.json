@@ -6,10 +6,24 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch AmendBooking",
+            "name": "Launch testCineplex",
             "request": "launch",
-            "mainClass": "tests.AmendBooking",
-            "projectName": "sc2002-project_cd3e2a63"
+            "mainClass": "tests.testCineplex",
+            "projectName": "sc2002-project_15e1bfac"
+        },
+        {
+            "type": "java",
+            "name": "Launch testCinema",
+            "request": "launch",
+            "mainClass": "tests.testCinema",
+            "projectName": "sc2002-project_15e1bfac"
+        },
+        {
+            "type": "java",
+            "name": "Launch MoblimaMainApp",
+            "request": "launch",
+            "mainClass": "programs.MoblimaMainApp",
+            "projectName": "sc2002-project_15e1bfac"
         },
         {
             "type": "java",

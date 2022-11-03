@@ -16,9 +16,20 @@ import serializers.ReviewSerializer;
 import serializers.TransactionSerializer;
 
 public class SalesManager {
-    public static void sortByRating(){
+    private int adminOrmember; 
+    private int id;
+    static TransactionSerializer ts = new TransactionSerializer();
+    static MovieSerializer ms = new MovieSerializer();
+    static ReviewSerializer rs = new ReviewSerializer();
+
+    public SalesManager(int id, int adminOrmember){
+        this.id = id;
+        this.adminOrmember = adminOrmember;
+    }
+
+    public void sortByRating(){
         Map<Double,String> d = new TreeMap<Double,String>(Collections.reverseOrder());
-        for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+        for (Movie m: ms.readFromCSV()) {           
             d.put(m.getRating(),m.getTitle());
         }
         Set<Entry<Double, String>> set = d.entrySet();
@@ -37,9 +48,9 @@ public class SalesManager {
         
     }
 
-    public static void sortBySales(){
+    public void sortBySales(){
         final Map<Double, Integer> d = new TreeMap<Double,Integer>(Collections.reverseOrder());
-        for (Transaction m: TransactionSerializer.readFromTransactionCSV()) {   
+        for (Transaction m: ts.readFromCSV()) {   
             int id = m.getMovieID();  
             Set<Double> prices = d.keySet();      
             if (d.containsValue(id)){
@@ -61,7 +72,7 @@ public class SalesManager {
         int c=0;
         while (i.hasNext()) {
             Map.Entry me = (Map.Entry)i.next();
-            for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+            for (Movie m: ms.readFromCSV()) {           
                 if (me.getValue().equals(m.getMovieID())){
                     System.out.print(m.getTitle() + ": ");
                     break;
@@ -75,19 +86,19 @@ public class SalesManager {
         }
     }
 
-    public static void showReview(){
+    public void showReview(){
         System.out.println("Input the movie name: ");
         Scanner sc = new Scanner(System.in);
         int movieid = -1;
         String movieName = sc.nextLine();
-        for (Movie m: MovieSerializer.readFromMovieCSV()) {           
+        for (Movie m: ms.readFromCSV()) {           
             if (movieName.equals(m.getTitle())){
                 movieid = m.getMovieID();
                 break;
             }
         }
         int check = 0;
-        for (Review r: ReviewSerializer.readFromReviewCSV()){
+        for (Review r: rs.readFromCSV()){
             if (movieid == r.getMovieID()){
                 System.out.println(r.getReviews());
                 check=1;
@@ -96,6 +107,6 @@ public class SalesManager {
         if (check==0){
             System.out.println("The movie has no review yet.");
         }
-        sc.close();
+        ;
     }
 }

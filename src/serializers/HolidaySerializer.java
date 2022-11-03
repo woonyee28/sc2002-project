@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 import models.Holiday;
 
-public class HolidaySerializer {
+public class HolidaySerializer implements InterfaceSerializer<Holiday>{
     private static final String CSV_SEPARATOR = ",";
 
-    public static void writeToHolidayCSV(Holiday holiday)
+    @Override
+    public void writeToCSV(Holiday holiday)
     {
         try
         {
@@ -21,14 +22,14 @@ public class HolidaySerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
-
-    public static ArrayList<Holiday> readFromHolidayCSV()
+    @Override
+    public ArrayList<Holiday> readFromCSV()
     {
         try {
             ArrayList<Holiday> holidayList = new ArrayList<Holiday>();
@@ -44,7 +45,7 @@ public class HolidaySerializer {
                Holiday m = new Holiday(name,date);
                holidayList.add(m);
             }
-            br.close();
+            ;
             return holidayList;
         } 
         catch(IOException e) {
@@ -52,7 +53,8 @@ public class HolidaySerializer {
         }
         return null;
     }
-    public static void overwriteHolidayCSV(ArrayList<Holiday> hList) {
+    @Override
+    public void overwriteCSV(ArrayList<Holiday> hList) {
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/holidayData.csv",false)));
             for(Holiday h:hList) {
@@ -64,46 +66,49 @@ public class HolidaySerializer {
                 bw.newLine();
             }
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
-    
-}
+    }
 
-public static void updateHolidayFromCSV(String name, String newDate) {
-    ArrayList<Holiday> hList = HolidaySerializer.readFromHolidayCSV();
-    int flag =0;
-    for (Holiday h:hList) {
-        if (h.getName().equals(name)) {
-            h.setDate(newDate);
-            flag=1;
+    @Override
+    public void updateFromCSV(Holiday m) {
+        HolidaySerializer hs = new HolidaySerializer();
+        ArrayList<Holiday> hList = hs.readFromCSV();
+        int flag =0;
+        for (Holiday h:hList) {
+            if (h.getName().equals(m.getName())) {
+                h.setDate(m.getDate());
+                flag=1;
+            }
         }
+        if (flag==1){
+        hs.overwriteCSV(hList);
+        System.out.println(m.getName() + " Holiday succesfully updated!");
+        } else System.out.println("update of "+ m.getName() + " holiday unsuccessful!");
     }
-    if (flag==1){
-    HolidaySerializer.overwriteHolidayCSV(hList);
-    System.out.println(name + " Holiday succesfully updated!");
-    } else System.out.println("update of "+ name + " holiday unsuccessful!");
-}
 
-public static void deleteHolidayFromCSV(String name) {
-    ArrayList<Holiday> hList = HolidaySerializer.readFromHolidayCSV();
-    int index=0,flag=0;
-    for (Holiday h:hList) {
-        if (h.getName().equals(name)) {
-            flag=1;
-            break;
+    @Override
+    public void deleteFromCSV(Holiday m) {
+        HolidaySerializer hs = new HolidaySerializer();
+        ArrayList<Holiday> hList = hs.readFromCSV();
+        int index=0,flag=0;
+        for (Holiday h:hList) {
+            if (h.getName().equals(m.getName())) {
+                flag=1;
+                break;
+            }
+            index++;
         }
-        index++;
-    }
-    if (flag==1) {
-        hList.remove(index);
-        HolidaySerializer.overwriteHolidayCSV(hList);
-        System.out.println(name + " Holiday succesfully deleted");
-    }
-    else System.out.println("Deletion of" +name+" holiday unsuccesful!");
+        if (flag==1) {
+            hList.remove(index);
+            hs.overwriteCSV(hList);
+            System.out.println(m.getName() + " Holiday succesfully deleted");
+        }
+        else System.out.println("Deletion of" +m.getName()+" holiday unsuccesful!");
 
-    
-}
+        
+    }
 }

@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 import models.Review;
 
-public class ReviewSerializer {
+public class ReviewSerializer implements InterfaceSerializer<Review>{
     private static final String CSV_SEPARATOR = ",";
 
-    public static void writeToReviewCSV(Review review)
+    @Override
+    public void writeToCSV(Review review)
     {
         try
         {
@@ -27,14 +28,14 @@ public class ReviewSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
-
-    public static ArrayList<Review> readFromReviewCSV()
+    @Override
+    public ArrayList<Review> readFromCSV()
     {
         try {
             ArrayList<Review> reviewList = new ArrayList<Review>();
@@ -53,7 +54,7 @@ public class ReviewSerializer {
                Review m = new Review(reviewsID,movieGoersID,rating,reviews,movieID);
                reviewList.add(m);
             }
-            br.close();
+            ;
             return reviewList;
         } 
         catch(IOException e) {
@@ -61,8 +62,8 @@ public class ReviewSerializer {
         }
         return null;
     }
-
-    public static void overwriteReviewCSV(ArrayList<Review> aList) {
+    @Override
+    public void overwriteCSV(ArrayList<Review> aList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/reviewsData.csv",false)));
 			for(Review review:aList) {
@@ -81,39 +82,41 @@ public class ReviewSerializer {
                 bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
 	
     }
-
-    public static void updateReviewFromCSV(int reviewsID, int movieGoersID, double rating, String reviews, int movieID) {
-	    ArrayList<Review> aList = ReviewSerializer.readFromReviewCSV();
+    @Override
+    public void updateFromCSV(Review r) {
+        ReviewSerializer rs = new ReviewSerializer();
+	    ArrayList<Review> aList = rs.readFromCSV();
 	    int flag =0;
 	    for (Review a:aList) {
-		    if (a.getReviewsID()==reviewsID ) {
-		    	a.setMovieGoersID(movieGoersID);
-                a.setRating(rating);
-                a.setReviews(reviews);
-                a.setMovieID(movieID);
+		    if (a.getReviewsID()==r.getReviewsID()) {
+		    	a.setMovieGoersID(r.getMovieID());
+                a.setRating(r.getRating());
+                a.setReviews(r.getReviews());
+                a.setMovieID(r.getMovieID());
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        ReviewSerializer.overwriteReviewCSV(aList);
-	        System.out.println("Review record, id = "+ reviewsID+" successfully updated!");
+	        rs.overwriteCSV(aList);
+	        System.out.println("Review record, id = "+ r.getReviewsID()+" successfully updated!");
         }
-        else System.out.println("Review record, id = "+ reviewsID+" update unsuccessful!");
+        else System.out.println("Review record, id = "+ r.getReviewsID()+" update unsuccessful!");
     }
-
-    public static void deleteReviewFromCSV(int reviewsID) {
-        ArrayList<Review> aList = ReviewSerializer.readFromReviewCSV();
+    @Override
+    public void deleteFromCSV(Review r) {
+        ReviewSerializer rs = new ReviewSerializer();
+        ArrayList<Review> aList = rs.readFromCSV();
         int index=0,flag=0;
         for (Review a:aList) {
-            if (a.getReviewsID()==reviewsID) {
+            if (a.getReviewsID()==r.getReviewsID()) {
                 flag=1;
                 break;
             }
@@ -121,10 +124,10 @@ public class ReviewSerializer {
         }
         if (flag==1) {
             aList.remove(index);
-            ReviewSerializer.overwriteReviewCSV(aList);
-            System.out.println("Review record, id = "+ reviewsID+" successfully deleted!");
+            rs.overwriteCSV(aList);
+            System.out.println("Review record, id = "+ r.getReviewsID()+" successfully deleted!");
         }
-        else System.out.println("Review record, id = "+ reviewsID+" deletion unsuccessful!");
+        else System.out.println("Review record, id = "+ r.getReviewsID()+" deletion unsuccessful!");
 
 	
     }

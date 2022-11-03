@@ -5,9 +5,10 @@ import serializers.MovieSerializer;
 public class MovieInformation {
 
     private ArrayList<Movie> movList;
-
+    static MovieSerializer ms = new MovieSerializer();
+    
     public MovieInformation(){
-        this.movList = MovieSerializer.readFromMovieCSV();
+        this.movList = ms.readFromCSV();
     }
 
     public int returnMovInfo(int MovieID){
@@ -44,7 +45,7 @@ public class MovieInformation {
         Scanner sc = new Scanner(System.in);
         System.out.println("What would you like to do?\n\t[1] Book tickets\t[2] Return to Movie Listings");
         int choice = sc.nextInt();
-        sc.close();
+        ;
         return choice;
     }
     

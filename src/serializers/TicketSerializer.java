@@ -4,12 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 import models.Ticket;
 
-public class TicketSerializer {
+public class TicketSerializer implements InterfaceSerializer<Ticket> {
     private static final String CSV_SEPARATOR = ",";
 
     
-
-    public static void writeToTicketCSV(Ticket t)
+    @Override
+    public void writeToCSV(Ticket t)
     {
         try
         {
@@ -29,14 +29,15 @@ public class TicketSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
 
-    public static ArrayList<Ticket> readFromTicketCSV()
+    @Override
+    public ArrayList<Ticket> readFromCSV()
     {
         try {
             ArrayList<Ticket> adminList = new ArrayList<Ticket>();
@@ -57,7 +58,7 @@ public class TicketSerializer {
                adminList.add(newT);
                
             }
-            br.close();
+            ;
             return adminList;
         } 
         catch(IOException e) {
@@ -65,8 +66,9 @@ public class TicketSerializer {
         }
         return null;
     }
-    
-    public static void overwriteTicketCSV(ArrayList<Ticket> tList) {
+
+    @Override
+    public void overwriteCSV(ArrayList<Ticket> tList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/ticketData.csv",false)));
 			for(Ticket t:tList) {
@@ -86,7 +88,7 @@ public class TicketSerializer {
 	            bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -94,48 +96,52 @@ public class TicketSerializer {
 	
     }
 
-    public static void updateTicketfromCSV(String movieType, String cineplexCode, String ageCat,String dayType,Boolean afterSix,int price) {
-	    ArrayList<Ticket> tList = TicketSerializer.readFromTicketCSV();
+    @Override
+    public void updateFromCSV(Ticket o) {
+        TicketSerializer tt = new TicketSerializer();
+	    ArrayList<Ticket> tList = tt.readFromCSV();
 	    int flag =0;
 	    for (Ticket t:tList) {
-		    if (t.getMovieType().equals(movieType) 
-            && t.getCineplexCode().equals(cineplexCode) 
-            && t.getAgeCat().equals(ageCat) 
-            && t.getDayType().equals(dayType)
-            && t.getAfterSix()==afterSix) {
-		    	t.setPrice(price);
+		    if (t.getMovieType().equals(o.getMovieType()) 
+            && t.getCineplexCode().equals(o.getCineplexCode()) 
+            && t.getAgeCat().equals(o.getAgeCat()) 
+            && t.getDayType().equals(o.getDayType())
+            && t.getAfterSix()==o.getAfterSix()) {
+		    	t.setPrice(o.getPrice());
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        TicketSerializer.overwriteTicketCSV(tList);
-	        System.out.println("Ticket: "+ movieType + " "+ cineplexCode+" " + ageCat+ " "+ dayType + " "+ afterSix+ " price successfully updated!");
-	    } else System.out.println("Ticket: "+ movieType + " "+ cineplexCode+" " + ageCat+ " "+ dayType + " "+ afterSix+ " price update unsuccesful!");
+	        tt.overwriteCSV(tList);
+	        System.out.println("Ticket: "+ o.getMovieType()+ " "+ o.getCineplexCode()+" " + o.getAgeCat()+ " "+ o.getDayType() + " "+ o.getAfterSix()+ o.getPrice() +" price successfully updated!");
+	    } else System.out.println("Ticket: "+ o.getMovieType()+ " "+ o.getCineplexCode()+" " + o.getAgeCat()+ " "+ o.getDayType() + " "+ o.getAfterSix() + o.getPrice() +" price update unsuccesful!");
     }
 
-public static void deleteTicketFromCSV(String movieType, String cineplexCode, String ageCat,String dayType,Boolean afterSix,int price) {
-	ArrayList<Ticket> tList = TicketSerializer.readFromTicketCSV();
-	int index=0,flag=0;
-	for (Ticket t:tList) {
-		if (t.getMovieType().equals(movieType) 
-            && t.getCineplexCode().equals(cineplexCode) 
-            && t.getAgeCat().equals(ageCat) 
-            && t.getDayType().equals(dayType)
-            && t.getAfterSix()==afterSix
-            && t.getPrice()==price)
-            {
-			flag=1;
-			break;
-		}
-		index++;
-	}
-	if (flag==1) {
-		tList.remove(index);
-		TicketSerializer.overwriteTicketCSV(tList);
-		System.out.println("Ticket: "+ movieType + " "+ cineplexCode+" " + ageCat+ " "+ dayType + " "+ afterSix+" "+price + " successfully deleted!");
-	    } else System.out.println("Ticket: "+ movieType + " "+ cineplexCode+" " + ageCat+ " "+ dayType + " "+ afterSix+ " "+price+ " deletion unsuccesful!");
-    
-    }
+    @Override
+    public void deleteFromCSV(Ticket o) {
+        TicketSerializer tt = new TicketSerializer();
+        ArrayList<Ticket> tList = tt.readFromCSV();
+        int index=0,flag=0;
+        for (Ticket t:tList) {
+            if (t.getMovieType().equals(o.getMovieType()) 
+            && t.getCineplexCode().equals(o.getCineplexCode()) 
+            && t.getAgeCat().equals(o.getAgeCat()) 
+            && t.getDayType().equals(o.getDayType())
+            && t.getAfterSix()==o.getAfterSix()
+                && t.getPrice()==o.getPrice())
+                {
+                flag=1;
+                break;
+            }
+            index++;
+        }
+        if (flag==1) {
+            tList.remove(index);
+            tt.overwriteCSV(tList);
+            System.out.println("Ticket: "+ o.getMovieType()+ " "+ o.getCineplexCode()+" " + o.getAgeCat()+ " "+ o.getDayType() + " "+ o.getAfterSix()+ " " + o.getPrice() + " successfully deleted!");
+            } else System.out.println("Ticket: "+ o.getMovieType()+ " "+ o.getCineplexCode()+" " + o.getAgeCat()+ " "+ o.getDayType() + " "+ o.getAfterSix()+ " " + o.getPrice() + " deletion unsuccesful!");
+        
+        }
     
 }

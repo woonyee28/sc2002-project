@@ -3,6 +3,7 @@ package programs;
 import java.util.Scanner;
 
 import managers.AdminManager;
+import managers.GuestManager;
 import managers.MemberManager;
 
 // import com.apple.laf.resources.aqua;
@@ -25,7 +26,7 @@ public class MoblimaMainApp{
 
         do{
             System.out.println("====================MoblimaMainApp======================\n");
-            System.out.println("Are you a:\n\t[1] Moblima Member\t[2] New User\t[3] Moblima Staff");
+            System.out.println("Are you a:\n\t[1] Moblima Member\n\t[2] New User Sign Up\n\t[3] Guest Visit\n\t[4] Moblima Staff");
             choice = Integer.valueOf(sc.next());
             System.out.println();
             switch (choice) {
@@ -39,21 +40,26 @@ public class MoblimaMainApp{
 				case 2:
 					MemberManager.signUp();
 					break;
-				case 3:
-                    adminID = AdminManager.logIn();
+                case 3:
+                    GuestManager gm = new GuestManager();
+                    gm.run();
+                    break;
+				case 4:
+                    AdminManager adminmag = new AdminManager(adminID);
+                    adminID = adminmag.logIn();
                     if(adminID!=-1){
                         AdminApp a = new AdminApp(adminID);
                         a.run();
                     }
 					break;
-				case 4:
+				case 5:
 					System.out.println("Program exiting...");
 					break;
 				default:
 					System.out.println("Please input a valid option.");
 					break;
 			}
-        }while (choice != 4);
-        sc.close();
+        }while (choice != 5);
+        ;
     }
 }

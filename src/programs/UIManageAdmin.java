@@ -35,19 +35,20 @@ public class UIManageAdmin {
             }
 			choice = Integer.valueOf(sc.next());
 			System.out.println();
+            AdminManager adminmag = new AdminManager(this.adminID);
 			
             switch (choice) {
 				case 1:
                     // Prints admin list
-                    AdminManager.printAdminList();
+                    adminmag.printAdminList();
                     break;
                 case 2:
                     // Update admin(change pass/email)
-                    AdminManager.updateAdminPassword();
+                    adminmag.updateAdminPassword();
                     break;
                 case 3:
                     // Delete admin
-                   AdminManager.deleteAdmin(this.adminID);
+                    adminmag.deleteAdmin(this.adminID);
                     break;
 				case 4:
 					System.out.println("Exiting to the previous level...");
@@ -57,6 +58,6 @@ public class UIManageAdmin {
 					break;
 			}
         }while (choice != 4);
-        sc.close();
+        ;
     }
 }

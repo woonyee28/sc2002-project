@@ -5,14 +5,23 @@ import serializers.*;
 import java.util.*;
 
 public class SessionManager {
-    public static void printAllSessions(){
-        for (Sessions m: SessionSerializer.readFromSessionCSV()) {           
+    static SessionSerializer ss = new SessionSerializer();
+
+    private int adminID;
+
+    public SessionManager(int adminID){
+        this.adminID = adminID;
+    }
+
+    public void printAllSessions(){
+        for (Sessions m: ss.readFromCSV()) {           
             System.out.println(m.toString()); 
         }
     }
 
-    public static void createNewSession(){
-        MovieManager.printAllMovies();
+    public void createNewSession(){
+        MovieManager mm = new MovieManager(this.adminID);
+        mm.printAllMovies();
         Scanner ii = new Scanner(System.in);
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Movie Id: ");
@@ -24,12 +33,12 @@ public class SessionManager {
         ArrayList<Integer> seatingPlan = new ArrayList<Integer>();
         seatingPlan.add(-1);
         Sessions sess = new Sessions(movieID, sessionDate, sessionTime, seatingPlan);
-        SessionSerializer.writeToSessionCSV(sess);
-        ii.close();
-        sc.close();
+        ss.writeToCSV(sess);
+        ;
+        ;
     }
     
-    public static void modifySession(){
+    public void modifySession(){
         Scanner ii = new Scanner(System.in);
         Scanner sc = new Scanner(System.in);
         int movieID = -1;
@@ -48,7 +57,7 @@ public class SessionManager {
             "Session Time",
             "Exit ChangeOptions"
         };
-        for (Sessions s: SessionSerializer.readFromSessionCSV()){
+        for (Sessions s: ss.readFromCSV()){
             if (s.getMovieID()==movieID && s.getSessionDate().equals(sessionDate) && s.getSessionTime().equals(sessionTime)){
                 seatingPlan = s.getSeatingPlan();
             }
@@ -88,10 +97,14 @@ public class SessionManager {
 					break;
 			}
         }while (choice != 4);
-        SessionSerializer.deleteSessionsFromCSV(movieID, sessionDate, sessionTime);
+        Sessions aa = new Sessions();
+        aa.setSessionTime(sessionTime);
+        aa.setSessionDate(sessionDate);
+        aa.setMovieID(movieID);
+        ss.deleteFromCSV(aa);
         Sessions sa = new Sessions(newMovieID,newSessionDate,newSessionTime,seatingPlan);
-        SessionSerializer.writeToSessionCSV(sa);
-        sc.close();
-        ii.close();
+        ss.writeToCSV(sa);
+        ;
+        ;
     }
 }

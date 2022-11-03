@@ -11,8 +11,8 @@ public class testMovieGoer {
         //     m.toString();
         //     System.out.println(m); 
         // }
-        MovieGoerSerializer.deleteMovieGoerFromCSV("TestSnorlex","snorlex@gmail.com.org");
-        MovieGoerSerializer.updateMovieGoerFromCSV(0,"Woon Yee","ngnwy289@e.ntu.edu.sg",21,String.valueOf("renewpw".hashCode()),86521928,"AAA202210202056");
+        // MovieGoerSerializer.deleteMovieGoerFromCSV("TestSnorlex","snorlex@gmail.com.org");
+        // MovieGoerSerializer.updateMovieGoerFromCSV(0,"Woon Yee","ngnwy289@e.ntu.edu.sg",21,String.valueOf("renewpw".hashCode()),86521928,"AAA202210202056");
     }
 }
  

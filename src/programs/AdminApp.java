@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class AdminApp {
 
 	private int adminID;
+
 	private final String menuOptions[] = {
         "Amend Booking",
         "Show Movie Listing",
@@ -47,23 +48,23 @@ public class AdminApp {
 					// Zheng Kai
 					break;
 				case 3:
-					UISalesReporting s = new UISalesReporting();
+					UISalesReporting s = new UISalesReporting(this.adminID,1);
 					s.run();
 					break;
                 case 4:
 					// Create new movie listing / new session / change movie details, UINewListingSession
 					// Woon Yee
-					UINewListingSession l = new UINewListingSession();
+					UINewListingSession l = new UINewListingSession(this.adminID);
 					l.run();
 					break;
                 case 5:
 					// Config system setting, UIConfigSystem
-					UIConfigSystem configSystem = new UIConfigSystem();
+					UIConfigSystem configSystem = new UIConfigSystem(this.adminID);
 					configSystem.run();
 					break;
                 case 6:
 					// sign up admin, UIAdminSignUp
-					UIAdminSignUp adminSignUp = new UIAdminSignUp();
+					UIAdminSignUp adminSignUp = new UIAdminSignUp(this.adminID);
 					adminSignUp.run();
                 case 7:
 					// manage admin, UIManageAdmin
@@ -78,7 +79,7 @@ public class AdminApp {
 					break;
 			}
         }while (choice != 8);
-		sc.close();
+		;
     }
 	
 }

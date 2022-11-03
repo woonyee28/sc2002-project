@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import models.MovieGoer;
 
-public class MovieGoerSerializer {
+public class MovieGoerSerializer implements InterfaceSerializer<MovieGoer>{
     private static final String CSV_SEPARATOR = ",";
-
-    public static void writeToMovieGoerCSV(MovieGoer movieGoer)
+    @Override
+    public void writeToCSV(MovieGoer movieGoer)
     {
         try
         {
@@ -31,14 +31,14 @@ public class MovieGoerSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
-
-    public static ArrayList<MovieGoer> readFromMovieGoerCSV()
+    @Override
+    public ArrayList<MovieGoer> readFromCSV()
     {
         try {
             ArrayList<MovieGoer> movieGoerList = new ArrayList<MovieGoer>();
@@ -61,7 +61,7 @@ public class MovieGoerSerializer {
                movieGoerList.add(m);
                
             }
-            br.close();
+            ;
             return movieGoerList;
         } 
         catch(IOException e) {
@@ -69,8 +69,8 @@ public class MovieGoerSerializer {
         }
         return null;
     }
-
-    public static void overwriteMovieGoerCSV(ArrayList<MovieGoer> aList) {
+    @Override
+    public void overwriteCSV(ArrayList<MovieGoer> aList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/movieGoersData.csv",false)));
 			for(MovieGoer movieGoer:aList) {
@@ -93,39 +93,41 @@ public class MovieGoerSerializer {
                 bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
 	
     }
-
-    public static void updateMovieGoerFromCSV(int movieGoersID, String name, String email, int age, String passwordHashed, int mobileNumber, String TID_List) {
-	    ArrayList<MovieGoer> aList = MovieGoerSerializer.readFromMovieGoerCSV();
+    @Override
+    public void updateFromCSV(MovieGoer m) {
+	    MovieGoerSerializer mg = new MovieGoerSerializer();
+        ArrayList<MovieGoer> aList = mg.readFromCSV();
 	    int flag =0;
 	    for (MovieGoer a:aList) {
-		    if (a.getName().equals(name) && a.getEmail().equals(email)) {
-		    	a.setMovieGoersID(movieGoersID);
-                a.setAge(age);
-                a.setpasswordHashed(passwordHashed);
-                a.setMobileNumber(mobileNumber);
-                a.setTID_List(TID_List);
+		    if (a.getName().equals(m.getName()) && a.getEmail().equals(m.getEmail())) {
+		    	a.setMovieGoersID(m.getMovieGoersID());
+                a.setAge(m.getAge());
+                a.setpasswordHashed(m.getPasswordHashed());
+                a.setMobileNumber(m.getMobileNumber());
+                a.setTID_List(m.getTID_List());
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        MovieGoerSerializer.overwriteMovieGoerCSV(aList);
-	        System.out.println("MovieGoer record, name = " + name +" successfully updated!");
-	    } else System.out.println("MovieGoer record, name " + name+" update unsuccessful!");
+	        mg.overwriteCSV(aList);
+	        System.out.println("MovieGoer record, name = " + m.getName() +" successfully updated!");
+	    } else System.out.println("MovieGoer record, name " + m.getName()+" update unsuccessful!");
     }
-
-    public static void deleteMovieGoerFromCSV(String name, String email) {
-        ArrayList<MovieGoer> aList = MovieGoerSerializer.readFromMovieGoerCSV();
+    @Override
+    public void deleteFromCSV(MovieGoer m) {
+        MovieGoerSerializer mg = new MovieGoerSerializer();
+        ArrayList<MovieGoer> aList = mg.readFromCSV();
         int index=0,flag=0;
         for (MovieGoer a:aList) {
-            if (a.getName().equals(name) && a.getEmail().equals(email)) {
+            if (a.getName().equals(m.getName()) && a.getEmail().equals(m.getEmail())) {
                 flag=1;
                 break;
             }
@@ -133,9 +135,9 @@ public class MovieGoerSerializer {
         }
         if (flag==1) {
             aList.remove(index);
-            MovieGoerSerializer.overwriteMovieGoerCSV(aList);
-            System.out.println("MovieGoer record, name = " + name +" successfully deleted!");
-	    } else System.out.println("MovieGoer record, name " + name+" delete unsuccessful!");
+            mg.overwriteCSV(aList);
+            System.out.println("MovieGoer record, name = " + m.getName() +" successfully deleted!");
+	    } else System.out.println("MovieGoer record, name " + m.getName()+" delete unsuccessful!");
     }
 }
  

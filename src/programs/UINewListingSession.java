@@ -6,6 +6,12 @@ import managers.MovieManager;
 import managers.SessionManager;
 
 public class UINewListingSession {
+    private int adminID;
+
+    public UINewListingSession(int adminID){
+        this.adminID = adminID;
+    }
+    
     private final String menuOptions[] = {
         "Print All Movies",
         "Print All Sessions",
@@ -28,31 +34,32 @@ public class UINewListingSession {
                 System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
             }
             choice = Integer.valueOf(sc.next());
-			
+			SessionManager sm = new SessionManager(this.adminID);
+            MovieManager mm = new MovieManager(adminID);
             switch (choice) {
                 case 1:
                     System.out.println("printAllMovies():");
-                    MovieManager.printAllMovies();
+                    mm.printAllMovies();
                     break;
                 case 2:
                     System.out.println("printAllSessions:");
-                    SessionManager.printAllSessions();
+                    sm.printAllSessions();
                     break;                
 				case 3:
                     System.out.println("createNewMovie():");
-                    MovieManager.createNewMovie();
+                    mm.createNewMovie();
 					break;
 				case 4:
                     System.out.println("createNewSession():");
-					SessionManager.createNewSession();
+					sm.createNewSession();
 					break;
                 case 5:
                     System.out.println("modifyMovie()");
-                    MovieManager.modifyMovie();
+                    mm.modifyMovie();
                     break;
 				case 6:
                     System.out.println("modifySession()");
-                    SessionManager.modifySession();
+                    sm.modifySession();
                     break;
                 case 7:
                     System.out.println("Program exiting...");
@@ -62,6 +69,6 @@ public class UINewListingSession {
 					break;
 			}
         }while (choice != 7);
-        sc.close();
+        ;
     }
 }

@@ -5,10 +5,11 @@ import java.util.ArrayList;
  
 import models.Cineplexes;
 
-public class CineplexSerializer {
+public class CineplexSerializer implements InterfaceSerializer<Cineplexes>{
     private static final String CSV_SEPARATOR = ",";
 
-    public static void writeToCineplexesCSV(Cineplexes cineplexes)
+    @Override
+    public void writeToCSV(Cineplexes cineplexes)
     {
         try
         {
@@ -25,14 +26,15 @@ public class CineplexSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
- 
-    public static ArrayList<Cineplexes> readFromCineplexesCSV()
+
+    @Override
+    public ArrayList<Cineplexes> readFromCSV()
     {
         try {
             ArrayList<Cineplexes> cineplexesList = new ArrayList<Cineplexes>();
@@ -55,7 +57,7 @@ public class CineplexSerializer {
                cineplexesList.add(m);
                
             }
-            br.close();
+            ;
             return cineplexesList;
         } 
         catch(IOException e) {
@@ -63,7 +65,8 @@ public class CineplexSerializer {
         }
         return null;
     }  
-    public static void overwriteCineplexesCSV(ArrayList<Cineplexes> aList) {
+    @Override
+    public void overwriteCSV(ArrayList<Cineplexes> aList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/cineplexesData.csv",false)));
 			for(Cineplexes cineplexes:aList) {
@@ -80,37 +83,39 @@ public class CineplexSerializer {
                 bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
 	
     }
-
-    public static void updateCineplexesFromCSV(String cineplexCode, String name, ArrayList<String> cinemasCode) {
-	    ArrayList<Cineplexes> aList = CineplexSerializer.readFromCineplexesCSV();
+    @Override
+    public void updateFromCSV(Cineplexes m) {
+        CineplexSerializer cp = new CineplexSerializer();
+	    ArrayList<Cineplexes> aList = cp.readFromCSV();
 	    int flag =0;
 	    for (Cineplexes a:aList) {
-		    if (a.getCineplexCode().equals(cineplexCode) ) {
-                a.setName(name);
-                a.setCinemasCode(cinemasCode);
+		    if (a.getCineplexCode().equals(m.getCineplexCode()) ) {
+                a.setName(m.getName());
+                a.setCinemasCode(m.getCinemasCode());;
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        CineplexSerializer.overwriteCineplexesCSV(aList);
-	        System.out.println("Cineplexes record, code = "+ cineplexCode+" successfully updated!");
+	        cp.overwriteCSV(aList);
+	        System.out.println("Cineplexes record, code = "+ m.getCineplexCode()+" successfully updated!");
         }
-        else System.out.println("Cineplexes record, code = "+ cineplexCode+" update unsuccessful!");
+        else System.out.println("Cineplexes record, code = "+m.getCineplexCode()+" update unsuccessful!");
     }
-
-    public static void deleteCineplexesFromCSV(String cineplexCode) {
-        ArrayList<Cineplexes> aList = CineplexSerializer.readFromCineplexesCSV();
+    @Override
+    public void deleteFromCSV(Cineplexes m) {
+        CineplexSerializer cp = new CineplexSerializer();
+        ArrayList<Cineplexes> aList = cp.readFromCSV();
         int index=0,flag=0;
         for (Cineplexes a:aList) {
-            if (a.getCineplexCode().equals(cineplexCode)) {
+            if (a.getCineplexCode().equals(m.getCineplexCode())) {
                 flag=1;
                 break;
             }
@@ -118,10 +123,10 @@ public class CineplexSerializer {
         }
         if (flag==1) {
             aList.remove(index);
-            CineplexSerializer.overwriteCineplexesCSV(aList);
-            System.out.println("Cineplexes record, code = "+ cineplexCode+" successfully deleted!");
+            cp.overwriteCSV(aList);
+            System.out.println("Cineplexes record, code = "+ m.getCineplexCode()+" successfully deleted!");
         }
-        else System.out.println("Cineplexes record, code = "+ cineplexCode+" deletion unsuccessful!");
+        else System.out.println("Cineplexes record, code = "+ m.getCineplexCode()+" deletion unsuccessful!");
 
 	
     }

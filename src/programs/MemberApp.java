@@ -8,6 +8,11 @@ public class MemberApp {
 	public MemberApp(int movieGoerID){
 		this.movieGoerID = movieGoerID;
 	}
+
+	public int getMemberID(){
+		return this.movieGoerID;
+	}
+
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);
@@ -36,7 +41,7 @@ public class MemberApp {
 					break;
 				case 4:
 					// Woon Yee
-					UISalesReporting s = new UISalesReporting();
+					UISalesReporting s = new UISalesReporting(this.movieGoerID,0);
 					s.run();
 					break;
 				case 5:
@@ -47,6 +52,6 @@ public class MemberApp {
 					break;
 			}
         }while (choice != 5);
-		sc.close();
+		;
     }
 }

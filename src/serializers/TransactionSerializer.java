@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 import models.Transaction;
 
-public class TransactionSerializer {
+public class TransactionSerializer implements InterfaceSerializer<Transaction>{
     private static final String CSV_SEPARATOR = ",";
 
-    public static void writeToTransactionCSV(Transaction transaction)
+    @Override
+    public void writeToCSV(Transaction transaction)
     {
         try
         {
@@ -33,14 +34,14 @@ public class TransactionSerializer {
             bw.write(oneLine.toString());
             bw.newLine();
             bw.flush();
-            bw.close();
+            ;
         }
         catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
-
-    public static ArrayList<Transaction> readFromTransactionCSV()
+    @Override
+    public ArrayList<Transaction> readFromCSV()
     {
         try {
             ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
@@ -62,7 +63,7 @@ public class TransactionSerializer {
                Transaction m = new Transaction(TID,movieGoersID,bookingDate,bookingTime,cinemaCode,seatingNum, price, movieID);
                transactionList.add(m);
             }
-            br.close();
+            ;
             return transactionList;
         } 
         catch(IOException e) {
@@ -70,7 +71,9 @@ public class TransactionSerializer {
         } 
         return null;
     }
-    public static void overwriteTransactionCSV(ArrayList<Transaction> aList) {
+
+    @Override
+    public void overwriteCSV(ArrayList<Transaction> aList) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/transactionsData.csv",false)));
 			for(Transaction transaction:aList) {
@@ -95,7 +98,7 @@ public class TransactionSerializer {
                 bw.newLine();
 			}
 			bw.flush();
-			bw.close();
+			;
 		}
 		catch (UnsupportedEncodingException e) {System.out.printf("'%s' %n", "Unsupported Encoding");}
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
@@ -103,34 +106,37 @@ public class TransactionSerializer {
 	
     }
 
-    public static void updateTransactionFromCSV(String TID, int movieGoersID, String bookingDate, String bookingTime, String cinemaCode, int seatingNum, double price, int movieID ) {
-	    ArrayList<Transaction> aList = TransactionSerializer.readFromTransactionCSV();
+    @Override
+    public void updateFromCSV(Transaction t ) {
+	    TransactionSerializer ts = new TransactionSerializer();
+        ArrayList<Transaction> aList = ts.readFromCSV();
 	    int flag =0;
 	    for (Transaction a:aList) {
-		    if (a.getTID().equals(TID) ) {
-		    	a.setMovieGoersID(movieGoersID);
-                a.setBookingDate(bookingDate);
-                a.setBookingTime(bookingTime);
-                a.setCinemaCode(cinemaCode);
-                a.setSeatingNum(seatingNum);
-                a.setPrice(price);
-                a.setMovieID(movieID);
+		    if (a.getTID().equals(t.getTID()) ) {
+		    	a.setMovieGoersID(t.getMovieGoersID());
+                a.setBookingDate(t.getBookingDate());
+                a.setBookingTime(t.getBookingTime());
+                a.setCinemaCode(t.getCinemaCode());
+                a.setSeatingNum(t.getSeatingNum());
+                a.setPrice(t.getPrice());
+                a.setMovieID(t.getMovieID());
 		    	flag=1;
 		    	break;
 	    	}
 	    }
 	    if (flag==1){
-	        TransactionSerializer.overwriteTransactionCSV(aList);
-	        System.out.println("Transaction record, id = "+ TID+" successfully updated!");
+	        ts.overwriteCSV(aList);
+	        System.out.println("Transaction record, id = "+ t.getTID()+" successfully updated!");
         }
-        else System.out.println("Transaction record, id = "+ TID+" update unsuccessful!");
+        else System.out.println("Transaction record, id = "+ t.getTID()+" update unsuccessful!");
     }
-
-    public static void deleteTransactionFromCSV(String TID) {
-        ArrayList<Transaction> aList = TransactionSerializer.readFromTransactionCSV();
+    @Override
+    public void deleteFromCSV(Transaction t) {
+	    TransactionSerializer ts = new TransactionSerializer();
+        ArrayList<Transaction> aList = ts.readFromCSV();
         int index=0,flag=0;
         for (Transaction a:aList) {
-            if (a.getTID().equals(TID) ){
+            if (a.getTID().equals(t.getTID()) ){
                 flag=1;
                 break;
             }
@@ -138,10 +144,10 @@ public class TransactionSerializer {
         }
         if (flag==1) {
             aList.remove(index);
-            TransactionSerializer.overwriteTransactionCSV(aList);
-            System.out.println("Transaction record, id = "+ TID+" successfully deleted!");
+            ts.overwriteCSV(aList);
+            System.out.println("Transaction record, id = "+ t.getTID()+" successfully deleted!");
         }
-        else System.out.println("Transaction record, id = "+ TID+" deletion unsuccessful!");
+        else System.out.println("Transaction record, id = "+ t.getTID()+" deletion unsuccessful!");
 
 	
     }

@@ -29,15 +29,15 @@ public class UIBookHistAndReview {
                 System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
             }
             choice = Integer.valueOf(sc.next());
-			
+            BookingHistManager bh = new BookingHistManager(this.movieGoerID);
             switch (choice) {
 				case 1:
                     System.out.println("showBookingHistory():");
-                    BookingHistManager.showBookingHistory(this.movieGoerID);
+                    bh.showBookingHistory(this.movieGoerID);
 					break;
 				case 2:
                     System.out.println("inputReviewAndRating():");
-					BookingHistManager.inputReviewAndRating(this.movieGoerID);
+					bh.inputReviewAndRating(this.movieGoerID);
 					break;
 				case 3:
 					System.out.println("Program exiting...");
@@ -47,6 +47,6 @@ public class UIBookHistAndReview {
 					break;
 			}
         }while (choice != 3);
-        sc.close();
+        ;
     }
 }

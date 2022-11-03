@@ -10,6 +10,8 @@ public class Transaction {
     private double price;
     private int movieID;
 
+    public Transaction(){}
+    
     public Transaction(String TID, int movieGoersID, String bookingDate, String bookingTime, String cinemaCode, int seatingNum, double price, int movieID ){
         this.TID = TID;
         this.movieGoersID = movieGoersID;

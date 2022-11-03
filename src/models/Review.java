@@ -7,6 +7,8 @@ public class Review {
     private String reviews;
     private int movieID;
 
+    public Review(){}
+    
     public Review(int reviewsID, int movieGoersID, double rating, String reviews, int movieID){
         this.reviewsID = reviewsID;
         this.movieGoersID = movieGoersID;
