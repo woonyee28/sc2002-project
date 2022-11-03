@@ -27,7 +27,7 @@ public class AdminApp {
 		return this.adminID;
 	}
 
-
+	
     public void run(){
         int i,choice = -1;
         Scanner sc = new Scanner(System.in);

@@ -41,10 +41,10 @@ public class SettingsManager {
         return exists;
     }
 
-    public boolean checkExistencePrice(String cat){
+    public boolean checkExistencePrice(String movieType,String cat){
         boolean exists =false;
         for (Price p:this.pList){
-            if(p.getCat().equals(cat)){
+            if(p.getCat().equals(cat) && p.getMovieType().equals(movieType)){
                 exists =true;
                 break;
             }
@@ -129,22 +129,24 @@ public class SettingsManager {
     }
 
     public void editPrices(){
-        String cat;
+        String cat,movieType;
         double newPrice;
         SettingsManager edit = new SettingsManager();
         Scanner input1 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
 
         System.out.println("--------- Edit prices ---------");
-        System.out.println("Please enter category to be edited:");
+        System.out.println("Please enter Movie Type to be edited:");
+        movieType=input1.nextLine();
+        System.out.println("Please enter Category to be edited:");
         cat=input1.nextLine();
-        if(edit.checkExistencePrice(cat)){
+        if(edit.checkExistencePrice(movieType,cat)){
             System.out.println("Please enter new price:");
             newPrice=input2.nextDouble();
-            Price p =new Price(cat, newPrice);
+            Price p =new Price(movieType,cat, newPrice);
             ps.updateFromCSV(p);
             printPriceList();
-        }else System.out.println(cat +" type not found!");
+        }else System.out.println("Movie type: "+ movieType+" Category: "+cat +" not found!");
         ;
         ;
     }

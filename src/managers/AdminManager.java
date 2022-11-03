@@ -90,7 +90,7 @@ public class AdminManager{
         return staffID;
 
     }
-
+    
     public boolean checkStaffID(int staffID){
         boolean exists =false;
         for(Staff s:this.sList){
