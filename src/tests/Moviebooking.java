@@ -11,6 +11,7 @@ import java.util.Scanner;
 import models.Cineplexes;
 import serializers.CinemaSerializer;
 import serializers.CineplexSerializer;
+import serializers.TransactionSerializer;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;    
@@ -18,6 +19,10 @@ import models.Movie;
 import serializers.MovieSerializer;
 import serializers.SessionSerializer;
 import models.Sessions;
+import models.Transaction;
+import java.text.SimpleDateFormat;  
+import java.util.Date;
+import java.text.DateFormat;
 
 import javax.lang.model.element.Element;
 
@@ -38,9 +43,10 @@ public class Moviebooking {
     static CineplexSerializer cps = new CineplexSerializer();
     static SessionSerializer ss = new SessionSerializer();
     static MovieSerializer ms = new MovieSerializer();
+    static TransactionSerializer ts = new TransactionSerializer();
     private static ArrayList<Cineplexes> Cineplex = cps.readFromCSV();
     private static ArrayList<Cinemas> Cinema = cs.readFromCSV();
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		double price=0;
         int selection_choice;
         String book_choice;
@@ -255,7 +261,7 @@ private static void showSeatPlan()
 
 
 }
-private static void bookings()
+private static void bookings() throws Exception
 {   
     String cineplex_choice;
     String cinema_code =null;
@@ -366,8 +372,8 @@ private static void bookings()
             // SessionID.add(dtf.format(now));
         }
     }
-   
-    System.out.println("Ticket price is: xxx");
+    double cost = ticketTransact(movieid_selected, cinema_code, cinema_class, movie_date, movie_time, selectedSeat, 1);
+    System.out.printf("Total price: $%.2f \n", cost);
 
 
   
@@ -623,52 +629,127 @@ private static String getCineCode_V1(String cineplex_choice)
 }
 
 
-//Deprecated function, hard coded the section of row
-// gets the Cineplex choice and returns the cinema choice in small case format
-//returns aaa,aab,aac/ bba,bbb,bbc, cca,ccb,ccc
+    public static double ticketTransact(int movieID, String cinema_code, int cinema_class, String movieDate, String movieTime, ArrayList<Integer> seats, int movieGoerID)throws Exception{
+        double price=0.0;
+        double totalPrice = 0.0;
 
-private static String getCineCode(String cineplex_Choice)
-{
-    String cinema_choice ="";
-    Scanner sc = new Scanner(System.in);
-    
-    if(cineplex_Choice.toLowerCase().equals("aa")) // selected first 3
+        SimpleDateFormat date1 = new SimpleDateFormat("yyyyMMdd");
+        Date date2 = date1.parse(movieDate);
+        DateFormat date3 = new SimpleDateFormat("E");
+        String dayM = date3.format(date2);
+
+        //check if weekday or weekend
+        if (dayM != "Sun" || dayM!="Sat"){
+            for (int x=0; x<seats.size();x++){
+
+                int sit = seats.get(x);
+                Scanner input = new Scanner(System.in);
+                System.out.printf("Please choose category for seat %d:\n", x);
+                System.out.println("\t[1] Standard Weekday\n\t[2] Student\n\t[3] Senior Citizen");
+                int catChoice = input.nextInt();
+                if (catChoice == 1){
+                    price = cinema_class*10;
+                }
+                else if (catChoice==2){
+                    price = cinema_class*8;
+                }
+                else if (catChoice==3){
+                    price = cinema_class*7.50;
+                }
+                
+                totalPrice = totalPrice + price;
+
+                //update transactionID
+                String TID = cinema_code.toUpperCase()+movieDate+movieTime;
+                Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code.toUpperCase(), sit, price, movieID);
+                ts.writeToCSV(newTran);
+            }
+        }
+        else{
+            for (int y=0; y<seats.size();y++){
+                int sit = seats.get(y);
+                price = cinema_class*12.50;
+                totalPrice = totalPrice + price;
+
+                //update transaction ID
+                String TID = cinema_code+movieDate+movieTime;
+                Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code, sit, price, movieID);
+                ts.writeToCSV(newTran);
+            }
+        }
+
+
+        return totalPrice;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Deprecated function, hard coded the section of row
+    // gets the Cineplex choice and returns the cinema choice in small case format
+    //returns aaa,aab,aac/ bba,bbb,bbc, cca,ccb,ccc
+
+    private static String getCineCode(String cineplex_Choice)
     {
-        System.out.println("Please select which Cinemas you would like to book:");
-        for(int i =0; i<3; i++)
+        String cinema_choice ="";
+        Scanner sc = new Scanner(System.in);
+        
+        if(cineplex_Choice.toLowerCase().equals("aa")) // selected first 3
         {
-            System.out.print(Cinema.get(i).getCinemaCode() + " ");
+            System.out.println("Please select which Cinemas you would like to book:");
+            for(int i =0; i<3; i++)
+            {
+                System.out.print(Cinema.get(i).getCinemaCode() + " ");
+            }
+            
+            // cinema_choice = sc.next();
+            System.out.println("Selection: ");
+            return sc.next().toLowerCase();
+        }
+        else if (cineplex_Choice.toLowerCase().equals("bb"))
+        {
+            System.out.println("Please select which Cinemas you would like to book:");
+            for(int i=3; i<6; i++)
+            {
+                System.out.print(Cinema.get(i).getCinemaCode() + " ");
+            }
+            System.out.println("Selection: ");
+            return sc.next().toLowerCase();
+        }
+        else if (cineplex_Choice.toLowerCase().equals("cc"))
+        {
+            System.out.println("Please select which Cinemas you would like to book:");
+            for(int i=6; i<9; i++)
+            {
+                System.out.print(Cinema.get(i).getCinemaCode() + " ");
+            }
+            System.out.println("Selection: ");
+            return sc.next().toLowerCase();
+        }
+        else{
+            System.out.println("Invalid selection made..");
+            return null;
         }
         
-        // cinema_choice = sc.next();
-        System.out.println("Selection: ");
-        return sc.next().toLowerCase();
     }
-    else if (cineplex_Choice.toLowerCase().equals("bb"))
-    {
-        System.out.println("Please select which Cinemas you would like to book:");
-        for(int i=3; i<6; i++)
-        {
-            System.out.print(Cinema.get(i).getCinemaCode() + " ");
-        }
-        System.out.println("Selection: ");
-        return sc.next().toLowerCase();
-    }
-    else if (cineplex_Choice.toLowerCase().equals("cc"))
-    {
-        System.out.println("Please select which Cinemas you would like to book:");
-        for(int i=6; i<9; i++)
-        {
-            System.out.print(Cinema.get(i).getCinemaCode() + " ");
-        }
-        System.out.println("Selection: ");
-        return sc.next().toLowerCase();
-    }
-    else{
-        System.out.println("Invalid selection made..");
-        return null;
-    }
-    
-}
 }
 
