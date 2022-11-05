@@ -7,18 +7,43 @@ import models.Staff;
 import serializers.StaffSerializer;
 
 public class AdminManager{
+    /**
+     * The adminID of this AdminManager.
+     */
     private int adminID;
+    /**
+     * The Admin List of this AdminManager.
+     */
     private ArrayList<Staff> sList;
+    /**
+     * The AdminSerializer of this AdminManager.
+     */
     static StaffSerializer ss = new StaffSerializer();
 
+    /**
+     * Creates a new AdminManager with the given adminID.
+     * @param adminID This AdminManger's adminID.
+     */
     public AdminManager(int adminID){
         this.sList =ss.readFromCSV();
         this.adminID = adminID;
     }
 
+    /**
+     * Get Admin List of this AdminManager
+     * @return this Admin List
+     */
     public ArrayList<Staff> getList(){
         return this.sList;
     }
+
+    /**
+     * Checks if hash of the entered password matches that of the database.
+     * @param email
+     * Email is used to identify the admin.
+     * @param hashedPassword
+     * @return true if hashed password matches.
+     */
 
     public boolean checkPassword(String email, String hashedPassword){
         boolean correct = false;
@@ -34,6 +59,11 @@ public class AdminManager{
         return correct;
     }
 
+    /**
+     * Check if email exists in the database.
+     * @param email Target email.
+     * @return true if email exists.
+     */
     public boolean checkExistenceEmail(String email){
         boolean exists = false;
         for (Staff s: this.sList){
@@ -46,6 +76,11 @@ public class AdminManager{
         return exists;
     }
 
+    /**
+     * Check if name of admin exists in the database
+     * @param name
+     * @return
+     */
     public boolean checkExistenceName(String name){
         boolean exists =false;
         for (Staff s:this.sList){
@@ -57,8 +92,13 @@ public class AdminManager{
         return exists;
     }
 
+    /**
+     * Gets name of Admin using email.
+     * @param email Email of target Admin.
+     * @return Name of Admin with target email and null if target is not found.
+     */
     public String checkName(String email){
-        String name = email;
+        String name = null;
         for (Staff s: this.sList){
             if (s.getEmail().equals(email)){
                 name = s.getName();
@@ -68,6 +108,10 @@ public class AdminManager{
         return name;
     }
 
+    /**
+     * Generates unique adminID that is greater than the greatest adminID in database by 1.
+     * @return Int of unique adminID.
+     */
     public int checkExistenceID(){
         int largest = 0;
 		for (Staff s:this.sList) {
@@ -79,6 +123,11 @@ public class AdminManager{
 
     }
 
+    /**
+     * Gets adminID by email.
+     * @param email Target email
+     * @return adminID of target email and -1 if target is not found.
+     */
     public int getStaffID(String email){
         int staffID =-1;
         for (Staff s : this.sList){
@@ -91,6 +140,11 @@ public class AdminManager{
 
     }
     
+    /**
+     * Checks if staffID already exists in the database.
+     * @param staffID staffID to be checked
+     * @return true if staffID exists.
+     */
     public boolean checkStaffID(int staffID){
         boolean exists =false;
         for(Staff s:this.sList){
@@ -102,6 +156,11 @@ public class AdminManager{
         return exists;
     }
 
+    /**
+     * Log in function for Admins.
+     * Prompts for email and password.
+     * @return adminID if succesfully logged in,-1 if unsuccesful.
+     */
     public int logIn(){
         AdminManager login = new AdminManager(this.adminID);
         Scanner input = new Scanner(System.in);
@@ -132,6 +191,12 @@ public class AdminManager{
 
     
 
+    /**
+     * Creates new Admin
+     * Generates new adminID and checks if email is already in use.
+     * If email is not in used, new Admin will be written to CSV using AdminSerializer.
+     * @return 1 if succesfully created, 0 if unsuccessful.
+     */
     public int createAdmin(){
         AdminManager create = new AdminManager(this.adminID);
         int staffID = 0;
@@ -170,6 +235,10 @@ public class AdminManager{
 		
     }
 
+    /**
+     * Prints list of adminID,name and email for all Admins.
+     * Uses AdminSerializer
+     */
     public void printAdminList(){
         AdminManager print = new AdminManager(this.adminID);
         System.out.println("--------- Admin list ---------");
@@ -184,6 +253,10 @@ public class AdminManager{
         }
     }
 
+    /**
+     * Changes hashed password of existing Admin in database.
+     * Uses AdminSerializer.
+     */
     public void updateAdminPassword(){
         String email=null,password,passwordHashed=null,name;
         int staffID;
@@ -222,6 +295,12 @@ public class AdminManager{
         ;
     }
 
+    /**
+     * Deletes Admin with target adminID and name.
+     * Uses AdminSerializer.
+     * Currently logged in Admin cannot delete own account.
+     * @param accountHolderID This AdminManager's adminID.
+     */
     public void deleteAdmin(int accountHolderID){
         int staffID;
         String name,confirm;

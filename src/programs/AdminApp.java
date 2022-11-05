@@ -23,6 +23,10 @@ public class AdminApp {
 		this.adminID=adminID;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getAdminID(){
 		return this.adminID;
 	}
