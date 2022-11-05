@@ -73,6 +73,7 @@ public class AdminApp {
 					// sign up admin, UIAdminSignUp
 					UIAdminSignUp adminSignUp = new UIAdminSignUp(this.adminID);
 					adminSignUp.run();
+					break;
                 case 7:
 					// manage admin, UIManageAdmin
 					UIManageAdmin manageAdmin = new UIManageAdmin(this.adminID);

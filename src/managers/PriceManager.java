@@ -6,13 +6,20 @@ import java.util.ArrayList;
 import models.*;
 import serializers.*;
 public class PriceManager {
-    private ArrayList<Price> pList;
+    /**
+     * The PriceSerializer of this PriceManager.
+     */
     static PriceSerializer ps = new PriceSerializer();
 
+    /**
+     * Create a new PriceManager.
+     */
     public PriceManager(){
-        this.pList = ps.readFromCSV();
     }
 
+    /**
+     * Prints out the list of price of the respective cineplexes.
+     */
     public void viewPricing(){
         
         System.out.println("---------- View Pricing ----------");
@@ -24,13 +31,13 @@ public class PriceManager {
         for (String s:Class){
             System.out.println("----------------------------------");
             int numChar =34-1-s.length()+normal.length();
-            System.out.print(bold+italics+"|"+s);
-            System.out.printf("%"+numChar+"s","|"+normal);
+            System.out.print("|"+bold+italics+s);
+            System.out.printf("%"+numChar+"s",normal+"|");
             System.out.println();
             System.out.println("----------------------------------");
             System.out.println(bold+"|Movie Type |Category     |Price |"+normal);
             System.out.println("----------------------------------");
-            for (Price p: pList){
+            for (Price p: ps.readFromCSV()){
                 StringBuffer oneLine = new StringBuffer();
                 oneLine.append("|");
                 oneLine.append(String.format("%-11s",p.getMovieType()));

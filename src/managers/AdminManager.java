@@ -6,15 +6,11 @@ import java.util.Scanner;
 import models.Staff;
 import serializers.StaffSerializer;
 
-public class AdminManager{
+public class AdminManager implements logIn{
     /**
      * The adminID of this AdminManager.
      */
     private int adminID;
-    /**
-     * The Admin List of this AdminManager.
-     */
-    private ArrayList<Staff> sList;
     /**
      * The AdminSerializer of this AdminManager.
      */
@@ -25,30 +21,22 @@ public class AdminManager{
      * @param adminID This AdminManger's adminID.
      */
     public AdminManager(int adminID){
-        this.sList =ss.readFromCSV();
         this.adminID = adminID;
     }
 
-    /**
-     * Get Admin List of this AdminManager
-     * @return this Admin List
-     */
-    public ArrayList<Staff> getList(){
-        return this.sList;
-    }
+
 
     /**
      * Checks if hash of the entered password matches that of the database.
-     * @param email
-     * Email is used to identify the admin.
-     * @param hashedPassword
+     * @param email Target email is used to identify the admin.
+     * @param hashedPassword Hashed password to be matched.
      * @return true if hashed password matches.
      */
 
     public boolean checkPassword(String email, String hashedPassword){
         boolean correct = false;
         if (checkExistenceEmail(email)){
-                for (Staff s: sList){
+                for (Staff s: ss.readFromCSV()){
                     if (s.getEmail().equals(email) && s.getPasswordHashed().equals(hashedPassword)){
                         correct = true;
                     }
@@ -66,7 +54,7 @@ public class AdminManager{
      */
     public boolean checkExistenceEmail(String email){
         boolean exists = false;
-        for (Staff s: this.sList){
+        for (Staff s: ss.readFromCSV()){
             if (s.getEmail().equals(email)){
                 exists = true;
                 break;
@@ -77,13 +65,13 @@ public class AdminManager{
     }
 
     /**
-     * Check if name of admin exists in the database
-     * @param name
-     * @return
+     * Check if name of Admin exists in the database
+     * @param name Target name of Admin to be checked.
+     * @return true if name of Admin exists.
      */
     public boolean checkExistenceName(String name){
         boolean exists =false;
-        for (Staff s:this.sList){
+        for (Staff s:ss.readFromCSV()){
             if(s.getName().equals(name)){
                 exists =true;
                 break;
@@ -99,7 +87,7 @@ public class AdminManager{
      */
     public String checkName(String email){
         String name = null;
-        for (Staff s: this.sList){
+        for (Staff s: ss.readFromCSV()){
             if (s.getEmail().equals(email)){
                 name = s.getName();
                 break;
@@ -114,7 +102,7 @@ public class AdminManager{
      */
     public int checkExistenceID(){
         int largest = 0;
-		for (Staff s:this.sList) {
+		for (Staff s:ss.readFromCSV()) {
 			if (largest < s.getStaffID()) {
 				largest = s.getStaffID();
 			}
@@ -130,7 +118,7 @@ public class AdminManager{
      */
     public int getStaffID(String email){
         int staffID =-1;
-        for (Staff s : this.sList){
+        for (Staff s : ss.readFromCSV()){
             if(s.getEmail().equals(email)){
                 staffID= s.getStaffID();
                 break;
@@ -147,7 +135,7 @@ public class AdminManager{
      */
     public boolean checkStaffID(int staffID){
         boolean exists =false;
-        for(Staff s:this.sList){
+        for(Staff s:ss.readFromCSV()){
             if(s.getStaffID()==staffID){
                 exists =true;
                 break;            
@@ -240,9 +228,8 @@ public class AdminManager{
      * Uses AdminSerializer
      */
     public void printAdminList(){
-        AdminManager print = new AdminManager(this.adminID);
         System.out.println("--------- Admin list ---------");
-        for (Staff s:print.getList()){
+        for (Staff s:ss.readFromCSV()){
             StringBuffer oneLine = new StringBuffer();
             oneLine.append(s.getStaffID());
             oneLine.append(",");
