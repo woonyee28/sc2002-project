@@ -5,9 +5,10 @@ import java.util.Scanner;
 import managers.AmendBooking;
 
 public class AdminApp {
-
+	
+	
 	private int adminID;
-
+	
 	private final String menuOptions[] = {
         "Amend Booking",
         "Show Movie Listing",
@@ -18,7 +19,10 @@ public class AdminApp {
 		"Manage Admins",
 		"Exit Admin App"
 	};
-
+	/**
+	 * Creates an AdminApp with the given adminID.
+	 * @param adminID This AdminApp's adminID.
+	 */
 	public AdminApp(int adminID){
 		this.adminID=adminID;
 	}
@@ -31,7 +35,9 @@ public class AdminApp {
 		return this.adminID;
 	}
 
-	
+	/**
+	 * Runs the AdminApp.
+	 */
     public void run(){
         int i,choice = -1;
         Scanner sc = new Scanner(System.in);

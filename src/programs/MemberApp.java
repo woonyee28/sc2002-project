@@ -7,15 +7,22 @@ import managers.PriceManager;
 
 public class MemberApp {
 	private int movieGoerID;
-
+	/**
+	 * Creates a new MemberApp with given movieGoerID.
+	 * @param movieGoerID
+	 */
 	public MemberApp(int movieGoerID){
 		this.movieGoerID = movieGoerID;
 	}
-
+	/**
+	 * @return This MemberApp's movieGoerID.
+	 */
 	public int getMemberID(){
 		return this.movieGoerID;
 	}
-
+	/**
+	 * Runs the MemberApp.
+	 */
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);

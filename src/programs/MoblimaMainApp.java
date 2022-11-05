@@ -16,7 +16,9 @@ public class MoblimaMainApp{
 		app.run();
 	}
    
-
+    /**
+     * Runs the mainpage of the Moblima app.
+     */
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);

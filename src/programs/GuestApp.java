@@ -3,7 +3,13 @@ package programs;
 import java.util.Scanner;
 
 public class GuestApp {
+	/**
+	 * Creates a new GuestApp.
+	 */
     public GuestApp(){};
+	/**
+	 * Runs the Guest App
+	 */
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);

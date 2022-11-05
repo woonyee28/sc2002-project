@@ -7,7 +7,10 @@ import managers.AdminManager;
 
 public class UIAdminSignUp {
     private int adminID;
-
+    /**
+     * Creates a new UIAdminSignUP with the given adminID.
+     * @param adminID This UIAdminSignUp's adminID.
+     */
     public UIAdminSignUp(int adminID){
         this.adminID = adminID;
     }
@@ -16,7 +19,9 @@ public class UIAdminSignUp {
         "Create New Admin",
         "Exit Admin Signup"
     };
-
+    /**
+     * Runs the UIAdminSIgnUp.
+     */
     public void run(){
         int i,choice = -1;
         Scanner sc = new Scanner(System.in);
