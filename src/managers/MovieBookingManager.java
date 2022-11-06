@@ -262,6 +262,8 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
         {
             if(m.getSessionTime().equals(ss_datetime.get(movie_time_choice-1).substring(8)))
             {
+                movie_date = m.getSessionDate();
+                movie_time = m.getSessionTime();
                 seatPlan = m.getSeatingPlan();
             }
             
