@@ -153,9 +153,7 @@ private static void showMovieListing()
             
 
         }
-        // System.out.println(preview);
-        //     System.out.println(endofShowing);
-        //     System.out.println(nowShowing);
+
             System.out.println("Previews:");
             for(int i=0; i<preview.size(); i++)
             {
@@ -225,6 +223,12 @@ private static ArrayList<Integer> showMovieListing(String cinema_code)
             }
         }
     }
+    if(which_cine == -1)
+    {
+        System.out.println("No session availble from the movie you selected");
+        return null;
+    }
+
     // show the movies showing for that cinema selected
     //print out in console
     for (Movie m: ms.readFromCSV())
@@ -233,37 +237,33 @@ private static ArrayList<Integer> showMovieListing(String cinema_code)
         {
             if (m.getShowingStatus().equals("Preview"))
             {
-                preview.add(m.getTitle());
+                preview.add(m.getMovieID()+1 + ": "+ m.getTitle());
             }
             else if (m.getShowingStatus().equals("Now Showing"))
             {
-                nowShowing.add(m.getTitle());
+                nowShowing.add(m.getMovieID()+1 + ": "+ m.getTitle());
             }
      
-            System.out.println(m.getMovieID()+1 + ": "+ m.getTitle());
+            // System.out.println(m.getMovieID()+1 + ": "+ m.getTitle());
         }
 
-            System.out.println("Previews:");
-            for(int i=0; i<preview.size(); i++)
-            {
-                System.out.println(preview.get(i));
-            }
-            
-            System.out.println();
-            System.out.println("Now Showing:");
-            for(int i=0; i<nowShowing.size(); i++)
-            {
-                System.out.println(nowShowing.get(i));
-            }
-            System.out.println();
-         
+    }
+    
+ 
 
-    }
-    if(which_cine == -1)
+    System.out.println("Previews:");
+    for(int i=0; i<preview.size(); i++)
     {
-        System.out.println("No session availble from the movie you selected");
-        return null;
+        System.out.println(preview.get(i));
     }
+    
+    System.out.println();
+    System.out.println("Now Showing:");
+    for(int i=0; i<nowShowing.size(); i++)
+    {
+        System.out.println(nowShowing.get(i));
+    }
+    System.out.println();
     System.out.println("Please select the movie");
     
     movieid_selected = sc.nextInt() - 1;
