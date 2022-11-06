@@ -60,6 +60,8 @@ public class MovieBookingManager {
     static TransactionSerializer ts = new TransactionSerializer();
     private static ArrayList<Cineplexes> Cineplex = cps.readFromCSV();
     private static ArrayList<Cinemas> Cinema = cs.readFromCSV();
+    static MovieGoerSerializer mgs = new MovieGoerSerializer();
+
 	public void run() throws ParseException {
 		double price=0;
         int selection_choice;
@@ -83,11 +85,25 @@ public class MovieBookingManager {
                     System.out.println("Now Showing:");
                     
                     showMovieListing();
+                    if (adminOrmember==-1){
+                        break;
+                    }
                     System.out.println("Would you like to book a movie?(Y/N)");
                     book_choice = sc.next().toLowerCase();
                     if(book_choice.equals("y") || book_choice.equals("yes"))
                     {
-                        bookings(this.id);
+                        int n;
+                        
+                        if (adminOrmember==1){
+                            System.out.println("Choose which moviegoer to book for.\n");
+                            for (MovieGoer mg: mgs.readFromCSV()){
+                                System.out.println(mg.toString());
+                            }
+                            n = sc.nextInt();
+                            bookings(n);
+                        }else{
+                            bookings(this.id);
+                        }
                         break;
                     }
                     else
@@ -96,12 +112,24 @@ public class MovieBookingManager {
                         //call for main page function
                         break;
                     }
-                    
-
     
                 case 2: 
                     System.out.println("Welcome to booking ticket page: ");
-                    bookings(this.id);
+                    if (adminOrmember==-1){
+                        System.out.println("Guest is not allowed to book ticket, please return to main app and register yourself :D\n");
+                        break;
+                    }
+                    int n = -1;
+                    if (adminOrmember==1){
+                        System.out.println("Choose which moviegoer to book for.\n");
+                        for (MovieGoer mg: mgs.readFromCSV()){
+                            System.out.println(mg.toString());
+                        }
+                        n = sc.nextInt();
+                        bookings(n);
+                    }else{
+                        bookings(this.id);
+                    }
                     break;
                 case 3:
                     System.out.println("Please select a cineplex: ");
