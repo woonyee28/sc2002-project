@@ -7,7 +7,10 @@ import managers.BookingHistManager;
 
 public class UIBookHistAndReview {
     private int movieGoerID;
-
+    /**
+     * Creates a new UIBookHistAndReview with the given movieGoerID.
+     * @param movieGoerID This UIBookHistAndReview's movieGoerID.
+     */
     public UIBookHistAndReview(int movieGoerID){
         this.movieGoerID = movieGoerID;
     }
@@ -17,7 +20,9 @@ public class UIBookHistAndReview {
         "Input Review And Rating",
         "Exit to previous level"
     };
-
+    /**
+     * Runs UIBookHistAndReview.
+     */
     public void run(){
         int choice = -1; 
         Scanner sc = new Scanner(System.in);

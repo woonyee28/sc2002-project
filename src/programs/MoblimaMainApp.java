@@ -1,5 +1,6 @@
 package programs;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 import managers.AdminManager;
@@ -7,17 +8,18 @@ import managers.MemberManager;
 
 // import com.apple.laf.resources.aqua;
 
-
-
 public class MoblimaMainApp{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 		MoblimaMainApp app = new MoblimaMainApp();
         System.out.println("Welcome to MOBLIMA Booking System!");
 		app.run();
 	}
    
-
-    public void run(){
+    /**
+     * Runs the mainpage of the Moblima app.
+     * @throws ParseException
+     */
+    public void run() throws ParseException{
         int choice = -1;
         Scanner sc = new Scanner(System.in);
         int adminID=0;
@@ -59,6 +61,8 @@ public class MoblimaMainApp{
 					break;
 			}
         }while (choice != 5);
+        
         ;
     }
+       
 }

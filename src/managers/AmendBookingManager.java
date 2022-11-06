@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.concurrent.DelayQueue;
 
 import models.Cinemas;
 import models.Cineplexes;
@@ -20,10 +19,9 @@ import serializers.CineplexSerializer;
 import serializers.MovieGoerSerializer;
 import serializers.SessionSerializer;
 import serializers.TransactionSerializer;
-import tests.Moviebooking;
 
 
-public class AmendBooking {
+public class AmendBookingManager {
     private int id;
     private int adminOrmember;
     static CinemaSerializer cs = new CinemaSerializer();
@@ -34,7 +32,7 @@ public class AmendBooking {
     static SessionSerializer sss = new SessionSerializer();
     static MovieGoerSerializer mgs = new MovieGoerSerializer();
     
-    public AmendBooking(int id, int adminOrmember){
+    public AmendBookingManager(int id, int adminOrmember){
         this.id = id;
         this.adminOrmember = adminOrmember;
     }

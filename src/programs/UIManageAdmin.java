@@ -7,7 +7,10 @@ import managers.AdminManager;
 
 public class UIManageAdmin {
     private int adminID;
-
+    /**
+     * Creates a new UIManageAdmin with given adminID.
+     * @param adminID
+     */
     public UIManageAdmin(int adminID){
         this.adminID=adminID;
     }
@@ -18,12 +21,17 @@ public class UIManageAdmin {
         "Delete Admin",
         "Exit ManageAdmin"
     };
-
+    /**
+     * Gets adminID of the UIManageAdmin.
+     * @return Returns this UIManageAdmin's adminID.
+     */
     public int getAdminID(){
         return this.adminID;
     }
 
-
+    /**
+     * Runs UIManageAdmin.
+     */
     public void run(){
         int i,choice = -1;
         Scanner sc = new Scanner(System.in);
