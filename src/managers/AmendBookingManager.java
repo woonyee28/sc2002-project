@@ -171,7 +171,7 @@ public class AmendBookingManager {
     // seat not in db
         System.out.println("The seat you selected is already empty");
         System.out.println("Please select the seats with 'X' ");
-        amendSeat(seatingPlan, SessionID, seat,movieid);
+        
         return -1;
         // return -1;
     }
