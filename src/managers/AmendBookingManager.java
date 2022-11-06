@@ -148,7 +148,7 @@ public class AmendBookingManager {
                 //need to add integer.value of to remove that integer value else will remove by the index
                 getIndex = seatingPlan.indexOf(seat);
                 seatingPlan.remove(getIndex);
-                
+
                 String sess = SessionID.get(getIndex);
                 String date = sess.substring(0, 8);
                 String time = sess.substring(8,12);
@@ -171,9 +171,8 @@ public class AmendBookingManager {
     // seat not in db
         System.out.println("The seat you selected is already empty");
         System.out.println("Please select the seats with 'X' ");
-        amendSeat(seatingPlan, SessionID, seat,movieid);
+        
         return -1;
-
         // return -1;
     }
 

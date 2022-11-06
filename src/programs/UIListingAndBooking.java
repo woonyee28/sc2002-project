@@ -38,7 +38,7 @@ public class UIListingAndBooking {
                     book_choice = sc.next().toLowerCase();
                     if(book_choice.equals("y") || book_choice.equals("yes"))
                     {
-                        mbm.bookings();
+                        mbm.bookings(id);
                         break;
                     }
                     System.out.println("test(Y/N)");
@@ -46,7 +46,7 @@ public class UIListingAndBooking {
                     break;
                 case 2: 
                     System.out.println("Welcome to booking ticket page: ");
-                    mbm.bookings();
+                    mbm.bookings(id);
                     break;
                 case 3:
                     System.out.println("Please select a cineplex: ");
