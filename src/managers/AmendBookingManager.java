@@ -173,7 +173,6 @@ public class AmendBookingManager {
         System.out.println("Please select the seats with 'X' ");
         amendSeat(seatingPlan, SessionID, seat,movieid);
         return -1;
-
         // return -1;
     }
 
