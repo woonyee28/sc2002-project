@@ -149,7 +149,7 @@ public class MovieBookingManager {
 
 }
 
-private static void showMovieListing()
+public static void showMovieListing()
     {
         for (Movie m: ms.readFromCSV()) {           
             // m.toString();
