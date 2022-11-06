@@ -201,8 +201,6 @@ public static void showMovieListing()
             {
                 nowShowing.add(m.getTitle());
             }
-            
-
         }
 
             System.out.println("Previews:");
