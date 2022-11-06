@@ -256,10 +256,11 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
     // System.out.println(ss_time);
     
    //add all the movies in the cinema into movieID
-   for(int i =0; i<Cineplex.size();  i++)
+   for(int i =0; i<Cinema.size();  i++)
    {
        //get the cinema that its parsed in
        //to get the index of which cinema to later check the array of sessionID
+       
        if(Cinema.get(i).getCinemaCode().equals(cinema_code.toUpperCase()))
        {
            for(Sessions m : ss.readFromCSV())
@@ -496,6 +497,8 @@ public static void bookings(int id) throws ParseException
 
     System.out.println("Here is the seating plan for Cinema " + cinema_code.toUpperCase()+":");
     System.out.println("------------SCREEN------------");
+    System.out.println(seatingPlan);
+
     printSeatingPlan(seatingPlan);
     System.out.println("How many seats would you like?");
     

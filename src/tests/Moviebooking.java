@@ -605,6 +605,7 @@ private static void printSeatingPlan(ArrayList<Integer> seatingPlan)
     //     }
     //     System.out.println("");
     // }
+    
     Collections.sort(seatingPlan);
     // for(Integer z :seatingPlan)
     // {
