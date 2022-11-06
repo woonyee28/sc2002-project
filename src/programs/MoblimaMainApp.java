@@ -3,7 +3,6 @@ package programs;
 import java.util.Scanner;
 
 import managers.AdminManager;
-import managers.GuestManager;
 import managers.MemberManager;
 
 // import com.apple.laf.resources.aqua;
@@ -39,7 +38,7 @@ public class MoblimaMainApp{
 					MemberManager.signUp();
 					break;
                 case 3:
-                    GuestManager gm = new GuestManager();
+                    GuestApp gm = new GuestApp();
                     gm.run();
                     break;
 				case 4:

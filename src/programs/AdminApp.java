@@ -2,6 +2,8 @@ package programs;
 
 import java.util.Scanner;
 
+import managers.AmendBooking;
+
 public class AdminApp {
 
 	private int adminID;
@@ -41,7 +43,8 @@ public class AdminApp {
             switch (choice) {
 				case 1:
                     // Amend Booking, UIAmendBooking
-					// Zheng Kai
+					AmendBooking m = new AmendBooking(adminID,1);
+					m.run();
 					break;
 				case 2:
 					// Show movie listing + Book ticket, UIListingAndBooking

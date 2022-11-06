@@ -1,3 +1,6 @@
+//Author Zheng Kai
+//last modified - 30/10/22
+
 package tests;
 import models.*;
 
@@ -11,24 +14,36 @@ import serializers.CineplexSerializer;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;    
+import models.Movie;
+import serializers.MovieSerializer;
+import serializers.SessionSerializer;
+import models.Sessions;
 
 import javax.lang.model.element.Element;
+
+
 // this class defines the movie booking of movies selected
 public class Moviebooking {
 
     private String movieTitle;
     private String theatre;
     private String cineplex; // which of the 3 cineplex
+    private static int movieid_selected;
+    private static String movie_date;
+    private static String movie_time;
 
 
     private int amountofTicket;
     static CinemaSerializer cs = new CinemaSerializer();
     static CineplexSerializer cps = new CineplexSerializer();
+    static SessionSerializer ss = new SessionSerializer();
+    static MovieSerializer ms = new MovieSerializer();
     private static ArrayList<Cineplexes> Cineplex = cps.readFromCSV();
     private static ArrayList<Cinemas> Cinema = cs.readFromCSV();
 	public static void main(String[] args) {
 		double price=0;
         int selection_choice;
+        String book_choice;
         
        
         Scanner sc = new Scanner(System.in);
@@ -46,15 +61,30 @@ public class Moviebooking {
                     break;
                 case 1: 
                     System.out.println("Now Showing:");
-                    //insert function to show movie listing
-                    break;
+                    
+                    showMovieListing();
+                    System.out.println("Would you like to book a movie?(Y/N)");
+                    book_choice = sc.next().toLowerCase();
+                    if(book_choice.equals("y") || book_choice.equals("yes"))
+                    {
+                        bookings();
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Going back to main page..");
+                        //call for main page function
+                        break;
+                    }
+                    
+
     
                 case 2: 
                     System.out.println("Welcome to booking ticket page: ");
                     bookings();
                     break;
                 case 3:
-                    System.out.println("Please select a cineplex:  (Currently dont work)");
+                    System.out.println("Please select a cineplex: ");
                     showSeatPlan();
                     break;
                 default:
@@ -95,11 +125,113 @@ public class Moviebooking {
 
 }
 
+private static void showMovieListing()
+{
+    for (Movie m: ms.readFromCSV()) {           
+        m.toString();
+        System.out.println(m.getMovieID()+1 +": " +  m.getTitle()); 
+    }
+}
+// parse in cinema_code to get the sessionID, to print out relevant movies according to the cinema chose
+private static ArrayList<Integer> showMovieListing(String cinema_code)
+{
+    ArrayList<Integer> movieID = new ArrayList<>();
+    ArrayList<Integer> seatPlan = new ArrayList<>();
+    // for(Cinemas cine : cs.readFromCSV())
+    // {
+    //     System.out.println(cine.getSessionsID());
+    //     for(Sessions m : ss.readFromCSV());
+    //     {
+    //         System.out.println(m);
+    //     }
+    // }
+    Scanner sc = new Scanner(System.in);
+    int movieid_choice;
+    int which_cine =-1;
+    for(int i =0; i<Cineplex.size();  i++)
+    {
+        if(Cinema.get(i).getCinemaCode().equals(cinema_code.toUpperCase()))
+        {
+            for(Sessions m : ss.readFromCSV())
+            {
+                if(Cinema.get(i).getSessionsID().contains(m.getSessionDate()+m.getSessionTime()))
+                {
+                    which_cine = i;
+                    // System.out.println(m.getSessionDate()+m.getSessionTime());
+                    movieID.add(m.getMovieID());
+                }
+            }
+        }
+    }
+    for (Movie m: ms.readFromCSV())
+    {
+        if(movieID.contains(m.getMovieID()))
+        {
+            System.out.println(m.getMovieID()+1 + ": "+ m.getTitle());
+        }
+    }
+    if(which_cine == -1)
+    {
+        System.out.println("No session availble from the movie you selected");
+        return null;
+    }
+    System.out.println("Please select the movie");
+    movieid_selected = sc.nextInt() - 1;
+    // movieid_choice = sc.nextInt() - 1 ;
+    System.out.println("Please select the movie time");
+    int count =0;
+    for(Sessions m : ss.readFromCSV())
+    {
+        
+        if(movieid_selected == m.getMovieID())
+        {
+            count++;
+            
+            System.out.println(count + ": Date: " + m.getSessionDate() + " Time: " + m.getSessionTime());
+        }
+    }
+    count =0;
+    int movie_time_choice = 0;
+    movie_time_choice = sc.nextInt();
+    for (Sessions m :  ss.readFromCSV())
+    {
+        if (movieid_selected == m.getMovieID())
+        {
+            count++;
+            if (movie_time_choice == count)
+            {
+                movie_date = m.getSessionDate();
+                 movie_time = m.getSessionTime();
+                System.out.println(m.getSeatingPlan());
+                seatPlan = m.getSeatingPlan();
+            }
+        }
+    }
+    return seatPlan;
+    
+
+    
+
+    // for(Sessions m : ss.readFromCSV())
+    // {
+    //     // System.out.println(m.getSessionDate() + m.getSessionTime());
+    //     for(Cinemas cine: cs.readFromCSV())
+    //     {
+    //         if(cine.getSessionsID().contains(m.getSessionDate()+m.getSessionTime()))
+    //         {
+    //             System.out.println(m.getSessionDate()+m.getSessionTime());
+    //         }
+    //     }
+    // }
+    
+}
+
 private static void showSeatPlan()
 {
     String cineplex_choice;
     String cinema_code =null;
     Scanner sc = new Scanner(System.in);
+    ArrayList<Integer> seatingPlan = new ArrayList<>();
     while(cinema_code==null)
     {
     for (Cineplexes m : Cineplex)
@@ -115,7 +247,11 @@ private static void showSeatPlan()
     
     cinema_code = getCineCode_V1(cineplex_choice);
     }
-    printSeatingPlan(getOccupiedSeats(cinema_code));
+    System.out.println("Which movie would you like to view?");
+    seatingPlan =  showMovieListing(cinema_code);
+    // System.out.println(getOccupiedSeats(cinema_code));
+    // printSeatingPlan(getOccupiedSeats(cinema_code));
+    printSeatingPlan(seatingPlan);
 
 
 }
@@ -127,6 +263,8 @@ private static void bookings()
     int cinema_class;
     ArrayList<Integer> seatingPlan = new ArrayList<>();
     ArrayList<String> SessionID = new ArrayList<>();
+    ArrayList<Integer> selectedSeat = new ArrayList<>();
+
     Boolean loop_seat = true;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");  
     int noOfSeats;
@@ -150,24 +288,15 @@ private static void bookings()
         // cinema_code = getCineCode(cineplex_choice);
         //cinema_code :aaa,bbb
     }
+    SessionID = getSessionID(cinema_code);
     
-    //At this point, user selected which Cineplex & Cinema
-
-
-    // System.out.println(cineplex_choice);
-
-    //  cinema_choice = showCinema(cineplex_choice);
-    // if (cinema_choice == null)
-    // {
-    //     System.out.println("Please Select the Cinema again");
-    //     cineplex_choice = sc.next();
-        
-    //     cinema_choice = showCinema(cineplex_choice);
-    // }
-    // System.out.println(cinema_code);
-    //show moving listings:
     System.out.println("Which movie would you like to book?");
-    movie_choice = sc.nextInt();
+    seatingPlan =  showMovieListing(cinema_code);
+    System.out.println(seatingPlan);
+
+    // movie_choice = sc.nextInt() -1 ;// user select movie based on movieID
+    // System.out.println("Select session time");
+
     cinema_class = getCinemaClass(cinema_code);
     if (cinema_class == -1)
     {
@@ -177,9 +306,9 @@ private static void bookings()
     
     // theatre.createRows(cinema_class, 50, 5);
     //SeatingPlan is a ArrayList that contains occupiedSeats
-    seatingPlan = getOccupiedSeats(cinema_code);
+    // seatingPlan = getOccupiedSeats(cinema_code);
     //SessionID is a ArrayList that contains sessionsID(Date+HHMM, (YYYYMMDDHHmm))
-    SessionID = getSessionID(cinema_code);
+    
     //Assuming moviegoers is created;
     // MovieGoer bob = new MovieGoer(1, "bob", "test@gmail.com", 1, "asda", 1, "TID_LSIT");
 
@@ -192,7 +321,7 @@ private static void bookings()
     while(true)
     {
         noOfSeats = sc.nextInt();
-        System.out.println(seatingPlan.size());
+        // System.out.println(seatingPlan.size());
         if (noOfSeats<1)
         {
             System.out.println("Please select at least 1 seat..");
@@ -213,9 +342,12 @@ private static void bookings()
     {
         System.out.println("Which seat would you like?");
         seat = bookSeats(seatingPlan);
+         //Here to add Tarun's requested seat. selectedSeat is an array consists of user selected seats
+        selectedSeat.add(seat);
+
         seatingPlan.add(seat);
-        LocalDateTime now = LocalDateTime.now();
-        SessionID.add(dtf.format(now));
+        // LocalDateTime now = LocalDateTime.now();
+        // SessionID.add(dtf.format(now));
         //TO IMPLEMENT NO: OF SeATS
     }
     else
@@ -226,9 +358,12 @@ private static void bookings()
             // display which seat user is selecting
             System.out.println("Please select the seat you would like for seat "+ z  );
             seat = bookSeats(seatingPlan);
+            //Here to add Tarun's requested seat. selectedSeat is an array consists of user selected seats
+            selectedSeat.add(seat);
+
             seatingPlan.add(seat);
-            LocalDateTime now = LocalDateTime.now();
-            SessionID.add(dtf.format(now));
+            // LocalDateTime now = LocalDateTime.now();
+            // SessionID.add(dtf.format(now));
         }
     }
    
@@ -241,14 +376,24 @@ private static void bookings()
     
     //adds current time to SessionID
 
-    //Update data into CSV
-    Cinemas up = new Cinemas();
-    up.setCinemaClass(toStringClass(cinema_class));
-    up.setCinemaCode(cinema_code.toUpperCase());
-    up.setSeatingPlan(seatingPlan);
-    up.setSessionsID(SessionID);
-    cs.updateFromCSV(up);
+    //update data into Sessions CSV
+    Sessions s = new Sessions();
+    s.setMovieID(movieid_selected);
+    s.setSessionDate(movie_date);
+    s.setSessionTime(movie_time);
+    s.setSeatingPlan(seatingPlan);
+    ss.updateFromCSV(s);
     System.out.println("Successfully booked the seat you requested");
+    
+    
+    // //Update data into CSV
+    // Cinemas up = new Cinemas();
+    // up.setCinemaClass(toStringClass(cinema_class));
+    // up.setCinemaCode(cinema_code.toUpperCase());
+    // up.setSeatingPlan(seatingPlan);
+    // up.setSessionsID(SessionID);
+    // cs.updateFromCSV(up);
+    // System.out.println("Successfully booked the seat you requested");
 
 
     //at this point can either call the function again or go back main page.
@@ -263,7 +408,9 @@ private static int bookSeats( ArrayList<Integer> seatingPlan)
     while(loop_seat)
         {
                int check_seat =0;
-            seat = sc.nextInt();
+               if(sc.hasNextInt())
+               {
+                seat = sc.nextInt();
             if(seat>70 || seat <1)
             {
                 System.out.println("Please choose seat that are available");
@@ -282,6 +429,16 @@ private static int bookSeats( ArrayList<Integer> seatingPlan)
             if(check_seat == 0)
             {
                 loop_seat = false;
+            }
+               }
+            
+
+            else
+            {
+                sc.nextLine();
+                System.out.println("Enter a valid Integer value");
+                // System.out.println("Please enter the valid integer");
+
             }
            
         }
@@ -370,6 +527,8 @@ private static void printSeatingPlan(ArrayList<Integer> seatingPlan)
 
 }
 
+// private static ArrayList<Integer> getOccupiedSeats_sess(Strin)
+
     //get getOccupiedSeats will return ArrayList of occupied seats with the cinema_choice input (aaa,bbb..)
 private static ArrayList<Integer> getOccupiedSeats(String cinema_code)
 {
@@ -437,13 +596,13 @@ private static String getCineCode_V1(String cineplex_choice)
     Scanner sc = new Scanner(System.in);
     int error  =0;
     //Prints entire CinemaCode in the Cineplex
-    System.out.println(Cineplex.size());
+    // System.out.println(Cineplex.size());
     for(int i =0; i<Cineplex.size(); i++)
     {
         if(Cineplex.get(i).getCineplexCode().equals(cineplex_choice.toUpperCase()))
         {
             System.out.println(Cineplex.get(i).getCinemasCode());
-            System.out.println("Please select which Cinema you would like to book: ");
+            System.out.println("Please select which Cinema you would like to view: ");
             cinema_choice = sc.next();
             if( Cineplex.get(i).getCinemasCode().contains(cinema_choice.toUpperCase()))
             {

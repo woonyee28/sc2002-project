@@ -2,6 +2,8 @@ package programs;
 
 import java.util.Scanner;
 
+import managers.AmendBooking;
+
 public class MemberApp {
 	private int movieGoerID;
 
@@ -33,7 +35,8 @@ public class MemberApp {
                     break;
 				case 2:
                     // Amend Booking, UIAmendBooking
-					// Zheng Kai
+					AmendBooking m = new AmendBooking(movieGoerID,0);
+					m.run();
 					break;
 				case 3:
 					// Show movie listing + Book ticket, UIListingAndBooking
