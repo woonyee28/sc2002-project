@@ -11,6 +11,7 @@ import java.util.Scanner;
 import models.Cineplexes;
 import serializers.CinemaSerializer;
 import serializers.CineplexSerializer;
+import serializers.MovieGoerSerializer;
 import serializers.TransactionSerializer;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
@@ -59,7 +60,7 @@ public class MovieBookingManager {
     static TransactionSerializer ts = new TransactionSerializer();
     private static ArrayList<Cineplexes> Cineplex = cps.readFromCSV();
     private static ArrayList<Cinemas> Cinema = cs.readFromCSV();
-	public static void main(String[] args) throws ParseException {
+	public void run() throws ParseException {
 		double price=0;
         int selection_choice;
         String book_choice;
@@ -86,7 +87,7 @@ public class MovieBookingManager {
                     book_choice = sc.next().toLowerCase();
                     if(book_choice.equals("y") || book_choice.equals("yes"))
                     {
-                        bookings();
+                        bookings(this.id);
                         break;
                     }
                     else
@@ -100,7 +101,7 @@ public class MovieBookingManager {
     
                 case 2: 
                     System.out.println("Welcome to booking ticket page: ");
-                    bookings();
+                    bookings(this.id);
                     break;
                 case 3:
                     System.out.println("Please select a cineplex: ");
@@ -336,7 +337,7 @@ public static void showSeatPlan()
 
 
 }
-public static void bookings() throws ParseException
+public static void bookings(int id) throws ParseException
 {   
     String cineplex_choice;
     String cinema_code =null;
@@ -448,7 +449,7 @@ public static void bookings() throws ParseException
         }
     }
 
-    double cost = ticketTransact(movieid_selected, cinema_code, cinema_class, movie_date, movie_time, selectedSeat, 1);
+    double cost = ticketTransact(movieid_selected, cinema_code, cinema_class, movie_date, movie_time, selectedSeat, id);
     System.out.printf("Total price: $%.2f \n", cost);
 
 
@@ -739,6 +740,20 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
             String TID = cinema_code.toUpperCase()+movieDate+movieTime;
             Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code.toUpperCase(), sit, price, movieID);
             ts.writeToCSV(newTran);
+            MovieGoerSerializer mgs = new MovieGoerSerializer();
+            for (MovieGoer aa: mgs.readFromCSV()){
+                if (aa.getMovieGoersID()==movieGoerID){
+                    MovieGoer add = new MovieGoer();
+                    add.setMovieGoersID(movieGoerID);
+                    add.setName(aa.getName());
+                    add.setEmail(aa.getEmail());
+                    add.setAge(aa.getAge());
+                    add.setpasswordHashed(aa.getPasswordHashed());
+                    add.setMobileNumber(aa.getMobileNumber());
+                    add.setTID_List(aa.getTID_List()+"; "+TID);
+                    mgs.updateFromCSV(add);
+                }
+            }
         }
     }
     else{
@@ -751,6 +766,20 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
             String TID = cinema_code+movieDate+movieTime;
             Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code, sit, price, movieID);
             ts.writeToCSV(newTran);
+            MovieGoerSerializer mgs = new MovieGoerSerializer();
+            for (MovieGoer aa: mgs.readFromCSV()){
+                if (aa.getMovieGoersID()==movieGoerID){
+                    MovieGoer add = new MovieGoer();
+                    add.setMovieGoersID(movieGoerID);
+                    add.setName(aa.getName());
+                    add.setEmail(aa.getEmail());
+                    add.setAge(aa.getAge());
+                    add.setpasswordHashed(aa.getPasswordHashed());
+                    add.setMobileNumber(aa.getMobileNumber());
+                    add.setTID_List(aa.getTID_List()+"; "+TID);
+                    mgs.updateFromCSV(add);
+                }
+            }
         }
     }
 
