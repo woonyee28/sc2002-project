@@ -62,6 +62,7 @@ public class SessionManager {
         String sessionDate="";
         String sessionTime = "";
         ArrayList<Integer> seatingPlan = new ArrayList<Integer>();
+        seatingPlan.add(-1);
         System.out.println("Enter the Session's Movie Id: ");
         movieID = ii.nextInt();
         System.out.println("Enter Session Date YYYYMMDD: ");

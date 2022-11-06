@@ -148,7 +148,7 @@ public class AmendBookingManager {
                 //need to add integer.value of to remove that integer value else will remove by the index
                 getIndex = seatingPlan.indexOf(seat);
                 seatingPlan.remove(getIndex);
-                
+
                 String sess = SessionID.get(getIndex);
                 String date = sess.substring(0, 8);
                 String time = sess.substring(8,12);

@@ -171,10 +171,6 @@ public class MemberManager implements logIn {
         // Create Account then go back to memberLogIn
         int check1=0;
         check1 = createMember();
-        if (check1==1){
-            logIn();
-        }
-
     }
     /**
      * Get MovieGoer's ID from given email.

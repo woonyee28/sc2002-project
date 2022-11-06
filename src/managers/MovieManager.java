@@ -47,7 +47,7 @@ public class MovieManager {
         String type = sc.nextLine();
         System.out.println("Enter Synopsis (Without Comma): ");
         String synopsis = sc.nextLine();
-        System.out.println("Enter Rating (2 Decimals): ");
+        System.out.println("Enter Rating (1 Decimals): ");
         Double rating = sc.nextDouble();
         sc.nextLine();
         System.out.println("Enter Showing Status (No Longer Showing, Now Showing, Coming Soon): ");
