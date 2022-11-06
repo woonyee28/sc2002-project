@@ -275,6 +275,11 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
 
    // show the movies showing for that cinema selected
    //print out in console
+
+   //To clear previous data if the first method was called
+   preview.clear();
+   nowShowing.clear();
+   
    for (Movie m: ms.readFromCSV())
    {
        if(movieID.contains(m.getMovieID()))
