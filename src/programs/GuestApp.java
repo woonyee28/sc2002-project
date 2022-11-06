@@ -2,7 +2,7 @@ package programs;
 
 import java.util.Scanner;
 
-public class GuestApp {
+public class GuestApp extends MoblimaMainApp{
     public GuestApp(){};
     public void run(){
         int choice = -1;

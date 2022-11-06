@@ -2,9 +2,9 @@ package programs;
 
 import java.util.Scanner;
 
-import managers.AmendBooking;
+import managers.AmendBookingManager;
 
-public class MemberApp {
+public class MemberApp extends MoblimaMainApp{
 	private int movieGoerID;
 
 	public MemberApp(int movieGoerID){
@@ -35,7 +35,7 @@ public class MemberApp {
                     break;
 				case 2:
                     // Amend Booking, UIAmendBooking
-					AmendBooking m = new AmendBooking(movieGoerID,0);
+					UIAmendBooking m = new UIAmendBooking(movieGoerID,0);
 					m.run();
 					break;
 				case 3:

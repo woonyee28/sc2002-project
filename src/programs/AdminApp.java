@@ -2,9 +2,9 @@ package programs;
 
 import java.util.Scanner;
 
-import managers.AmendBooking;
+import managers.AmendBookingManager;
 
-public class AdminApp {
+public class AdminApp extends MoblimaMainApp{
 
 	private int adminID;
 
@@ -43,7 +43,7 @@ public class AdminApp {
             switch (choice) {
 				case 1:
                     // Amend Booking, UIAmendBooking
-					AmendBooking m = new AmendBooking(adminID,1);
+					AmendBookingManager m = new AmendBookingManager(adminID,1);
 					m.run();
 					break;
 				case 2:
