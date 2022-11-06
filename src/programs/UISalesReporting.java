@@ -11,7 +11,11 @@ public class UISalesReporting {
     public static int displaySortByRating = 1;
     public static int displaySortBySales = 1;
     public static int displayReview = 1;
-
+    /**
+     * Creates a new UISalesReporting with give id and adminOrmember.
+     * @param id This UISalesReporting's id.
+     * @param adminOrmember This UISalesReporting's adminOrmember.
+     */
     public UISalesReporting(int id, int adminOrmember){
         this.id = id;
         this.adminOrmember = adminOrmember;
@@ -35,7 +39,9 @@ public class UISalesReporting {
         "Display Review",
         "Done and Exit"
     };
-
+    /**
+     * Runs UISalesReporting.
+     */
     public void run(){
         int choice = -1;
 

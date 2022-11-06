@@ -8,19 +8,22 @@ import java.util.Scanner;
 import models.*;
 
 public class MemberManager implements logIn {
-    private static ArrayList<MovieGoer> mList;
+   /**
+    * The MovieGoerSerializer of this MemberManager.
+    */
     static MovieGoerSerializer mgs = new MovieGoerSerializer(); 
     
-
-    public MemberManager(){
-        MemberManager.mList = mgs.readFromCSV();
-    }
-
+     /**
+     * Checks if hash of the entered password matches that of the database.
+     * @param email Target email is used to identify the Member.
+     * @param hashedPassword Hashed password to be matched.
+     * @return true if hashed password matches.
+     */
     @Override
     public boolean checkPassword(String email, String hashedPassword){
         boolean correct = false;
         if (checkExistenceEmail(email)){
-                for (MovieGoer m: mList){
+                for (MovieGoer m: mgs.readFromCSV()){
                     if (m.getEmail().equals(email) && m.getPasswordHashed().equals(hashedPassword)){
                         correct = true;
                     }
@@ -30,11 +33,15 @@ public class MemberManager implements logIn {
 
         return correct;
     }
-
+     /**
+     * Check if email of Member exists in the database
+     * @param name Target email of Member to be checked.
+     * @return true if name of Member exists.
+     */
     @Override
     public boolean checkExistenceEmail(String email){
         boolean exists = false;
-        for (MovieGoer m: MemberManager.mList){
+        for (MovieGoer m: mgs.readFromCSV()){
             if (m.getEmail().equals(email)){
                 exists = true;
                 break;
@@ -44,9 +51,14 @@ public class MemberManager implements logIn {
         return exists;
     }
 
+    /**
+     * Gets name of Member using email.
+     * @param email Email of target Member.
+     * @return Name of Member with target email.
+     */
     public String checkName(String email){
         String name = email;
-        for (MovieGoer m: MemberManager.mList){
+        for (MovieGoer m: mgs.readFromCSV()){
             if (m.getEmail().equals(email)){
                 name = m.getName();
                 break;
@@ -54,7 +66,13 @@ public class MemberManager implements logIn {
         }
         return name;
     }
-
+    
+    
+    /*
+     * Log in function for Member.
+     * Prompts for email and password.
+     * @return 1 if successfully logged in. 0 otherwise.
+     */
     public static int logIn(){
         MemberManager login = new MemberManager();
         Scanner input = new Scanner(System.in);
@@ -82,18 +100,25 @@ public class MemberManager implements logIn {
 		}
     
     }
-
+     /**
+     * Generates unique memberID that is greater than the greatest memberID in database by 1.
+     * @return Int of unique memberID.
+     */
     public int checkExistenceID(){
         int largest = 0;
-		for (MovieGoer m:MemberManager.mList) {
+		for (MovieGoer m:mgs.readFromCSV()) {
 			if (largest < m.getMovieGoersID()) {
 				largest = m.getMovieGoersID();
 			}
 		}
         return largest;
-
     }
-
+     /**
+     * Creates new Member
+     * Generates new MemberID and checks if email is already in use.
+     * If email is not in used, new Member will be written to CSV using MovieGoerSerializer.
+     * @return 1 if succesfully created, 0 if unsuccessful.
+     */
     public static int createMember(){
         MemberManager create = new MemberManager();
         int movieGoerID = 0;
@@ -136,6 +161,12 @@ public class MemberManager implements logIn {
         return 0;
 		
     }
+    
+    /**
+     * signUp function.
+     * Uses createMember.
+     * if creation is succesful, Member are directed to logIn.
+     */
     public static void signUp(){
         // Create Account then go back to memberLogIn
         int check1=0;
@@ -145,9 +176,13 @@ public class MemberManager implements logIn {
         }
 
     }
-
+    /**
+     * Get MovieGoer's ID from given email.
+     * @param email Email of MovieGoer to have name returned.
+     * @return name of MovieGoer.
+     */
     public static int checkMovieGoerID(String email){
-        for (MovieGoer m: mList){
+        for (MovieGoer m: mgs.readFromCSV()){
             if (m.getEmail().equals(email)){
                 return m.getMovieGoersID();
             }

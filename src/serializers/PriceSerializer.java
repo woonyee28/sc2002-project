@@ -14,6 +14,8 @@ public class PriceSerializer implements InterfaceSerializer<Price>{
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/priceData.csv", true)));
             StringBuffer oneLine = new StringBuffer();
+            oneLine.append(p.getMovieType());
+            oneLine.append(CSV_SEPARATOR);
             oneLine.append(p.getCat());
             oneLine.append(CSV_SEPARATOR);
             oneLine.append(p.getPrice());
@@ -38,9 +40,10 @@ public class PriceSerializer implements InterfaceSerializer<Price>{
             String[] tempArr;
             while((line = br.readLine()) != null) {
                tempArr = line.split(CSV_SEPARATOR);
-               String cat = tempArr[0];
-               double price = Double.valueOf(tempArr[1]);
-               Price p = new Price(cat,price);
+               String movieType = tempArr[0];
+               String cat = tempArr[1];
+               double price = Double.valueOf(tempArr[2]);
+               Price p = new Price(movieType,cat,price);
                pList.add(p);
                
             }
@@ -58,6 +61,8 @@ public class PriceSerializer implements InterfaceSerializer<Price>{
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("database/priceData.csv",false)));
 			for(Price p:pList) {
 				StringBuffer oneLine = new StringBuffer();
+                oneLine.append(p.getMovieType());
+				oneLine.append(CSV_SEPARATOR);
                 oneLine.append(p.getCat());
 				oneLine.append(CSV_SEPARATOR);
                 oneLine.append(p.getPrice());
@@ -78,7 +83,7 @@ public class PriceSerializer implements InterfaceSerializer<Price>{
 	    ArrayList<Price> pList = p.readFromCSV();
 	    int flag =0;
 	    for (Price pp:pList) {
-		    if (pp.getCat().equals(m.getCat())) {
+		    if (pp.getCat().equals(m.getCat()) && pp.getMovieType().equals(m.getMovieType())) {
                 pp.setPrice(m.getPrice());
 		    	flag=1;
 		    	break;
@@ -97,7 +102,7 @@ public class PriceSerializer implements InterfaceSerializer<Price>{
 	    int flag =0;
         int index = 0;
 	    for (Price pp:pList) {
-		    if (pp.getCat().equals(o.getCat())) {
+		    if (pp.getCat().equals(o.getCat()) && pp.getMovieType().equals(o.getMovieType())) {
                 pp.setPrice(o.getPrice());
 		    	flag=1;
 		    	break;

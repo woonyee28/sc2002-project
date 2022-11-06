@@ -7,8 +7,6 @@ import managers.MemberManager;
 
 // import com.apple.laf.resources.aqua;
 
-
-
 public class MoblimaMainApp{
     public static void main(String[] args) {
 		MoblimaMainApp app = new MoblimaMainApp();
@@ -16,7 +14,9 @@ public class MoblimaMainApp{
 		app.run();
 	}
    
-
+    /**
+     * Runs the mainpage of the Moblima app.
+     */
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);
@@ -59,6 +59,8 @@ public class MoblimaMainApp{
 					break;
 			}
         }while (choice != 5);
+        
         ;
     }
+       
 }
