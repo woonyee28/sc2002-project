@@ -6,25 +6,45 @@ public class Holiday {
 
     public Holiday(){}
     
+    /**
+     * Initialise variables of an instance of Holiday class
+     * @param name
+     * @param date
+     */
     public Holiday(String name, String date){
         this.name = name;
         this.date = date;
     }
 
-    // get methods
+    /**
+     * returns name of Holiday
+     * @return
+     */
     public String getName(){
         return this.name;
     }
 
+    /**
+     * returns date of the Holiday
+     * @return
+     */
     public String getDate(){
         return this.date;
     }
 
     // set methods
+    /**
+     * set name of Holiday 
+     * @param name
+     */
     public void setName(String name){
         this.name = name;
     }
 
+    /**
+     * set date of Holiday
+     * @param date
+     */
     public void setDate(String date){
         this.date = date;
     }
