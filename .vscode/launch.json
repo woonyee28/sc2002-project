@@ -6,10 +6,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch MoblimaMainApp",
+            "name": "Launch Display_movie",
             "request": "launch",
-            "mainClass": "programs.MoblimaMainApp",
-            "projectName": "sc2002-project_69ac6e3e"
+            "mainClass": "tests.Display_movie",
+            "projectName": "sc2002-project_985b3ca0"
         },
         {
             "type": "java",
