@@ -1,9 +1,9 @@
 package programs;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 
-import managers.AmendBooking;
 import managers.PriceManager;
 import managers.AmendBookingManager;
 
@@ -25,8 +25,9 @@ public class MemberApp extends MoblimaMainApp{
 	}
 	/**
 	 * Runs the MemberApp.
+	 * @throws ParseException
 	 */
-    public void run(){
+    public void run() throws ParseException{
         int choice = -1;
         Scanner sc = new Scanner(System.in);
 
@@ -51,6 +52,8 @@ public class MemberApp extends MoblimaMainApp{
 					break;
 				case 3:
 					// Show movie listing + Book ticket, UIListingAndBooking
+					UIListingAndBooking n = new UIListingAndBooking(movieGoerID, 0);
+					n.run();
 					// Zheng Kai
 					break;
 				case 4:

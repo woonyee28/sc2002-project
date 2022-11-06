@@ -1,5 +1,6 @@
 package programs;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 import managers.AmendBookingManager;
@@ -11,7 +12,7 @@ public class AdminApp {
 	
 	private final String menuOptions[] = {
         "Amend Booking",
-        "Show Movie Listing",
+        "Show Movie Listing and Book Ticket",
         "Show Sales Report",
         "Create New Movie/Session Listing",
 		"Configure System Settings",
@@ -37,8 +38,9 @@ public class AdminApp {
 
 	/**
 	 * Runs the AdminApp.
+	 * @throws ParseException
 	 */
-    public void run(){
+    public void run() throws ParseException{
         int i,choice = -1;
         Scanner sc = new Scanner(System.in);
 
@@ -53,11 +55,13 @@ public class AdminApp {
             switch (choice) {
 				case 1:
                     // Amend Booking, UIAmendBooking
-					AmendBookingManager m = new AmendBookingManager(adminID,1);
+					UIAmendBooking m = new UIAmendBooking(adminID,1);
 					m.run();
 					break;
 				case 2:
 					// Show movie listing + Book ticket, UIListingAndBooking
+					UIListingAndBooking a = new UIListingAndBooking(adminID, 1);
+					a.run();
 					// Zheng Kai
 					break;
 				case 3:
