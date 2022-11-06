@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 import managers.AmendBookingManager;
 
-public class AdminApp extends MoblimaMainApp{
+
+public class AdminApp {
 
 	private int adminID;
-
+	
 	private final String menuOptions[] = {
         "Amend Booking",
         "Show Movie Listing",
@@ -18,16 +19,25 @@ public class AdminApp extends MoblimaMainApp{
 		"Manage Admins",
 		"Exit Admin App"
 	};
-
+	/**
+	 * Creates an AdminApp with the given adminID.
+	 * @param adminID This AdminApp's adminID.
+	 */
 	public AdminApp(int adminID){
 		this.adminID=adminID;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getAdminID(){
 		return this.adminID;
 	}
 
-
+	/**
+	 * Runs the AdminApp.
+	 */
     public void run(){
         int i,choice = -1;
         Scanner sc = new Scanner(System.in);
@@ -69,6 +79,7 @@ public class AdminApp extends MoblimaMainApp{
 					// sign up admin, UIAdminSignUp
 					UIAdminSignUp adminSignUp = new UIAdminSignUp(this.adminID);
 					adminSignUp.run();
+					break;
                 case 7:
 					// manage admin, UIManageAdmin
 					UIManageAdmin manageAdmin = new UIManageAdmin(this.adminID);

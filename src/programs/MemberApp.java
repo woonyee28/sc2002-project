@@ -2,19 +2,30 @@ package programs;
 
 import java.util.Scanner;
 
+
+import managers.AmendBooking;
+import managers.PriceManager;
 import managers.AmendBookingManager;
+
 
 public class MemberApp extends MoblimaMainApp{
 	private int movieGoerID;
-
+	/**
+	 * Creates a new MemberApp with given movieGoerID.
+	 * @param movieGoerID
+	 */
 	public MemberApp(int movieGoerID){
 		this.movieGoerID = movieGoerID;
 	}
-
+	/**
+	 * @return This MemberApp's movieGoerID.
+	 */
 	public int getMemberID(){
 		return this.movieGoerID;
 	}
-
+	/**
+	 * Runs the MemberApp.
+	 */
     public void run(){
         int choice = -1;
         Scanner sc = new Scanner(System.in);
@@ -22,7 +33,7 @@ public class MemberApp extends MoblimaMainApp{
         do{
             System.out.println("====================MemberApp======================\n");
 			System.out.println("What would you like to do?");
-			System.out.println("\t[1] View your booking history and review ratings\n\t[2] Amend Bookings\n\t[3] View Movies and Book Tickets\n\t[4] View Sales\n\t[5] Go back to previous menu.");
+			System.out.println("\t[1] View your booking history and review ratings\n\t[2] Amend Bookings\n\t[3] View Movies and Book Tickets\n\t[4] View Sales\n\t[5] View Pricing\n\t[6] Go back to previous menu.");
 			choice = Integer.valueOf(sc.next());
 			System.out.println();
 			
@@ -48,13 +59,17 @@ public class MemberApp extends MoblimaMainApp{
 					s.run();
 					break;
 				case 5:
+					PriceManager p = new PriceManager();
+					p.viewPricing();
+				case 6:
 					System.out.println("Exiting to the previous level...");
 					break;
+					
 				default:
 					System.out.println("Please input a valid option.");
 					break;
 			}
-        }while (choice != 5);
+        }while (choice != 6);
 		;
     }
 }
