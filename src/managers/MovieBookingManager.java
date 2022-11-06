@@ -714,8 +714,22 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
     DateFormat date3 = new SimpleDateFormat("E");
     String dayM = date3.format(date2);
 
+    System.out.println(dayM);
     //check if weekday or weekend
-    if (dayM != "Sun" || dayM!="Sat"){
+    if (dayM.equals("Sun") || dayM.equals("Sat")){
+        for (int y=0; y<seats.size();y++){
+            int sit = seats.get(y);
+            price = cinema_class*12.50;
+            totalPrice = totalPrice + price;
+
+            //update transaction ID
+            String TID = cinema_code+movieDate+movieTime;
+            Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code, sit, price, movieID);
+            ts.writeToCSV(newTran);
+        
+        }
+    }
+    else{
         for (int x=0; x<seats.size();x++){
 
             int sit = seats.get(x);
@@ -739,23 +753,13 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
             String TID = cinema_code.toUpperCase()+movieDate+movieTime;
             Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code.toUpperCase(), sit, price, movieID);
             ts.writeToCSV(newTran);
-        }
-    }
-    else{
-        for (int y=0; y<seats.size();y++){
-            int sit = seats.get(y);
-            price = cinema_class*12.50;
-            totalPrice = totalPrice + price;
-
-            //update transaction ID
-            String TID = cinema_code+movieDate+movieTime;
-            Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code, sit, price, movieID);
-            ts.writeToCSV(newTran);
-        }
     }
 
 
+    
+    }
     return totalPrice;
 }
+
 }
 
