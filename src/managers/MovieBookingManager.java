@@ -286,6 +286,7 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
    //To clear previous data if the first method was called
    preview.clear();
    nowShowing.clear();
+   endofShowing.clear();
    
    for (Movie m: ms.readFromCSV())
    {
