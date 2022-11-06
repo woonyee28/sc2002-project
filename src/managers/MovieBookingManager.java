@@ -52,6 +52,7 @@ public class MovieBookingManager {
     public MovieBookingManager(int id, int adminOrmember){
         this.id = id;
         this.adminOrmember = adminOrmember;
+        
     }
 
 
@@ -87,17 +88,46 @@ public class MovieBookingManager {
                     break;
                 case 1: 
                     System.out.println("Now Showing:");
-                    
+                    System.out.println("right");
                     showMovieListing();
-                    if (adminOrmember==-1){
+                    if (this.adminOrmember==-1){
                         break;
+                    }else{
+                        System.out.println("Would you like to book a movie?(Y/N)");
+                        System.out.println("Would you like to book a movie?(Y/N)");
+                        book_choice = sc.next().toLowerCase();
+                        if(book_choice.equals("y") || book_choice.equals("yes"))
+                        {
+                            int n;
+                            
+                            if (adminOrmember==1){
+                                System.out.println("Choose which moviegoer to book for.\n");
+                                for (MovieGoer mg: mgs.readFromCSV()){
+                                    System.out.println(mg.toString());
+                                }
+                                n = sc.nextInt();
+                                bookings(n);
+                            }else{
+                                bookings(this.id);
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("Going back to main page..");
+                            //call for main page function
+                            break;
+                        }
                     }
-                    System.out.println("Would you like to book a movie?(Y/N)");
-                    book_choice = sc.next().toLowerCase();
-                    if(book_choice.equals("y") || book_choice.equals("yes"))
-                    {
-                        int n;
-                        
+                    
+    
+                case 2: 
+                    System.out.println("Welcome to booking ticket page: ");
+                    if (adminOrmember==-1){
+                        System.out.println("Guest is not allowed to book ticket, please return to main app and register yourself :D\n");
+                        break;
+                    }else{
+                        int n = -1;
                         if (adminOrmember==1){
                             System.out.println("Choose which moviegoer to book for.\n");
                             for (MovieGoer mg: mgs.readFromCSV()){
@@ -110,31 +140,7 @@ public class MovieBookingManager {
                         }
                         break;
                     }
-                    else
-                    {
-                        System.out.println("Going back to main page..");
-                        //call for main page function
-                        break;
-                    }
-    
-                case 2: 
-                    System.out.println("Welcome to booking ticket page: ");
-                    if (adminOrmember==-1){
-                        System.out.println("Guest is not allowed to book ticket, please return to main app and register yourself :D\n");
-                        break;
-                    }
-                    int n = -1;
-                    if (adminOrmember==1){
-                        System.out.println("Choose which moviegoer to book for.\n");
-                        for (MovieGoer mg: mgs.readFromCSV()){
-                            System.out.println(mg.toString());
-                        }
-                        n = sc.nextInt();
-                        bookings(n);
-                    }else{
-                        bookings(this.id);
-                    }
-                    break;
+
                 case 3:
                     System.out.println("Please select a cineplex: ");
                     showSeatPlan();
