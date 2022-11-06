@@ -206,7 +206,8 @@ private static ArrayList<Integer> showMovieListing(String cinema_code)
     // System.out.println(ss_time);
     
     //add all the movies in the cinema into movieID
-    for(int i =0; i<Cineplex.size();  i++)
+    // System.out.println(Cineplex.size());
+    for(int i =0; i<Cinema.size();  i++)
     {
         //get the cinema that its parsed in
         //to get the index of which cinema to later check the array of sessionID
@@ -228,6 +229,8 @@ private static ArrayList<Integer> showMovieListing(String cinema_code)
         System.out.println("No session availble from the movie you selected");
         return null;
     }
+    preview.clear();
+    nowShowing.clear();
 
     // show the movies showing for that cinema selected
     //print out in console
@@ -417,6 +420,7 @@ private static void bookings()
         cineplex_choice = sc.next();
         
         cinema_code = getCineCode_V1(cineplex_choice);
+        // System.out.println("This is cinema code: "+ cinema_code);
         // cinema_code = getCineCode(cineplex_choice);
         //cinema_code :aaa,bbb
     }
@@ -722,7 +726,7 @@ private static int getCinemaClass(String cinema_code)
 
 //This V1 version able to get directly from CSV, CINEPLEX cinema code.
 //It is not hard coded
-
+// this function returns aaa,bbb,bbc...
 private static String getCineCode_V1(String cineplex_choice)
 {
     String cinema_choice ="";

@@ -26,7 +26,7 @@ public class UIAmendBooking {
         Scanner sc = new Scanner(System.in);
 
         do{
-            System.out.println("====================AdminSignUp======================\n");
+            System.out.println("====================Amend Booking======================\n");
             for (int i = 1; i <= menuOptions.length; i++) {
                 System.out.printf("(%d) %s \n", i, menuOptions[i-1]);
             }
