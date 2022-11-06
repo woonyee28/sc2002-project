@@ -7,8 +7,6 @@ import managers.MemberManager;
 
 // import com.apple.laf.resources.aqua;
 
-
-
 public class MoblimaMainApp{
     public static void main(String[] args) {
 		MoblimaMainApp app = new MoblimaMainApp();

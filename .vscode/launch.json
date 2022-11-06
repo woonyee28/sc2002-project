@@ -6,24 +6,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch MoblimaMainApp",
+
+            "name": "Launch testSession",
             "request": "launch",
-            "mainClass": "programs.MoblimaMainApp",
-            "projectName": "sc2002-project_bad1ba49"
-        },
-        {
-            "type": "java",
-            "name": "Launch MoblimaMainApp",
-            "request": "launch",
-            "mainClass": "programs.MoblimaMainApp",
-            "projectName": "sc2002-project_72aca01f"
-        },
-        {
-            "type": "java",
-            "name": "Launch MoblimaMainApp",
-            "request": "launch",
-            "mainClass": "programs.MoblimaMainApp",
-            "projectName": "sc2002-project_7982b241"
+            "mainClass": "tests.testSession",
+            "projectName": "sc2002-project_985b3ca0"
         },
         {
             "type": "java",

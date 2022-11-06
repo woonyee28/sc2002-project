@@ -2,11 +2,11 @@ package programs;
 
 import java.util.Scanner;
 
-import managers.AmendBooking;
+import managers.AmendBookingManager;
+
 
 public class AdminApp {
-	
-	
+
 	private int adminID;
 	
 	private final String menuOptions[] = {
@@ -53,7 +53,7 @@ public class AdminApp {
             switch (choice) {
 				case 1:
                     // Amend Booking, UIAmendBooking
-					AmendBooking m = new AmendBooking(adminID,1);
+					AmendBookingManager m = new AmendBookingManager(adminID,1);
 					m.run();
 					break;
 				case 2:

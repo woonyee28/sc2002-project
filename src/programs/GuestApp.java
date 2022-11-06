@@ -2,10 +2,12 @@ package programs;
 
 import java.util.Scanner;
 
+
 public class GuestApp {
 	/**
 	 * Creates a new GuestApp.
 	 */
+
     public GuestApp(){};
 	/**
 	 * Runs the Guest App
