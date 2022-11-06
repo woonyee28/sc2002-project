@@ -11,6 +11,11 @@ public class MovieInformation {
         this.movList = ms.readFromCSV();
     }
 
+    /**
+     * Display the movie information of a selected movie
+     * @param MovieID
+     * @return
+     */
     public int returnMovInfo(int MovieID){
         String movieName = null;
         String movieType = null;
