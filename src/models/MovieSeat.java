@@ -36,16 +36,24 @@ public class MovieSeat {
         return assigned;
     }
 
+    
     public void assign()
     {
         assigned = true;
     }
 
+    /**
+     * Assign movieSeat object to customer
+     * @param cust_id
+     */
     public void assign(int cust_id){
         this.customerId = cust_id;
         assigned = true;
     }
 
+    /**
+     * unassign seat of customer by changing boolean value to false and changing customerID of movieSeat object to 0
+     */
     public void unAssign(){
         this.assigned = false;
         this.customerId = 0;
