@@ -1,4 +1,7 @@
-package managers;
+//Author Zheng Kai
+//last modified - 30/10/22
+
+package tests;
 import models.*;
 
 
@@ -6,12 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 import models.Cineplexes;
-import serializers.HolidaySerializer;
-import serializers.PriceSerializer;
 import serializers.CinemaSerializer;
 import serializers.CineplexSerializer;
-import serializers.MovieGoerSerializer;
-import serializers.TransactionSerializer;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;    
@@ -19,17 +18,12 @@ import models.Movie;
 import serializers.MovieSerializer;
 import serializers.SessionSerializer;
 import models.Sessions;
-import models.Transaction;
-import java.text.SimpleDateFormat;  
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
 
 import javax.lang.model.element.Element;
 
 
 // this class defines the movie booking of movies selected
-public class MovieBookingManager {
+public class Moviebooking {
 
     private String movieTitle;
     private String theatre;
@@ -40,40 +34,21 @@ public class MovieBookingManager {
     private static int movie_time_choice = 0;
     private static ArrayList<String> ss_datetime = new ArrayList<>();
 
-    private static ArrayList<String> nowShowing = new ArrayList<>();
-    private static ArrayList<String> preview = new ArrayList<>();
-    private static ArrayList<String> endofShowing = new ArrayList<>();
-
-
-    private int adminOrmember; // 1 == admin, 0 == member, -1 == Guest
-    private int id; // -1 == Member
-
-    public MovieBookingManager(int id, int adminOrmember){
-        this.id = id;
-        this.adminOrmember = adminOrmember;
-        
-    }
-
-
 
     private int amountofTicket;
     static CinemaSerializer cs = new CinemaSerializer();
     static CineplexSerializer cps = new CineplexSerializer();
     static SessionSerializer ss = new SessionSerializer();
     static MovieSerializer ms = new MovieSerializer();
-    static TransactionSerializer ts = new TransactionSerializer();
     private static ArrayList<Cineplexes> Cineplex = cps.readFromCSV();
     private static ArrayList<Cinemas> Cinema = cs.readFromCSV();
-    static MovieGoerSerializer mgs = new MovieGoerSerializer();
-    static HolidaySerializer hs = new HolidaySerializer();
-    static PriceSerializer ps = new PriceSerializer();
 
-	
-    /** 
-     * run booking
-     * @throws ParseException
-     */
-    public void run() throws ParseException {
+    private static ArrayList<String> nowShowing = new ArrayList<>();
+    private static ArrayList<String> preview = new ArrayList<>();
+    private static ArrayList<String> endofShowing = new ArrayList<>();
+    
+
+	public static void main(String[] args) {
 		double price=0;
         int selection_choice;
         String book_choice;
@@ -95,69 +70,26 @@ public class MovieBookingManager {
                 case 1: 
                     System.out.println("Now Showing:");
                     showMovieListing();
-                    System.out.println("Would you like view more details?(Y/N)");
-                    String c = sc.next().toLowerCase();
-                    if(c.equals("y") || c.equals("yes")){
-                        MovieSerializer mss = new MovieSerializer();
-                        for (Movie v: mss.readFromCSV()){
-                            System.out.println(v.toString());
-                        }
-                        MovieInformation mi = new MovieInformation();
-                        System.out.println("Which Movie ID you would like to know more? ");
-                        int cc = sc.nextInt();
-                        mi.returnMovInfo(cc);
-                    }
-
-                    if (this.adminOrmember==-1){
+                    System.out.println("Would you like to book a movie?(Y/N)");
+                    book_choice = sc.next().toLowerCase();
+                    if(book_choice.equals("y") || book_choice.equals("yes"))
+                    {
+                        bookings();
                         break;
-                    }else{
-                        System.out.println("Would you like to book a movie?(Y/N)");
-                        book_choice = sc.next().toLowerCase();
-                        if(book_choice.equals("y") || book_choice.equals("yes"))
-                        {
-                            int n;
-                            
-                            if (adminOrmember==1){
-                                System.out.println("Choose which moviegoer to book for.\n");
-                                for (MovieGoer mg: mgs.readFromCSV()){
-                                    System.out.println(mg.toString());
-                                }
-                                n = sc.nextInt();
-                                bookings(n);
-                            }else{
-                                bookings(this.id);
-                            }
-                            break;
-                        }
-                        else
-                        {
-                            System.out.println("Going back to main page..");
-                            //call for main page function
-                            break;
-                        }
+                    }
+                    else
+                    {
+                        System.out.println("Going back to main page..");
+                        //call for main page function
+                        break;
                     }
                     
+
     
                 case 2: 
                     System.out.println("Welcome to booking ticket page: ");
-                    if (adminOrmember==-1){
-                        System.out.println("Guest is not allowed to book ticket, please return to main app and register yourself :D\n");
-                        break;
-                    }else{
-                        int n = -1;
-                        if (adminOrmember==1){
-                            System.out.println("Choose which moviegoer to book for.\n");
-                            for (MovieGoer mg: mgs.readFromCSV()){
-                                System.out.println(mg.toString());
-                            }
-                            n = sc.nextInt();
-                            bookings(n);
-                        }else{
-                            bookings(this.id);
-                        }
-                        break;
-                    }
-
+                    bookings();
+                    break;
                 case 3:
                     System.out.println("Please select a cineplex: ");
                     showSeatPlan();
@@ -168,31 +100,60 @@ public class MovieBookingManager {
                     break;
             }
             System.out.println("Going Back to main page...");
+
+   
+        
+       
+       
+
+        // Theatre test = new Theatre(1);
+        // test.createRows(1, 11, 13);
+        // test.printSeatPlan();
+        // Theatre nex = new Theatre (2);
+        // nex.createRows(1, 5, 3);
+        // MovieName movie1 = new MovieName("TEST_Movie", "22,22,22", test);
+        // MovieGoer_zk bob = new MovieGoer_zk(1);
+        // // ticket ticket_1 = new ticket(bob, movie1);
+        // if(ticket_1.reserveSeat(11-1, 2-1))
+        // {
+        //     System.out.println("Successfully book");
+        //     price = ticket_1.calculatePrice();
+        //     System.out.println("Your ticket price is: "+ price);
+            // System.out.println(test.getNumRow());
+            
+        // }
+        // else
+        // {
+        //     System.out.println("seat taken");
+        // }
+        // test.printSeatPlan();
+        
+
+
 }
 
-public static void showMovieListing()
+private static void showMovieListing()
     {
-        preview.clear();
-        endofShowing.clear();
-        nowShowing.clear();
-        for (Movie m: ms.readFromCSV()) {    
-            //Add previews into arrayList       
+        for (Movie m: ms.readFromCSV()) {           
+            // m.toString();
+            // System.out.println(m.getMovieID()+1 +": " +  m.getTitle()); 
             if (m.getShowingStatus().equals("Preview"))
             {
                 preview.add(m.getTitle());
             }
-            //Add End of showing into arrayList
             else if (m.getShowingStatus().equals("End Of Showing"))
             {
                 endofShowing.add(m.getTitle());
             }
-            ////Add Now showing into arrayList 
+            //Now Showing
             else
             {
                 nowShowing.add(m.getTitle());
             }
+            
+
         }
-            //Printing all movies in different categories
+
             System.out.println("Previews:");
             for(int i=0; i<preview.size(); i++)
             {
@@ -212,97 +173,109 @@ public static void showMovieListing()
             }
     }
 
-/** 
- * parse in cinema_code to get the sessionID, to print out relevant movies according to the cinema chose
- * Function that requires user to input Movie & Session Timing and will return the seatingPlan
- * @param cinema_code
- * @return ArrayList<Integer>
- */
-
-public static ArrayList<Integer> showMovieListing(String cinema_code)
+// parse in cinema_code to get the sessionID, to print out relevant movies according to the cinema chose
+//Function that requires user to input Movie & Session Timing and will return the seatingPlan
+private static ArrayList<Integer> showMovieListing(String cinema_code)
 {
     //declare movieID & seatPlan
     ArrayList<Integer> movieID = new ArrayList<>();
     ArrayList<Integer> seatPlan = new ArrayList<>();
-    movieID.clear();
+    // for(Cinemas cine : cs.readFromCSV())
+    // {
+    //     System.out.println(cine.getSessionsID());
+    //     for(Sessions m : ss.readFromCSV());
+    //     {
+    //         System.out.println(m);
+    //     }
+    // }
+    
     Scanner sc = new Scanner(System.in);
+    int movieid_choice;
     int which_cine =-1;
-
     
-   //add all the movies in the cinema into movieID
-   for(int i =0; i<Cinema.size();  i++)
-   {
-       //get the cinema that its parsed in
-       //to get the index of which cinema to later check the array of sessionID
-       
-       if(Cinema.get(i).getCinemaCode().equals(cinema_code.toUpperCase()))
-       {
-           for(Sessions m : ss.readFromCSV())
-           {
-               if(Cinema.get(i).getSessionsID().contains(m.getSessionDate()+m.getSessionTime()))
-               {
-                   which_cine = i;
-                   // System.out.println(m.getSessionDate()+m.getSessionTime());
-                   movieID.add(m.getMovieID());
-               }
-           }
-       }
-   }
-   if(which_cine == -1)
-   {
-       System.out.println("No session availble from the movie you selected");
-       return null;
-   }
+    // ArrayList<String> ss_time = new ArrayList<>();
 
-   // show the movies showing for that cinema selected
-   //print out in console
-
-   //To clear previous data if the first method was called
-   preview.clear();
-   nowShowing.clear();
-   endofShowing.clear();
-   
-   for (Movie m: ms.readFromCSV())
-   {
-       if(movieID.contains(m.getMovieID()))
-       {
-           if (m.getShowingStatus().equals("Preview"))
-           {
-               preview.add(m.getMovieID()+1 + ": "+ m.getTitle());
-           }
-           else if (m.getShowingStatus().equals("Now Showing"))
-           {
-               nowShowing.add(m.getMovieID()+1 + ": "+ m.getTitle());
-           }
+    // for(Sessions s: ss.readFromCSV())
+    // {
+    //     ss_date.add(s.getSessionDate());
+    //     ss_time.add(s.getSessionTime());
+    // }
+    // Collections.sort(ss_date);
+    // Collections.sort(ss_time);
+    // System.out.println(ss_date);
+    // System.out.println(ss_time);
     
-           // System.out.println(m.getMovieID()+1 + ": "+ m.getTitle());
-       }
+    //add all the movies in the cinema into movieID
+    // System.out.println(Cineplex.size());
+    for(int i =0; i<Cinema.size();  i++)
+    {
+        //get the cinema that its parsed in
+        //to get the index of which cinema to later check the array of sessionID
+        if(Cinema.get(i).getCinemaCode().equals(cinema_code.toUpperCase()))
+        {
+            for(Sessions m : ss.readFromCSV())
+            {
+                if(Cinema.get(i).getSessionsID().contains(m.getSessionDate()+m.getSessionTime()))
+                {
+                    which_cine = i;
+                    // System.out.println(m.getSessionDate()+m.getSessionTime());
+                    movieID.add(m.getMovieID());
+                }
+            }
+        }
+    }
+    if(which_cine == -1)
+    {
+        System.out.println("No session availble from the movie you selected");
+        return null;
+    }
+    preview.clear();
+    nowShowing.clear();
+    endofShowing.clear();
 
-   }
-   
+    // show the movies showing for that cinema selected
+    //print out in console
+    for (Movie m: ms.readFromCSV())
+    {
+        if(movieID.contains(m.getMovieID()))
+        {
+            if (m.getShowingStatus().equals("Preview"))
+            {
+                preview.add(m.getMovieID()+1 + ": "+ m.getTitle());
+            }
+            else if (m.getShowingStatus().equals("Now Showing"))
+            {
+                nowShowing.add(m.getMovieID()+1 + ": "+ m.getTitle());
+            }
+     
+            // System.out.println(m.getMovieID()+1 + ": "+ m.getTitle());
+        }
 
+    }
+    
+ 
 
-   System.out.println("Previews:");
-   for(int i=0; i<preview.size(); i++)
-   {
-       System.out.println(preview.get(i));
-   }
-   
-   System.out.println();
-   System.out.println("Now Showing:");
-   for(int i=0; i<nowShowing.size(); i++)
-   {
-       System.out.println(nowShowing.get(i));
-   }
-   System.out.println();
-   System.out.println("Please select the movie");
+    System.out.println("Previews:");
+    for(int i=0; i<preview.size(); i++)
+    {
+        System.out.println(preview.get(i));
+    }
+    
+    System.out.println();
+    System.out.println("Now Showing:");
+    for(int i=0; i<nowShowing.size(); i++)
+    {
+        System.out.println(nowShowing.get(i));
+    }
+    System.out.println();
+    System.out.println("Please select the movie");
     
     movieid_selected = sc.nextInt() - 1;
     // movieid_choice = sc.nextInt() - 1 ;
     System.out.println("Please select the movie time");
     int count =0;
-    //Store all the movie session timing to ss_datetime ArrayList
     ss_datetime.clear();
+    //Store all the movie session timing to ss_datetime ArrayList
     for(Sessions m : ss.readFromCSV())
     {
         //movieIDs are unique, compare the movieID to the sessionsData
@@ -310,22 +283,11 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
         {
             count++;
             ss_datetime.add(m.getSessionDate()+m.getSessionTime());
-            // ss_time.add(m.getSessionTime());
-            // System.out.println(count + ": Date: " + m.getSessionDate() + " Time: " + m.getSessionTime());
         }
     }
     //Sort the timing array
     Collections.sort(ss_datetime);
-    // System.out.println(ss_date);
-    // Collections.sort(ss_time);
-    // to sort the ss_date and ss_Time;
-    // one way, sort the distinct string in date, then loop through, and sort according to time and date
 
-    // for(int i=0;i<ss_date.size();i++)
-    // {
-    //     if()
-
-    // }
 
     // print the session timings (Sorted order)
     for(int i=0; i<ss_datetime.size(); i++)
@@ -344,20 +306,53 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
         {
             if(m.getSessionTime().equals(ss_datetime.get(movie_time_choice-1).substring(8)))
             {
-                //Stores unique sessionID user selected
+                //Stores the unique sessionsID that the user selected
                 movie_date = m.getSessionDate();
                 movie_time = m.getSessionTime();
                 seatPlan = m.getSeatingPlan();
             }
             
         }
+        // count++;
     }
+    // System.out.println(seatPlan);
+    // get the seating plan according to user input of selection session in order to print later
+    // for (Sessions m :  ss.readFromCSV())
+    // {
+    //     if (movieid_selected == m.getMovieID())
+    //     {
+    //         count++;
+    //         if (movie_time_choice == count)
+    //         {
+    //             // get the specific seating plan for that specific sessionID
+    //             movie_date = m.getSessionDate();
+    //             movie_time = m.getSessionTime();
+    //             System.out.println(m.getSeatingPlan());
+    //             seatPlan = m.getSeatingPlan();
+    //         }
+    //     }
+    // }
     //return the seatplan of user selected session
     return seatPlan;
     
+
+    
+
+    // for(Sessions m : ss.readFromCSV())
+    // {
+    //     // System.out.println(m.getSessionDate() + m.getSessionTime());
+    //     for(Cinemas cine: cs.readFromCSV())
+    //     {
+    //         if(cine.getSessionsID().contains(m.getSessionDate()+m.getSessionTime()))
+    //         {
+    //             System.out.println(m.getSessionDate()+m.getSessionTime());
+    //         }
+    //     }
+    // }
+    
 }
 
-public static void showSeatPlan()
+private static void showSeatPlan()
 {
     String cineplex_choice;
     String cinema_code =null;
@@ -380,17 +375,13 @@ public static void showSeatPlan()
     }
     System.out.println("Which movie would you like to view?");
     seatingPlan =  showMovieListing(cinema_code);
+    // System.out.println(getOccupiedSeats(cinema_code));
+    // printSeatingPlan(getOccupiedSeats(cinema_code));
     printSeatingPlan(seatingPlan);
 
 
 }
-
-/** 
- * book the ticket function
- * @param id
- * @throws ParseException
- */
-public static void bookings(int id) throws ParseException
+private static void bookings()
 {   
     String cineplex_choice;
     String cinema_code =null;
@@ -403,6 +394,7 @@ public static void bookings(int id) throws ParseException
     Boolean loop_seat = true;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");  
     int noOfSeats;
+    
 
     Scanner sc = new Scanner(System.in);
     while(cinema_code==null)
@@ -419,20 +411,36 @@ public static void bookings(int id) throws ParseException
         cineplex_choice = sc.next();
         
         cinema_code = getCineCode_V1(cineplex_choice);
+        // System.out.println("This is cinema code: "+ cinema_code);
+        // cinema_code = getCineCode(cineplex_choice);
+        //cinema_code :aaa,bbb
     }
     SessionID = getSessionID(cinema_code);
+    
     System.out.println("Which movie would you like to book?");
     seatingPlan =  showMovieListing(cinema_code);
     System.out.println(seatingPlan);
+
+    // movie_choice = sc.nextInt() -1 ;// user select movie based on movieID
+    // System.out.println("Select session time");
+
     cinema_class = getCinemaClass(cinema_code);
     if (cinema_class == -1)
     {
         System.out.println("Some Error Occured, data might not be in database");
     }
+    // System.out.println(cinema_class);
+    
+    // theatre.createRows(cinema_class, 50, 5);
+    //SeatingPlan is a ArrayList that contains occupiedSeats
+    // seatingPlan = getOccupiedSeats(cinema_code);
+    //SessionID is a ArrayList that contains sessionsID(Date+HHMM, (YYYYMMDDHHmm))
+    
+    //Assuming moviegoers is created;
+    // MovieGoer bob = new MovieGoer(1, "bob", "test@gmail.com", 1, "asda", 1, "TID_LSIT");
+
     System.out.println("Here is the seating plan for Cinema " + cinema_code.toUpperCase()+":");
     System.out.println("------------SCREEN------------");
-    System.out.println(seatingPlan);
-
     printSeatingPlan(seatingPlan);
     System.out.println("How many seats would you like?");
     
@@ -440,14 +448,17 @@ public static void bookings(int id) throws ParseException
     while(true)
     {
         noOfSeats = sc.nextInt();
+        // System.out.println(seatingPlan.size());
         if (noOfSeats<1)
         {
             System.out.println("Please select at least 1 seat..");
+            // seat = 0;
             continue;
         }
         else if(noOfSeats >= 70-seatingPlan.size())
         {
             System.out.println("No of seat exceeded remaining seats left, Please select again");
+            // seat = 0;
             continue;
         }
         break;
@@ -458,9 +469,9 @@ public static void bookings(int id) throws ParseException
     {
         System.out.println("Which seat would you like?");
         seat = bookSeats(seatingPlan);
-        //selectedSeat is the user select seat
+         //Here to add Tarun's requested seat. selectedSeat is an array consists of user selected seats
         selectedSeat.add(seat);
-        //Add user selected seat to main seatingPlan
+
         seatingPlan.add(seat);
         // LocalDateTime now = LocalDateTime.now();
         // SessionID.add(dtf.format(now));
@@ -482,9 +493,8 @@ public static void bookings(int id) throws ParseException
             // SessionID.add(dtf.format(now));
         }
     }
-
-    double cost = ticketTransact(movieid_selected, cinema_code, cinema_class, movie_date, movie_time, selectedSeat, id);
-    System.out.printf("Total price: $%.2f \n", cost);
+   
+    System.out.println("Ticket price is: xxx");
 
 
   
@@ -517,13 +527,7 @@ public static void bookings(int id) throws ParseException
 
     }
 
-
-/** 
- * reserve seat
- * @param seatingPlan
- * @return int
- */
-public static int bookSeats( ArrayList<Integer> seatingPlan)
+private static int bookSeats( ArrayList<Integer> seatingPlan)
 {
     Boolean loop_seat = true;
     Scanner sc = new Scanner(System.in);
@@ -568,13 +572,7 @@ public static int bookSeats( ArrayList<Integer> seatingPlan)
         return seat;
 }
 
-
-/** 
- * convert to string
- * @param cinema_class
- * @return String
- */
-public static String toStringClass(int cinema_class)
+private static String toStringClass(int cinema_class)
 {
     if(cinema_class == 1)
     {
@@ -590,12 +588,7 @@ public static String toStringClass(int cinema_class)
     }
 }
     
-
-/** 
- * print seating plan
- * @param seatingPlan
- */
-public static void printSeatingPlan(ArrayList<Integer> seatingPlan)
+private static void printSeatingPlan(ArrayList<Integer> seatingPlan)
 {
     int count =0;
     final  int TOTALSEAT = 70;
@@ -607,6 +600,7 @@ public static void printSeatingPlan(ArrayList<Integer> seatingPlan)
     //     }
     //     System.out.println("");
     // }
+    
     Collections.sort(seatingPlan);
     // for(Integer z :seatingPlan)
     // {
@@ -661,16 +655,10 @@ public static void printSeatingPlan(ArrayList<Integer> seatingPlan)
 
 }
 
-
-/** 
- * get occupied seat in the session
- * @param cinema_code
- * @return ArrayList<Integer>
- */
-// public static ArrayList<Integer> getOccupiedSeats_sess(Strin)
+// private static ArrayList<Integer> getOccupiedSeats_sess(Strin)
 
     //get getOccupiedSeats will return ArrayList of occupied seats with the cinema_choice input (aaa,bbb..)
-public static ArrayList<Integer> getOccupiedSeats(String cinema_code)
+private static ArrayList<Integer> getOccupiedSeats(String cinema_code)
 {
     for(Cinemas c : Cinema)
     {
@@ -682,13 +670,7 @@ public static ArrayList<Integer> getOccupiedSeats(String cinema_code)
     return null;
 }
 
-
-/** 
- * get session id string
- * @param cinema_code
- * @return ArrayList<String>
- */
-public static ArrayList<String> getSessionID(String cinema_code)
+private static ArrayList<String> getSessionID(String cinema_code)
 {
     for(Cinemas c : Cinema)
     {
@@ -701,14 +683,9 @@ public static ArrayList<String> getSessionID(String cinema_code)
 
 }
 
-
-/** 
- * Parse in which cinmea user selected and return which class
- * Regular - 1, Gold - 2, Plat 3
- * @param cinema_code
- * @return int
- */
-public static int getCinemaClass(String cinema_code)
+// Parse in which cinmea user selected and return which class
+//Regular - 1, Gold - 2, Plat 3
+private static int getCinemaClass(String cinema_code)
 {
     for(Cinemas c : Cinema)
     {
@@ -738,13 +715,10 @@ public static int getCinemaClass(String cinema_code)
 }
 
 
-
-/** 
- * This V1 version able to get directly from CSV, CINEPLEX cinema code.
- * @param cineplex_choice
- * @return String
- */
-public static String getCineCode_V1(String cineplex_choice)
+//This V1 version able to get directly from CSV, CINEPLEX cinema code.
+//It is not hard coded
+// this function returns aaa,bbb,bbc...
+private static String getCineCode_V1(String cineplex_choice)
 {
     String cinema_choice ="";
     Scanner sc = new Scanner(System.in);
@@ -777,134 +751,52 @@ public static String getCineCode_V1(String cineplex_choice)
 }
 
 
+//Deprecated function, hard coded the section of row
+// gets the Cineplex choice and returns the cinema choice in small case format
+//returns aaa,aab,aac/ bba,bbb,bbc, cca,ccb,ccc
 
-/** 
- * write to ticket transaction csv
- * @param movieID
- * @param cinema_code
- * @param cinema_class
- * @param movieDate
- * @param movieTime
- * @param seats
- * @param movieGoerID
- * @return double
- * @throws ParseException
- */
-public static double ticketTransact(int movieID, String cinema_code, int cinema_class, String movieDate, String movieTime, ArrayList<Integer> seats, int movieGoerID) throws ParseException{
-    double price=0.0;
-    double totalPrice = 0.0;
-    int checkDate =-1;
-    double studentPrice=0.0;
-    double seniorCitizenPrice=0.0;
-    double standardPrice=0;
-    double specialPrice=0;
-    SimpleDateFormat date1 = new SimpleDateFormat("yyyyMMdd");
-    Date date2 = date1.parse(movieDate);
-    DateFormat date3 = new SimpleDateFormat("E");
-    String dayM = date3.format(date2);
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");  
-
-    for(Holiday h:hs.readFromCSV()){
-        if (movieDate.equals(h.getDate())){
-            checkDate=1;
-            break;
+private static String getCineCode(String cineplex_Choice)
+{
+    String cinema_choice ="";
+    Scanner sc = new Scanner(System.in);
+    
+    if(cineplex_Choice.toLowerCase().equals("aa")) // selected first 3
+    {
+        System.out.println("Please select which Cinemas you would like to book:");
+        for(int i =0; i<3; i++)
+        {
+            System.out.print(Cinema.get(i).getCinemaCode() + " ");
         }
+        
+        // cinema_choice = sc.next();
+        System.out.println("Selection: ");
+        return sc.next().toLowerCase();
     }
-    for (Price p: ps.readFromCSV()){
-        if(p.getCat().equals("Student") && p.getMovieType().equals("Blockbuster")){
-            studentPrice = p.getPrice();
+    else if (cineplex_Choice.toLowerCase().equals("bb"))
+    {
+        System.out.println("Please select which Cinemas you would like to book:");
+        for(int i=3; i<6; i++)
+        {
+            System.out.print(Cinema.get(i).getCinemaCode() + " ");
         }
-        if(p.getCat().equals("SeniorCitizen") && p.getMovieType().equals("Blockbuster")){
-            seniorCitizenPrice = p.getPrice();
-        }
-        if(p.getCat().equals("Standard") && p.getMovieType().equals("Blockbuster")){
-            standardPrice = p.getPrice();
-        }
-        if(p.getCat().equals("Special") && p.getMovieType().equals("Blockbuster")){
-            specialPrice = p.getPrice();
-        }
+        System.out.println("Selection: ");
+        return sc.next().toLowerCase();
     }
-   // System.out.println(standardPrice);
-    //System.out.println(specialPrice);
-    //System.out.println(studentPrice);
-    //System.out.println(seniorCitizenPrice);
-
-    System.out.println(dayM);
-    //check if weekday or weekend
-    if (dayM.equals("Sun") || dayM.equals("Sat")||checkDate==1){
-        for (int y=0; y<seats.size();y++){
-            int sit = seats.get(y);
-            price = cinema_class*specialPrice;
-            totalPrice = totalPrice + price;
-
-            //update transaction ID
-            LocalDateTime now = LocalDateTime.now();
-            String TID = cinema_code.toUpperCase()+dtf.format(now);
-            Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code, sit, price, movieID);
-            ts.writeToCSV(newTran);
-            MovieGoerSerializer mgs = new MovieGoerSerializer();
-            for (MovieGoer aa: mgs.readFromCSV()){
-                if (aa.getMovieGoersID()==movieGoerID){
-                    MovieGoer add = new MovieGoer();
-                    add.setMovieGoersID(movieGoerID);
-                    add.setName(aa.getName());
-                    add.setEmail(aa.getEmail());
-                    add.setAge(aa.getAge());
-                    add.setpasswordHashed(aa.getPasswordHashed());
-                    add.setMobileNumber(aa.getMobileNumber());
-                    add.setTID_List(aa.getTID_List()+"; "+TID);
-                    mgs.updateFromCSV(add);
-                }
-            }
+    else if (cineplex_Choice.toLowerCase().equals("cc"))
+    {
+        System.out.println("Please select which Cinemas you would like to book:");
+        for(int i=6; i<9; i++)
+        {
+            System.out.print(Cinema.get(i).getCinemaCode() + " ");
         }
+        System.out.println("Selection: ");
+        return sc.next().toLowerCase();
     }
     else{
-        for (int x=0; x<seats.size();x++){
-
-            int sit = seats.get(x);
-            Scanner input = new Scanner(System.in);
-            System.out.printf("Please choose category for seat %d:\n", x);
-            System.out.println("\t[1] Standard Weekday\n\t[2] Student\n\t[3] Senior Citizen");
-            int catChoice = input.nextInt();
-            if (catChoice == 1){
-                price = cinema_class*standardPrice;
-            }
-            else if (catChoice==2){
-                price = cinema_class*studentPrice;
-            }
-            else if (catChoice==3){
-                price = cinema_class*seniorCitizenPrice;
-            }
-            
-            totalPrice = totalPrice + price;
-
-            //update transactionID
-            LocalDateTime now = LocalDateTime.now();
-            String TID = cinema_code.toUpperCase()+dtf.format(now);
-            Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code.toUpperCase(), sit, price, movieID);
-            ts.writeToCSV(newTran);
-            MovieGoerSerializer mgs = new MovieGoerSerializer();
-            for (MovieGoer aa: mgs.readFromCSV()){
-                if (aa.getMovieGoersID()==movieGoerID){
-                    MovieGoer add = new MovieGoer();
-                    add.setMovieGoersID(movieGoerID);
-                    add.setName(aa.getName());
-                    add.setEmail(aa.getEmail());
-                    add.setAge(aa.getAge());
-                    add.setpasswordHashed(aa.getPasswordHashed());
-                    add.setMobileNumber(aa.getMobileNumber());
-                    add.setTID_List(aa.getTID_List()+"; "+TID);
-                    mgs.updateFromCSV(add);
-                }
-            }
-        }
-    }
-
-
-    return totalPrice;
+        System.out.println("Invalid selection made..");
+        return null;
     }
     
 }
-
-
+}
 
