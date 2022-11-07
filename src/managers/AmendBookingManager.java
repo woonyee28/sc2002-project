@@ -82,8 +82,9 @@ public class AmendBookingManager {
                 }
             }
         }
-        seatingPlan = getOccupiedSeats(cinema_code);
+        
         SessionID = getSessionID(cinema_code);
+        seatingPlan = getOccupiedSeats(SessionID);
         
 
         System.out.println("Here is the seating plan BEFORE amending for Cinema " + cinema_code.toUpperCase()+":");
@@ -194,13 +195,17 @@ public class AmendBookingManager {
 
     
     //get getOccupiedSeats will return ArrayList of occupied seats with the cinema_choice input (aaa,bbb..)
-    private static ArrayList<Integer> getOccupiedSeats(String cinema_code)
+    // get from session
+    private static ArrayList<Integer> getOccupiedSeats(ArrayList<String> cinema_code)
     {
-        for(Cinemas c : Cinema)
+
+        SessionSerializer ss = new SessionSerializer();
+        for(Sessions m : ss.readFromCSV())
         {
-            if(c.getCinemaCode().toLowerCase().equals(cinema_code))
+            if(cinema_code.contains(m.getSessionDate()+m.getSessionTime()))
             {
-                return c.getSeatingPlan();
+                return m.getSeatingPlan();
+                // System.out.println(m.getSessionDate()+m.getSessionTime());
             }
         }
         return null;
