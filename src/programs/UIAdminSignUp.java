@@ -6,6 +6,9 @@ import managers.AdminManager;
 
 
 public class UIAdminSignUp {
+    /**
+     * The adminID of this UIAdminSignUp.
+     */
     private int adminID;
     /**
      * Creates a new UIAdminSignUP with the given adminID.
@@ -14,7 +17,9 @@ public class UIAdminSignUp {
     public UIAdminSignUp(int adminID){
         this.adminID = adminID;
     }
-
+    /**
+     * The menuOptions of this UIAdminSignUp.
+     */
     private final String menuOptions[] = {
         "Create New Admin",
         "Exit Admin Signup"

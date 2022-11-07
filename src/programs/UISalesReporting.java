@@ -5,11 +5,29 @@ import java.util.Scanner;
 import managers.SalesManager;
 
 public class UISalesReporting {
-
+    /**
+     * The adminOrmember of this UISalesReporting.
+     * Admin=1,Member=0,Guest=-1.
+     */
     private int adminOrmember; // 1 == admin, 0 == member, -1 == Guest
+    /**
+     * The id of this UISalesReporting.
+     */
     private int id; // -1 == Member
+    /**
+     * The displaySortByRating of this UISalesReporting.
+     * If value ==1, DisplaySortByRating is not hidden.
+     */
     public static int displaySortByRating = 1;
+    /**
+     * The displaySortBySales of this UISalesReporting.
+     * If value ==1, DisplaySortBySales is not hidden.
+     */
     public static int displaySortBySales = 1;
+    /**
+     * The displayReview of this UISalesReporting.
+     * If value ==1, DisplayReview is not hidden.
+     */
     public static int displayReview = 1;
     /**
      * Creates a new UISalesReporting with give id and adminOrmember.
@@ -21,7 +39,9 @@ public class UISalesReporting {
         this.adminOrmember = adminOrmember;
     }
 
-
+    /**
+     * The menuOptions of this UISalesReporting.
+     */
     protected String menuOptions[] = {
         "Sort By Rating",
         "Sort By Sales",
@@ -29,7 +49,9 @@ public class UISalesReporting {
         "Exit Sales Reporting",
         "Edit MovieGoers Permission"
     };
-
+    /**
+     * The adminOptions of this UISalesReporting.
+     */
     protected String adminOptions[] = {
         "Hide SortByRating",
         "Hide SortBySales",
