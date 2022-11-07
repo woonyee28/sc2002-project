@@ -831,6 +831,8 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
     Date date2 = date1.parse(movieDate);
     DateFormat date3 = new SimpleDateFormat("E");
     String dayM = date3.format(date2);
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");  
+
     for(Holiday h:hs.readFromCSV()){
         if (movieDate.equals(h.getDate())){
             checkDate=1;
@@ -865,7 +867,8 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
             totalPrice = totalPrice + price;
 
             //update transaction ID
-            String TID = cinema_code+movieDate+movieTime;
+            LocalDateTime now = LocalDateTime.now();
+            String TID = cinema_code.toUpperCase()+dtf.format(now);
             Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code, sit, price, movieID);
             ts.writeToCSV(newTran);
             MovieGoerSerializer mgs = new MovieGoerSerializer();
@@ -905,7 +908,8 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
             totalPrice = totalPrice + price;
 
             //update transactionID
-            String TID = cinema_code.toUpperCase()+movieDate+movieTime;
+            LocalDateTime now = LocalDateTime.now();
+            String TID = cinema_code.toUpperCase()+dtf.format(now);
             Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code.toUpperCase(), sit, price, movieID);
             ts.writeToCSV(newTran);
             MovieGoerSerializer mgs = new MovieGoerSerializer();

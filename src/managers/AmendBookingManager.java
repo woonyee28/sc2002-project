@@ -1,6 +1,3 @@
-//Author Zheng Kai
-//last modified - 30/10/22
-
 package managers;
 
 import java.time.format.DateTimeFormatter;
@@ -81,12 +78,11 @@ public class AmendBookingManager {
                     //DELETE THE TRANSACTION
                 }
             }
-            // update movie goer
-
         }
         
         SessionID = getSessionID(cinema_code);
         seatingPlan = getOccupiedSeats(SessionID);
+        String one = getOneSessionID(SessionID);
         
 
         System.out.println("Here is the seating plan BEFORE amending for Cinema " + cinema_code.toUpperCase()+":");
@@ -99,7 +95,7 @@ public class AmendBookingManager {
         {
             if (noOfSeats == 1)
             {
-                check_seat = amendSeat(seatingPlan, SessionID,delseatnum,movieid);
+                check_seat = amendSeat(seatingPlan, one,delseatnum,movieid);
                 
                 //if not in db, means user selected a seat that is already empty
             }
@@ -108,7 +104,7 @@ public class AmendBookingManager {
                 for (int i=1; i<=noOfSeats; i++)
                 {
                     System.out.println("Selecting seat " + i + "..");
-                    check_seat = amendSeat(seatingPlan, SessionID, delseatnum,movieid);
+                    check_seat = amendSeat(seatingPlan, one, delseatnum,movieid);
               
                     
                 }
@@ -137,12 +133,8 @@ public class AmendBookingManager {
 
         
     //Wil ask user for which seat do they wan to remove , and remove the data locally
-    private static int amendSeat(ArrayList<Integer> seatingPlan, ArrayList<String> SessionID, int seat,int movieid)
+    private static int amendSeat(ArrayList<Integer> seatingPlan, String SessionID, int seat,int movieid)
     {
-        System.out.println(seatingPlan);
-        System.out.println(SessionID);
-        System.out.println(seat);
-        System.out.println(movieid);
         
         int getIndex;
         Scanner sc = new Scanner(System.in);
@@ -156,11 +148,11 @@ public class AmendBookingManager {
                 getIndex = seatingPlan.indexOf(seat);
                 seatingPlan.remove(getIndex);
 
-                String sess = SessionID.get(getIndex);
-                String date = sess.substring(0, 8);
-                String time = sess.substring(8,12);
+                
+                String date = SessionID.substring(0, 8);
+                String time = SessionID.substring(8,12);
                               
-                SessionID.remove(getIndex);
+                
                 Sessions s = new Sessions();
                 s.setMovieID(movieid);
                 s.setSessionDate(date);
@@ -211,6 +203,23 @@ public class AmendBookingManager {
             if(cinema_code.contains(m.getSessionDate()+m.getSessionTime()))
             {
                 return m.getSeatingPlan();
+                // System.out.println(m.getSessionDate()+m.getSessionTime());
+            }
+        }
+        return null;
+    }
+
+        //get getOccupiedSeats will return ArrayList of occupied seats with the cinema_choice input (aaa,bbb..)
+    // get from session
+    private static String getOneSessionID(ArrayList<String> cinema_code)
+    {
+
+        SessionSerializer ss = new SessionSerializer();
+        for(Sessions m : ss.readFromCSV())
+        {
+            if(cinema_code.contains(m.getSessionDate()+m.getSessionTime()))
+            {
+                return m.getSessionDate()+m.getSessionTime();
                 // System.out.println(m.getSessionDate()+m.getSessionTime());
             }
         }
@@ -350,5 +359,3 @@ public class AmendBookingManager {
     }
 
 }
-
-
