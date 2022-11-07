@@ -11,14 +11,24 @@ import serializers.MovieGoerSerializer;
 import serializers.MovieSerializer;
 
 public class UIListingAndBooking {
+    /**
+     * The adminOrmember of this UIListingAndBooking of this UIListingAndBooking.
+     * Admin =1,Member=0,Guest=-1;
+     */
     private int adminOrmember; // 1 == admin, 0 == member, -1 == Guest
+    /**
+     * The id of this UILIstingAndBooking.
+     */
     private int id; // -1 == Member
 
     public UIListingAndBooking(int id, int adminOrmember){
         this.id = id;
         this.adminOrmember = adminOrmember;
     }
-
+    /**
+     * Runs UIListingAndBooking.
+     * @throws ParseException
+     */
     public void run() throws ParseException{
         int selection_choice;
         String book_choice;

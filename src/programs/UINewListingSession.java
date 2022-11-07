@@ -6,6 +6,9 @@ import managers.MovieManager;
 import managers.SessionManager;
 
 public class UINewListingSession {
+    /**
+     * The adminID of this UINewListingSession.
+     */
     private int adminID;
     /**
      * Creates a new UINewListingSession with given adminID. 
@@ -14,7 +17,9 @@ public class UINewListingSession {
     public UINewListingSession(int adminID){
         this.adminID = adminID;
     }
-    
+    /**
+     * THe menuOptions of this UIListingSession.
+     */
     private final String menuOptions[] = {
         "Print All Movies",
         "Print All Sessions",

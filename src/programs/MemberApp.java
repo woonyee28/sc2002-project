@@ -9,6 +9,9 @@ import managers.AmendBookingManager;
 
 
 public class MemberApp extends MoblimaMainApp{
+	/**
+	 * The movieGoerID of this MemberApp.
+	 */
 	private int movieGoerID;
 	/**
 	 * Creates a new MemberApp with given movieGoerID.

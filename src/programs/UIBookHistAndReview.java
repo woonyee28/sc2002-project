@@ -6,6 +6,9 @@ import managers.BookingHistManager;
 
 
 public class UIBookHistAndReview {
+    /**
+     * The movieGoerID of this UIBookHistAndReview.
+     */
     private int movieGoerID;
     /**
      * Creates a new UIBookHistAndReview with the given movieGoerID.
@@ -14,7 +17,9 @@ public class UIBookHistAndReview {
     public UIBookHistAndReview(int movieGoerID){
         this.movieGoerID = movieGoerID;
     }
-
+    /**
+     * THe menuOptions of this UIBookHistAndReview.
+     */
     private final String menuOptions[] = {
         "Show Booking History",
         "Input Review And Rating",
