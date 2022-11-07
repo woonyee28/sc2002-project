@@ -30,6 +30,7 @@ public class AdminApp {
 
 	
 	/** 
+	 * get admin id
 	 * @return int
 	 */
 	public int getAdminID(){

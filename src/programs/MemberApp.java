@@ -3,9 +3,8 @@ package programs;
 import java.text.ParseException;
 import java.util.Scanner;
 
-
-import managers.PriceManager;
 import managers.AmendBookingManager;
+import managers.PriceManager;
 
 
 public class MemberApp extends MoblimaMainApp{

@@ -3,6 +3,10 @@ import java.text.ParseException;
 
 import managers.*;
 public class testHolPriceConfig {
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args){
         SettingsManager sm = new SettingsManager(1);
         sm.printPriceList();

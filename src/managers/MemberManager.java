@@ -68,6 +68,10 @@ public class MemberManager implements logIn {
     }
     
     
+    
+    /** 
+     * @return int
+     */
     /*
      * Log in function for Member.
      * Prompts for email and password.

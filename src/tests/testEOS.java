@@ -4,6 +4,10 @@ import java.text.ParseException;
 import managers.*;
 import models.Movie;
 public class testEOS {
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args){
         SessionManager sm = new SessionManager(0);
         MovieManager mm = new MovieManager(0);

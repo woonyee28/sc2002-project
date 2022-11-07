@@ -132,7 +132,16 @@ public class AmendBookingManager {
     
 
         
-    //Wil ask user for which seat do they wan to remove , and remove the data locally
+    
+    /** 
+     * Wil ask user for which seat do they wan to remove , and remove the data locally
+     * @param seatingPlan
+     * @param SessionID
+     * @param seat
+     * @param movieid
+     * @return int
+     */
+    
     private static int amendSeat(ArrayList<Integer> seatingPlan, String SessionID, int seat,int movieid)
     {
         
@@ -175,6 +184,11 @@ public class AmendBookingManager {
         // return -1;
     }
 
+    
+    /** 
+     * @param cinema_class
+     * @return String
+     */
     private static String toStringClass(int cinema_class)
     {
         if(cinema_class == 1)
@@ -192,8 +206,14 @@ public class AmendBookingManager {
     }
 
     
-    //get getOccupiedSeats will return ArrayList of occupied seats with the cinema_choice input (aaa,bbb..)
-    // get from session
+    
+    /** 
+     * get getOccupiedSeats will return ArrayList of occupied seats with the cinema_choice input (aaa,bbb..)
+     * get from session
+     * @param cinema_code
+     * @return ArrayList<Integer>
+     */
+    
     private static ArrayList<Integer> getOccupiedSeats(ArrayList<String> cinema_code)
     {
 
@@ -209,8 +229,12 @@ public class AmendBookingManager {
         return null;
     }
 
-        //get getOccupiedSeats will return ArrayList of occupied seats with the cinema_choice input (aaa,bbb..)
-    // get from session
+        
+    /** 
+     * get OneSessionID will return Session String
+     * @param cinema_code
+     * @return String
+     */
     private static String getOneSessionID(ArrayList<String> cinema_code)
     {
 
@@ -226,6 +250,12 @@ public class AmendBookingManager {
         return null;
     }
 
+    
+    /** 
+     * return session ID
+     * @param cinema_code
+     * @return ArrayList<String>
+     */
     private static ArrayList<String> getSessionID(String cinema_code)
     {
         for(Cinemas c : Cinema)
@@ -240,6 +270,11 @@ public class AmendBookingManager {
     }
 
         
+    
+    /** 
+     * print seating plan
+     * @param seatingPlan
+     */
     private static void printSeatingPlan(ArrayList<Integer> seatingPlan)
     {
         int count =0;
@@ -294,6 +329,12 @@ public class AmendBookingManager {
         }
 
     }
+    
+    /** 
+     * archive getcinemacode_V1
+     * @param cineplex_choice
+     * @return String
+     */
     private static String getCineCode_V1(String cineplex_choice)
     {
         String cinema_choice ="";
@@ -327,8 +368,13 @@ public class AmendBookingManager {
     }
 
 
-    // Parse in which cinmea user selected and return which class
-    //Regular - 1, Gold - 2, Plat 3
+    
+    /** 
+     * Parse in which cinmea user selected and return which class
+     * Regular - 1, Gold - 2, Plat 3
+     * @param cinema_code
+     * @return int
+     */
     private static int getCinemaClass(String cinema_code)
     {
         for(Cinemas c : Cinema)

@@ -108,9 +108,9 @@ public class Review {
         this.movieID = movieID;
     }
 
-    // Generate String representation of the Object
     private static final String CSV_SEPARATOR = ",";
     /**
+     * Generate String representation of the Object
      * appends all returns all variables of a review object as a string
      */
     public String toString()

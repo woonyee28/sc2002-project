@@ -9,6 +9,11 @@ import managers.MemberManager;
 // import com.apple.laf.resources.aqua;
 
 public class MoblimaMainApp{
+    
+    /** 
+     * @param args
+     * @throws ParseException
+     */
     public static void main(String[] args) throws ParseException {
 		MoblimaMainApp app = new MoblimaMainApp();
         System.out.println("Welcome to MOBLIMA Booking System!");

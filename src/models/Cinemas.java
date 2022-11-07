@@ -90,6 +90,11 @@ public class Cinemas {
         this.sessionsID = sessionsID;
     }
 
+    
+    /** 
+     * convert to string
+     * @return String
+     */
     @Override
     public String toString() {
         return "{" +

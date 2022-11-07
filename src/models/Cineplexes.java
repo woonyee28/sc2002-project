@@ -70,6 +70,11 @@ public class Cineplexes {
         this.cinemasCode = cinemasCode;
     }
 
+    
+    /** 
+     * convert to string
+     * @return String
+     */
     @Override
     public String toString() {
         return "{" +

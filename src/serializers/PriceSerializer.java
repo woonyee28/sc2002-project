@@ -7,6 +7,11 @@ import models.Price;
 public class PriceSerializer implements InterfaceSerializer<Price>{
     private static final String CSV_SEPARATOR = ",";
 
+    
+    /** 
+     * write price to csv
+     * @param p
+     */
     @Override
     public void writeToCSV(Price p)
     {
@@ -28,6 +33,11 @@ public class PriceSerializer implements InterfaceSerializer<Price>{
         catch (FileNotFoundException e){System.out.printf("'%s' %n", "File Not Found"); }
         catch (IOException e){e.printStackTrace();}
     }
+    
+    /** 
+     * read price from csv
+     * @return ArrayList<Price>
+     */
     @Override
     public ArrayList<Price> readFromCSV()
     {
@@ -55,6 +65,11 @@ public class PriceSerializer implements InterfaceSerializer<Price>{
         }
         return null;
     }
+    
+    /** 
+     * overwrite price csv
+     * @param pList
+     */
     @Override
     public void overwriteCSV(ArrayList<Price> pList) {
 		try {
@@ -77,6 +92,11 @@ public class PriceSerializer implements InterfaceSerializer<Price>{
         catch (IOException e){e.printStackTrace();}
 	
     }
+    
+    /** 
+     * update price in csv
+     * @param m
+     */
     @Override
     public void updateFromCSV(Price m) {
         PriceSerializer p = new PriceSerializer();
@@ -95,6 +115,11 @@ public class PriceSerializer implements InterfaceSerializer<Price>{
 	    } else System.out.println(m.getCat() + " price update unsuccesful!");
     }
 
+    
+    /** 
+     * delete price from csv
+     * @param o
+     */
     @Override
     public void deleteFromCSV(Price o) {
         PriceSerializer p = new PriceSerializer();

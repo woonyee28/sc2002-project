@@ -3,6 +3,10 @@ import java.text.ParseException;
 
 import managers.*;;
 public class testBookEOS {
+    
+    /** 
+     * @param args
+     */
     public static void main(String [] args){
         MovieBookingManager mbm = new MovieBookingManager(0, 0);
         mbm.showMovieListing("AAA");

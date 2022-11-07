@@ -1,6 +1,3 @@
-//Author Zheng Kai
-//last modified - 30/10/22
-
 package managers;
 import models.*;
 
@@ -71,7 +68,12 @@ public class MovieBookingManager {
     static HolidaySerializer hs = new HolidaySerializer();
     static PriceSerializer ps = new PriceSerializer();
 
-	public void run() throws ParseException {
+	
+    /** 
+     * run booking
+     * @throws ParseException
+     */
+    public void run() throws ParseException {
 		double price=0;
         int selection_choice;
         String book_choice;
@@ -239,8 +241,14 @@ public static void showMovieListing()
                 System.out.println(endofShowing.get(i));
             }
     }
-// parse in cinema_code to get the sessionID, to print out relevant movies according to the cinema chose
-//Function that requires user to input Movie & Session Timing and will return the seatingPlan
+
+/** 
+ * parse in cinema_code to get the sessionID, to print out relevant movies according to the cinema chose
+ * Function that requires user to input Movie & Session Timing and will return the seatingPlan
+ * @param cinema_code
+ * @return ArrayList<Integer>
+ */
+
 public static ArrayList<Integer> showMovieListing(String cinema_code)
 {
     //declare movieID & seatPlan
@@ -461,6 +469,12 @@ public static void showSeatPlan()
 
 
 }
+
+/** 
+ * book the ticket function
+ * @param id
+ * @throws ParseException
+ */
 public static void bookings(int id) throws ParseException
 {   
     String cineplex_choice;
@@ -609,6 +623,12 @@ public static void bookings(int id) throws ParseException
 
     }
 
+
+/** 
+ * reserve seat
+ * @param seatingPlan
+ * @return int
+ */
 public static int bookSeats( ArrayList<Integer> seatingPlan)
 {
     Boolean loop_seat = true;
@@ -654,6 +674,12 @@ public static int bookSeats( ArrayList<Integer> seatingPlan)
         return seat;
 }
 
+
+/** 
+ * convert to string
+ * @param cinema_class
+ * @return String
+ */
 public static String toStringClass(int cinema_class)
 {
     if(cinema_class == 1)
@@ -670,6 +696,11 @@ public static String toStringClass(int cinema_class)
     }
 }
     
+
+/** 
+ * print seating plan
+ * @param seatingPlan
+ */
 public static void printSeatingPlan(ArrayList<Integer> seatingPlan)
 {
     int count =0;
@@ -736,6 +767,12 @@ public static void printSeatingPlan(ArrayList<Integer> seatingPlan)
 
 }
 
+
+/** 
+ * get occupied seat in the session
+ * @param cinema_code
+ * @return ArrayList<Integer>
+ */
 // public static ArrayList<Integer> getOccupiedSeats_sess(Strin)
 
     //get getOccupiedSeats will return ArrayList of occupied seats with the cinema_choice input (aaa,bbb..)
@@ -751,6 +788,12 @@ public static ArrayList<Integer> getOccupiedSeats(String cinema_code)
     return null;
 }
 
+
+/** 
+ * get session id string
+ * @param cinema_code
+ * @return ArrayList<String>
+ */
 public static ArrayList<String> getSessionID(String cinema_code)
 {
     for(Cinemas c : Cinema)
@@ -764,8 +807,13 @@ public static ArrayList<String> getSessionID(String cinema_code)
 
 }
 
-// Parse in which cinmea user selected and return which class
-//Regular - 1, Gold - 2, Plat 3
+
+/** 
+ * Parse in which cinmea user selected and return which class
+ * Regular - 1, Gold - 2, Plat 3
+ * @param cinema_code
+ * @return int
+ */
 public static int getCinemaClass(String cinema_code)
 {
     for(Cinemas c : Cinema)
@@ -796,9 +844,12 @@ public static int getCinemaClass(String cinema_code)
 }
 
 
-//This V1 version able to get directly from CSV, CINEPLEX cinema code.
-//It is not hard coded
 
+/** 
+ * This V1 version able to get directly from CSV, CINEPLEX cinema code.
+ * @param cineplex_choice
+ * @return String
+ */
 public static String getCineCode_V1(String cineplex_choice)
 {
     String cinema_choice ="";
@@ -832,6 +883,19 @@ public static String getCineCode_V1(String cineplex_choice)
 }
 
 
+
+/** 
+ * write to ticket transaction csv
+ * @param movieID
+ * @param cinema_code
+ * @param cinema_class
+ * @param movieDate
+ * @param movieTime
+ * @param seats
+ * @param movieGoerID
+ * @return double
+ * @throws ParseException
+ */
 public static double ticketTransact(int movieID, String cinema_code, int cinema_class, String movieDate, String movieTime, ArrayList<Integer> seats, int movieGoerID) throws ParseException{
     double price=0.0;
     double totalPrice = 0.0;

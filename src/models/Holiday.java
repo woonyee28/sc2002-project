@@ -51,6 +51,11 @@ public class Holiday {
 
     // Generate String representation of the Object
     private static final String CSV_SEPARATOR = ",";
+    
+    /** 
+     * convert to string
+     * @return String
+     */
     public String toString()
     {
         StringBuffer oneLine = new StringBuffer();
