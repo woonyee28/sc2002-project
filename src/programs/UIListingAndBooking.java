@@ -33,7 +33,7 @@ public class UIListingAndBooking {
             switch(selection_choice)
             { 
                 case 1: 
-                    System.out.println("Now Showing:");
+                    // System.out.println("Now Showing:");
                     mbm.showMovieListing();
                     if (this.adminOrmember==-1){
                         break;
