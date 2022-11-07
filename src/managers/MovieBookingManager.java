@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 import models.Cineplexes;
+import serializers.HolidaySerializer;
+import serializers.PriceSerializer;
 import serializers.CinemaSerializer;
 import serializers.CineplexSerializer;
 import serializers.MovieGoerSerializer;
@@ -66,6 +68,8 @@ public class MovieBookingManager {
     private static ArrayList<Cineplexes> Cineplex = cps.readFromCSV();
     private static ArrayList<Cinemas> Cinema = cs.readFromCSV();
     static MovieGoerSerializer mgs = new MovieGoerSerializer();
+    static HolidaySerializer hs = new HolidaySerializer();
+    static PriceSerializer ps = new PriceSerializer();
 
 	public void run() throws ParseException {
 		double price=0;
@@ -818,18 +822,46 @@ public static String getCineCode_V1(String cineplex_choice)
 public static double ticketTransact(int movieID, String cinema_code, int cinema_class, String movieDate, String movieTime, ArrayList<Integer> seats, int movieGoerID) throws ParseException{
     double price=0.0;
     double totalPrice = 0.0;
-
+    int checkDate =-1;
+    double studentPrice=0.0;
+    double seniorCitizenPrice=0.0;
+    double standardPrice=0;
+    double specialPrice=0;
     SimpleDateFormat date1 = new SimpleDateFormat("yyyyMMdd");
     Date date2 = date1.parse(movieDate);
     DateFormat date3 = new SimpleDateFormat("E");
     String dayM = date3.format(date2);
+    for(Holiday h:hs.readFromCSV()){
+        if (movieDate.equals(h.getDate())){
+            checkDate=1;
+            break;
+        }
+    }
+    for (Price p: ps.readFromCSV()){
+        if(p.getCat().equals("Student") && p.getMovieType().equals("Blockbuster")){
+            studentPrice = p.getPrice();
+        }
+        if(p.getCat().equals("SeniorCitizen") && p.getMovieType().equals("Blockbuster")){
+            seniorCitizenPrice = p.getPrice();
+        }
+        if(p.getCat().equals("Standard") && p.getMovieType().equals("Blockbuster")){
+            standardPrice = p.getPrice();
+        }
+        if(p.getCat().equals("Special") && p.getMovieType().equals("Blockbuster")){
+            specialPrice = p.getPrice();
+        }
+    }
+   // System.out.println(standardPrice);
+    //System.out.println(specialPrice);
+    //System.out.println(studentPrice);
+    //System.out.println(seniorCitizenPrice);
 
     System.out.println(dayM);
     //check if weekday or weekend
-    if (dayM.equals("Sun") || dayM.equals("Sat")){
+    if (dayM.equals("Sun") || dayM.equals("Sat")||checkDate==1){
         for (int y=0; y<seats.size();y++){
             int sit = seats.get(y);
-            price = cinema_class*12.50;
+            price = cinema_class*specialPrice;
             totalPrice = totalPrice + price;
 
             //update transaction ID
@@ -861,13 +893,13 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
             System.out.println("\t[1] Standard Weekday\n\t[2] Student\n\t[3] Senior Citizen");
             int catChoice = input.nextInt();
             if (catChoice == 1){
-                price = cinema_class*10;
+                price = cinema_class*standardPrice;
             }
             else if (catChoice==2){
-                price = cinema_class*8;
+                price = cinema_class*studentPrice;
             }
             else if (catChoice==3){
-                price = cinema_class*7.50;
+                price = cinema_class*seniorCitizenPrice;
             }
             
             totalPrice = totalPrice + price;
