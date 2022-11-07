@@ -50,7 +50,7 @@ public class MovieManager {
         System.out.println("Enter Rating (1 Decimals): ");
         Double rating = sc.nextDouble();
         sc.nextLine();
-        System.out.println("Enter Showing Status (No Longer Showing, Now Showing, Coming Soon): ");
+        System.out.println("Enter Showing Status (End of Showing, Now Showing, Preview): ");
         String showingStatus = sc.nextLine();
         System.out.println("Enter Director Name: ");
         String director = sc.nextLine();

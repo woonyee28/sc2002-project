@@ -92,12 +92,23 @@ public class MovieBookingManager {
                     break;
                 case 1: 
                     System.out.println("Now Showing:");
-                    System.out.println("right");
                     showMovieListing();
+                    System.out.println("Would you like view more details?(Y/N)");
+                    String c = sc.next().toLowerCase();
+                    if(c.equals("y") || c.equals("yes")){
+                        MovieSerializer mss = new MovieSerializer();
+                        for (Movie v: mss.readFromCSV()){
+                            System.out.println(v.toString());
+                        }
+                        MovieInformation mi = new MovieInformation();
+                        System.out.println("Which Movie ID you would like to know more? ");
+                        int cc = sc.nextInt();
+                        mi.returnMovInfo(cc);
+                    }
+
                     if (this.adminOrmember==-1){
                         break;
                     }else{
-                        System.out.println("Would you like to book a movie?(Y/N)");
                         System.out.println("Would you like to book a movie?(Y/N)");
                         book_choice = sc.next().toLowerCase();
                         if(book_choice.equals("y") || book_choice.equals("yes"))
@@ -189,6 +200,9 @@ public class MovieBookingManager {
 
 public static void showMovieListing()
     {
+        preview.clear();
+        endofShowing.clear();
+        nowShowing.clear();
         for (Movie m: ms.readFromCSV()) {           
             // m.toString();
             // System.out.println(m.getMovieID()+1 +": " +  m.getTitle()); 
@@ -232,6 +246,7 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
     //declare movieID & seatPlan
     ArrayList<Integer> movieID = new ArrayList<>();
     ArrayList<Integer> seatPlan = new ArrayList<>();
+    movieID.clear();
     // for(Cinemas cine : cs.readFromCSV())
     // {
     //     System.out.println(cine.getSessionsID());
@@ -829,6 +844,8 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
     Date date2 = date1.parse(movieDate);
     DateFormat date3 = new SimpleDateFormat("E");
     String dayM = date3.format(date2);
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");  
+
     for(Holiday h:hs.readFromCSV()){
         if (movieDate.equals(h.getDate())){
             checkDate=1;
@@ -863,7 +880,8 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
             totalPrice = totalPrice + price;
 
             //update transaction ID
-            String TID = cinema_code+movieDate+movieTime;
+            LocalDateTime now = LocalDateTime.now();
+            String TID = cinema_code.toUpperCase()+dtf.format(now);
             Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code, sit, price, movieID);
             ts.writeToCSV(newTran);
             MovieGoerSerializer mgs = new MovieGoerSerializer();
@@ -903,7 +921,8 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
             totalPrice = totalPrice + price;
 
             //update transactionID
-            String TID = cinema_code.toUpperCase()+movieDate+movieTime;
+            LocalDateTime now = LocalDateTime.now();
+            String TID = cinema_code.toUpperCase()+dtf.format(now);
             Transaction newTran = new Transaction(TID, movieGoerID, movieDate, movieTime, cinema_code.toUpperCase(), sit, price, movieID);
             ts.writeToCSV(newTran);
             MovieGoerSerializer mgs = new MovieGoerSerializer();

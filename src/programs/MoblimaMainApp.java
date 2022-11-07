@@ -27,7 +27,7 @@ public class MoblimaMainApp{
 
         do{
             System.out.println("====================MoblimaMainApp======================\n");
-            System.out.println("Are you a:\n\t[1] Moblima Member\n\t[2] New User Sign Up\n\t[3] Guest Visit\n\t[4] Moblima Staff");
+            System.out.println("Are you a:\n\t[1] Moblima Member\n\t[2] New User Sign Up\n\t[3] Guest Visit\n\t[4] Moblima Staff\n\t[5] Exit");
             choice = Integer.valueOf(sc.next());
             System.out.println();
             switch (choice) {

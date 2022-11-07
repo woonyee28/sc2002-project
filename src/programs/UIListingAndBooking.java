@@ -4,8 +4,11 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 import managers.MovieBookingManager;
+import managers.MovieInformation;
+import models.Movie;
 import models.MovieGoer;
 import serializers.MovieGoerSerializer;
+import serializers.MovieSerializer;
 
 public class UIListingAndBooking {
     /**
@@ -43,13 +46,24 @@ public class UIListingAndBooking {
             switch(selection_choice)
             { 
                 case 1: 
+                    
                     System.out.println("Now Showing:");
-                    System.out.println("right");
                     mbm.showMovieListing();
+                    System.out.println("Would you like view more details?(Y/N)");
+                    String c = sc.next().toLowerCase();
+                    if(c.equals("y") || c.equals("yes")){
+                        MovieSerializer mss = new MovieSerializer();
+                        for (Movie v: mss.readFromCSV()){
+                            System.out.println(v.toString());
+                        }
+                        MovieInformation mi = new MovieInformation();
+                        System.out.println("Which Movie ID you would like to know more? ");
+                        int cc = sc.nextInt();
+                        mi.returnMovInfo(cc);
+                    }
                     if (this.adminOrmember==-1){
                         break;
                     }else{
-                        System.out.println("Would you like to book a movie?(Y/N)");
                         System.out.println("Would you like to book a movie?(Y/N)");
                         book_choice = sc.next().toLowerCase();
                         if(book_choice.equals("y") || book_choice.equals("yes"))
