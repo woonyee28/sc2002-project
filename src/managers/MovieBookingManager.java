@@ -88,12 +88,10 @@ public class MovieBookingManager {
                     break;
                 case 1: 
                     System.out.println("Now Showing:");
-                    System.out.println("right");
                     showMovieListing();
                     if (this.adminOrmember==-1){
                         break;
                     }else{
-                        System.out.println("Would you like to book a movie?(Y/N)");
                         System.out.println("Would you like to book a movie?(Y/N)");
                         book_choice = sc.next().toLowerCase();
                         if(book_choice.equals("y") || book_choice.equals("yes"))
@@ -185,6 +183,9 @@ public class MovieBookingManager {
 
 public static void showMovieListing()
     {
+        preview.clear();
+        endofShowing.clear();
+        nowShowing.clear();
         for (Movie m: ms.readFromCSV()) {           
             // m.toString();
             // System.out.println(m.getMovieID()+1 +": " +  m.getTitle()); 
@@ -228,6 +229,7 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
     //declare movieID & seatPlan
     ArrayList<Integer> movieID = new ArrayList<>();
     ArrayList<Integer> seatPlan = new ArrayList<>();
+    movieID.clear();
     // for(Cinemas cine : cs.readFromCSV())
     // {
     //     System.out.println(cine.getSessionsID());
