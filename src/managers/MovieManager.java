@@ -12,7 +12,7 @@ public class MovieManager {
     /**
      * The MovieSerializer o fthis MovieManager.
      */
-    static MovieSerializer ms = new MovieSerializer();
+    private MovieSerializer ms = new MovieSerializer();
 
     /**
      * Creates a new MovieMangager with the given adminID.
