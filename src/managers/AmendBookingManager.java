@@ -81,6 +81,8 @@ public class AmendBookingManager {
                     //DELETE THE TRANSACTION
                 }
             }
+            // update movie goer
+
         }
         
         SessionID = getSessionID(cinema_code);
@@ -137,6 +139,10 @@ public class AmendBookingManager {
     //Wil ask user for which seat do they wan to remove , and remove the data locally
     private static int amendSeat(ArrayList<Integer> seatingPlan, ArrayList<String> SessionID, int seat,int movieid)
     {
+        System.out.println(seatingPlan);
+        System.out.println(SessionID);
+        System.out.println(seat);
+        System.out.println(movieid);
         
         int getIndex;
         Scanner sc = new Scanner(System.in);
