@@ -231,6 +231,7 @@ private static ArrayList<Integer> showMovieListing(String cinema_code)
     }
     preview.clear();
     nowShowing.clear();
+    endofShowing.clear();
 
     // show the movies showing for that cinema selected
     //print out in console
@@ -282,22 +283,11 @@ private static ArrayList<Integer> showMovieListing(String cinema_code)
         {
             count++;
             ss_datetime.add(m.getSessionDate()+m.getSessionTime());
-            // ss_time.add(m.getSessionTime());
-            // System.out.println(count + ": Date: " + m.getSessionDate() + " Time: " + m.getSessionTime());
         }
     }
     //Sort the timing array
     Collections.sort(ss_datetime);
-    // System.out.println(ss_date);
-    // Collections.sort(ss_time);
-    // to sort the ss_date and ss_Time;
-    // one way, sort the distinct string in date, then loop through, and sort according to time and date
 
-    // for(int i=0;i<ss_date.size();i++)
-    // {
-    //     if()
-
-    // }
 
     // print the session timings (Sorted order)
     for(int i=0; i<ss_datetime.size(); i++)
@@ -316,6 +306,7 @@ private static ArrayList<Integer> showMovieListing(String cinema_code)
         {
             if(m.getSessionTime().equals(ss_datetime.get(movie_time_choice-1).substring(8)))
             {
+                //Stores the unique sessionsID that the user selected
                 movie_date = m.getSessionDate();
                 movie_time = m.getSessionTime();
                 seatPlan = m.getSeatingPlan();
