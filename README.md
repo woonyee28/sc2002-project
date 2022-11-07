@@ -10,7 +10,7 @@ src -> all java code
 Note: Each folder contains a readme.md for further explanation 
 
 ## Authors 
-- `woonyee28` - database, serializers, models, Sales Reporting, Booking History, Review, Movie Listing/Modifying
+- `woonyee28` - data/flatfiles, serializers, models, Sales Reporting, Booking History, Review, Movie Listing/Modifying
 - `Nzkai` - Booking, Cancel Transaction
 - `Dingang123` - UML, test files, Staff Config, priceData, javadoc
 - `Runz99` - Login/Sign Up, Movie Information, Price Calculation, Video, javadoc
