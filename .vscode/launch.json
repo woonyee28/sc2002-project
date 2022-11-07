@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch testEOS",
+            "request": "launch",
+            "mainClass": "tests.testEOS",
+            "projectName": "sc2002-project_7982b241"
+        },
+        {
+            "type": "java",
             "name": "Launch testHolPriceConfig",
             "request": "launch",
             "mainClass": "tests.testHolPriceConfig",

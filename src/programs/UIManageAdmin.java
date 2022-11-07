@@ -6,6 +6,9 @@ import managers.AdminManager;
 
 
 public class UIManageAdmin {
+    /**
+     * THe adminID of this UIManageAdmin,
+     */
     private int adminID;
     /**
      * Creates a new UIManageAdmin with given adminID.
@@ -14,7 +17,9 @@ public class UIManageAdmin {
     public UIManageAdmin(int adminID){
         this.adminID=adminID;
     }
-
+    /**
+     * THe menuOptions of this UIManageAdmin.
+     */
     private final String menuOptions[] = {
         "Print Admin List",
         "Update Admin",
