@@ -48,6 +48,8 @@ public class MovieInformation {
         System.out.println("Synopsis: " + movieSynopsis);
         System.out.println("Status: " + movieStatus);
         System.out.println();
+        System.out.println("Going Back to Booking Page");
+        System.out.println();
         System.out.println();
     }
     

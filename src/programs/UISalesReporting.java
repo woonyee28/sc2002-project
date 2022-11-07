@@ -130,7 +130,7 @@ public class UISalesReporting {
                                     break;
                                 case 7:
                                     System.out.println("Program exiting...");
-                                    System.out.println("Program exiting...");
+                                    break;
                                 default:
                                     System.out.println("Please input a valid option.");
                                     break;
