@@ -1,5 +1,7 @@
-package models;
+package managers;
 import java.util.*;
+
+import models.Movie;
 import serializers.MovieSerializer;
 
 public class MovieInformation {
@@ -16,7 +18,7 @@ public class MovieInformation {
      * @param MovieID
      * @return
      */
-    public int returnMovInfo(int MovieID){
+    public void returnMovInfo(int MovieID){
         String movieName = null;
         String movieType = null;
         String movieSynopsis = null;
@@ -47,11 +49,6 @@ public class MovieInformation {
         System.out.println("Status: " + movieStatus);
         System.out.println();
         System.out.println();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("What would you like to do?\n\t[1] Book tickets\t[2] Return to Movie Listings");
-        int choice = sc.nextInt();
-        ;
-        return choice;
     }
     
 }

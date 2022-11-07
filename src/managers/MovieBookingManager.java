@@ -93,6 +93,19 @@ public class MovieBookingManager {
                 case 1: 
                     System.out.println("Now Showing:");
                     showMovieListing();
+                    System.out.println("Would you like view more details?(Y/N)");
+                    String c = sc.next().toLowerCase();
+                    if(c.equals("y") || c.equals("yes")){
+                        MovieSerializer mss = new MovieSerializer();
+                        for (Movie v: mss.readFromCSV()){
+                            System.out.println(v.toString());
+                        }
+                        MovieInformation mi = new MovieInformation();
+                        System.out.println("Which Movie ID you would like to know more? ");
+                        int cc = sc.nextInt();
+                        mi.returnMovInfo(cc);
+                    }
+
                     if (this.adminOrmember==-1){
                         break;
                     }else{
