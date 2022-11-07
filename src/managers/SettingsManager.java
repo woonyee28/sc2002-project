@@ -106,7 +106,7 @@ public class SettingsManager {
             System.out.println("Please enter name of holiday to be updated:");
             name=input1.nextLine();
             if(update.checkExistenceHol(name)){
-                System.out.println("Please enter new date (dd-mm-yyyy):");
+                System.out.println("Please enter new date (yyyymmdd):");
                 newDate=input1.nextLine();
                 Holiday up = new Holiday();
                 up.setDate(newDate);

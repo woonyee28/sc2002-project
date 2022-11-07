@@ -46,10 +46,10 @@ public class PriceManager {
                 oneLine.append("|");
                 Double price =p.getPrice();
                 if (s.equals("Gold")){
-                    price *=1.5;
+                    price *=2;
                 }
                 else if(s.equals("Platinum")){
-                    price*=2.5;
+                    price*=3;
                 }
                 oneLine.append("$");
                 pp =String.format("%.2f",price);
