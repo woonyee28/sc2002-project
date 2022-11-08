@@ -87,13 +87,10 @@ public class MovieBookingManager {
                     //function to go back main page
                     break;
                 case 1: 
-                    System.out.println("Now Showing:");
-                    System.out.println("right");
                     showMovieListing();
                     if (this.adminOrmember==-1){
                         break;
                     }else{
-                        System.out.println("Would you like to book a movie?(Y/N)");
                         System.out.println("Would you like to book a movie?(Y/N)");
                         book_choice = sc.next().toLowerCase();
                         if(book_choice.equals("y") || book_choice.equals("yes"))
