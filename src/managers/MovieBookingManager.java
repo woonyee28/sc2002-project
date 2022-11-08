@@ -100,7 +100,9 @@ public class MovieBookingManager {
                     if(c.equals("y") || c.equals("yes")){
                         MovieSerializer mss = new MovieSerializer();
                         for (Movie v: mss.readFromCSV()){
+                            
                             System.out.println(v.toString());
+
                         }
                         MovieInformation mi = new MovieInformation();
                         System.out.println("Which Movie ID you would like to know more? ");
@@ -170,6 +172,7 @@ public class MovieBookingManager {
             System.out.println("Going Back to main page...");
 }
 
+//Show all movie listings in the database
 public static void showMovieListing()
     {
         preview.clear();
@@ -218,7 +221,7 @@ public static void showMovieListing()
  * @param cinema_code
  * @return ArrayList<Integer>
  */
-
+//To show Preview & Now Showing when user select which cinema
 public static ArrayList<Integer> showMovieListing(String cinema_code)
 {
     //declare movieID & seatPlan
@@ -310,22 +313,12 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
         {
             count++;
             ss_datetime.add(m.getSessionDate()+m.getSessionTime());
-            // ss_time.add(m.getSessionTime());
-            // System.out.println(count + ": Date: " + m.getSessionDate() + " Time: " + m.getSessionTime());
+ 
         }
     }
     //Sort the timing array
     Collections.sort(ss_datetime);
-    // System.out.println(ss_date);
-    // Collections.sort(ss_time);
-    // to sort the ss_date and ss_Time;
-    // one way, sort the distinct string in date, then loop through, and sort according to time and date
 
-    // for(int i=0;i<ss_date.size();i++)
-    // {
-    //     if()
-
-    // }
 
     // print the session timings (Sorted order)
     for(int i=0; i<ss_datetime.size(); i++)
@@ -357,6 +350,7 @@ public static ArrayList<Integer> showMovieListing(String cinema_code)
     
 }
 
+//Function to ask user which Cineplex & Cinema to show the seatPlan
 public static void showSeatPlan()
 {
     String cineplex_choice;
@@ -502,16 +496,6 @@ public static void bookings(int id) throws ParseException
     ss.updateFromCSV(s);
     System.out.println("Successfully booked the seat you requested");
     
-    
-    // //Update data into CSV
-    // Cinemas up = new Cinemas();
-    // up.setCinemaClass(toStringClass(cinema_class));
-    // up.setCinemaCode(cinema_code.toUpperCase());
-    // up.setSeatingPlan(seatingPlan);
-    // up.setSessionsID(SessionID);
-    // cs.updateFromCSV(up);
-    // System.out.println("Successfully booked the seat you requested");
-
 
     //at this point can either call the function again or go back main page.
 
@@ -599,22 +583,7 @@ public static void printSeatingPlan(ArrayList<Integer> seatingPlan)
 {
     int count =0;
     final  int TOTALSEAT = 70;
-    // for (int i=1; i<=6; i++)
-    // {
-    //     for (int j=1; j<=10; j++)
-    //     {
-    //         System.out.print(j);
-    //     }
-    //     System.out.println("");
-    // }
     Collections.sort(seatingPlan);
-    // for(Integer z :seatingPlan)
-    // {
-    //     System.out.println(z);
-    //     System.out.println( z.getClass());
-    // }
-
-    
     for (int i =1; i<=TOTALSEAT; i++)
     {
         //check for every occupied seat while looping through the seat.
@@ -750,7 +719,6 @@ public static String getCineCode_V1(String cineplex_choice)
     Scanner sc = new Scanner(System.in);
     int error  =0;
     //Prints entire CinemaCode in the Cineplex
-    // System.out.println(Cineplex.size());
     for(int i =0; i<Cineplex.size(); i++)
     {
         if(Cineplex.get(i).getCineplexCode().equals(cineplex_choice.toUpperCase()))
@@ -824,10 +792,6 @@ public static double ticketTransact(int movieID, String cinema_code, int cinema_
             specialPrice = p.getPrice();
         }
     }
-   // System.out.println(standardPrice);
-    //System.out.println(specialPrice);
-    //System.out.println(studentPrice);
-    //System.out.println(seniorCitizenPrice);
 
     System.out.println(dayM);
     //check if weekday or weekend

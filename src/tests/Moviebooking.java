@@ -59,6 +59,14 @@ public class Moviebooking {
         System.out.println("1: Show movie listings:");
         System.out.println("2: Book Tickets");
         System.out.println("3: Print Seating Plan");
+
+
+        // char[] passwordArray = System.console().readPassword("Enter your  password: ");
+        // for (int i = 0; i < passwordArray.length; i++) {
+        //     System.out.print("*");
+        // }
+        // char[] passwd = System.console().readPassword("[%s]", "Password:");
+        // System.out.println(passwd);
         selection_choice =  sc.nextInt();
      
             switch(selection_choice)
