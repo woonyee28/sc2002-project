@@ -479,15 +479,7 @@ public static void bookings(int id) throws ParseException
     
     System.out.println("Which movie would you like to book?");
     seatingPlan =  showMovieListing(cinema_code);
-<<<<<<< Updated upstream
-    System.out.println(seatingPlan);
-
-    // movie_choice = sc.nextInt() -1 ;// user select movie based on movieID
-    // System.out.println("Select session time");
-
-=======
     // System.out.println(seatingPlan);
->>>>>>> Stashed changes
     cinema_class = getCinemaClass(cinema_code);
     if (cinema_class == -1)
     {
@@ -505,11 +497,7 @@ public static void bookings(int id) throws ParseException
 
     System.out.println("Here is the seating plan for Cinema " + cinema_code.toUpperCase()+":");
     System.out.println("------------SCREEN------------");
-<<<<<<< Updated upstream
-=======
     // System.out.println(seatingPlan);
-
->>>>>>> Stashed changes
     printSeatingPlan(seatingPlan);
     System.out.println("How many seats would you like?");
     
