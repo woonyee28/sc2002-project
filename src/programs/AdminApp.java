@@ -90,7 +90,7 @@ public class AdminApp {
 					manageAdmin.run();
 					break;
 				case 8:
-					System.out.println("Exiting to the previous level...");
+					System.out.println("Logging off...\nBack to main page.");
 					break;
 				default:
 					System.out.println("Please input a valid option.");

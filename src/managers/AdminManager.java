@@ -155,7 +155,9 @@ public class AdminManager implements logIn{
         System.out.println("Please key in your email:");
         String email = input.nextLine();
         System.out.println("Please key in your password:");
-        String password = input.nextLine();
+        char[] password1 = System.console().readPassword("%s", "Password:");
+        String password = new String(password1);
+        // String password = input.nextLine();
         ;
         if(!login.checkExistenceEmail(email)){
 			System.out.println("Email does not exist!");

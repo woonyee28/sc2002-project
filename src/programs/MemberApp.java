@@ -65,7 +65,7 @@ public class MemberApp extends MoblimaMainApp{
 					PriceManager p = new PriceManager();
 					p.viewPricing();
 				case 6:
-					System.out.println("Exiting to the previous level...");
+					System.out.println("Logging off...\nBack to main page...");
 					break;
 					
 				default:

@@ -7,3 +7,10 @@
 6,0,4.9,Woahhh!,6
 7,6,5.0,very nice movie,0
 8,7,4.9,very nice,0
+<<<<<<< Updated upstream
+=======
+9,8,4.9,nice,3
+10,9,4.9,Very nice movie,3
+11,10,4.9,It was a very nice movie,5
+12,11,4.8,It was excellent movie,5
+>>>>>>> Stashed changes
