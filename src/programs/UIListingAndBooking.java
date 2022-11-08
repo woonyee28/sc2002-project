@@ -54,7 +54,7 @@ public class UIListingAndBooking {
                     if(c.equals("y") || c.equals("yes")){
                         MovieSerializer mss = new MovieSerializer();
                         for (Movie v: mss.readFromCSV()){
-                            System.out.println(v.toString());
+                            System.out.println(v.getMovieID()+": "+ v.getTitle());
                         }
                         MovieInformation mi = new MovieInformation();
                         System.out.println("Which Movie ID you would like to know more? ");

@@ -101,7 +101,7 @@ public class MovieBookingManager {
                         MovieSerializer mss = new MovieSerializer();
                         for (Movie v: mss.readFromCSV()){
                             
-                            System.out.println(v.toString());
+                            System.out.println(v.getMovieID()+": "+v.getTitle());
 
                         }
                         MovieInformation mi = new MovieInformation();
