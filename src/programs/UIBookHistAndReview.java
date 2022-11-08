@@ -42,11 +42,11 @@ public class UIBookHistAndReview {
             BookingHistManager bh = new BookingHistManager(this.movieGoerID);
             switch (choice) {
 				case 1:
-                    System.out.println("showBookingHistory():");
+                    System.out.println("Booking History: ");
                     bh.showBookingHistory(this.movieGoerID);
 					break;
 				case 2:
-                    System.out.println("inputReviewAndRating():");
+                    System.out.println("Input Reviews and Ratings: ");
 					bh.inputReviewAndRating(this.movieGoerID);
 					break;
 				case 3:
