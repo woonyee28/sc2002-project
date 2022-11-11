@@ -165,10 +165,10 @@ public class SettingsManager {
                 oneLine.append("|");
                 Double price =p.getPrice();
                 if (s.equals("Gold")){
-                    price *=1.5;
+                    price *=2;
                 }
                 else if(s.equals("Platinum")){
-                    price*=2.5;
+                    price*=3;
                 }
                 oneLine.append("$");
                 pp =String.format("%.2f",price);
@@ -180,7 +180,7 @@ public class SettingsManager {
             System.out.println();
         }
         System.out.println("Prices are inclusive of GST.");
-        System.out.println("Friday,Weekends,Eve of Public Holiday and Public Holiday falls under \"Special\" category." );
+        System.out.println("Weekends and Public Holiday falls under \"Special\" category." );
         System.out.println();
     }   
 
