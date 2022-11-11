@@ -217,7 +217,7 @@ public class AdminManager implements logIn{
             return 1;
         }
         else{
-            System.out.println("Account already exists!");
+            System.out.println("Email already in use!");
         }
         ;
         return 0;
