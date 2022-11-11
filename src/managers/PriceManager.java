@@ -61,7 +61,7 @@ public class PriceManager {
             System.out.println();
         }
         System.out.println("Prices are inclusive of GST.");
-        System.out.println("Weekends,Eve of Public Holiday and Public Holiday falls under \"Special\" category." );
+        System.out.println("Weekends and Public Holiday falls under \"Special\" category." );
         System.out.println();
     }   
 }
