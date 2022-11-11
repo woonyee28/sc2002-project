@@ -3,12 +3,32 @@ package models;
 import java.util.ArrayList;
 
 public class RegularCinema extends Cinemas{
-    public RegularCinema(String cinemaCode, String cinemaClass, ArrayList<Integer> seatingPlan, ArrayList<String> sessionsID) {
-		super(cinemaCode,cinemaClass,seatingPlan,sessionsID);
-	}
+    private String cinemaClass;
 
+    /**
+     * Initialise variables of any instance of Gold Cinemas class
+     * @param cinemaCode
+     * @param cinemaClass
+     * @param seatingPlan
+     * @param sessionsID
+     */
+    public RegularCinema(String cinemaCode, ArrayList<Integer> seatingPlan, ArrayList<String> sessionsID, String cinemaClass) {
+		super(cinemaCode,seatingPlan,sessionsID);
+        this.cinemaClass = cinemaClass;
+	}
+    /**
+     * get Cinema Class of the Cinema
+     */
     @Override
     public String getCinemaClass() {
-        return "Regular";
+        return this.cinemaClass;
     }
+    /**
+     * set Cinema Class of the Cinema
+     */
+    @Override
+    public void setCinemaClass(String cinemaClass) {
+        this.cinemaClass = cinemaClass;
+    }
+    
 }

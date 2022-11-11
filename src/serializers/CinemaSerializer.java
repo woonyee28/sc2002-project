@@ -75,16 +75,16 @@ public class CinemaSerializer implements InterfaceSerializer<Cinemas>{
                for (String s: tempCast) {           
                 sessionsID.add(s);
                }
-               Cinemas m = new RegularCinema(cinemaCode,cinemaClass,seatingPlan,sessionsID);
+               Cinemas m = new RegularCinema(cinemaCode,seatingPlan,sessionsID,cinemaClass);
                switch (cinemaClass){
                     case "Regular":
-                        m = new RegularCinema(cinemaCode,cinemaClass,seatingPlan,sessionsID);
+                        m = new RegularCinema(cinemaCode,seatingPlan,sessionsID,cinemaClass);
                         break;
                     case "Gold":
-                        m = new GoldCinema(cinemaCode,cinemaClass,seatingPlan,sessionsID);
+                        m = new GoldCinema(cinemaCode,seatingPlan,sessionsID,cinemaClass);
                         break;
                     case "Platinum":
-                        m = new PlatinumCinema(cinemaCode,cinemaClass,seatingPlan,sessionsID);
+                        m = new PlatinumCinema(cinemaCode,seatingPlan,sessionsID,cinemaClass);
                         break;
                     default:
                         System.out.println("CinemaSerializer Line 83 Error!");

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public abstract class Cinemas {
     String cinemaCode;
-    String cinemaClass;
     ArrayList<Integer> seatingPlan;
     ArrayList<String> sessionsID;
 
@@ -18,9 +17,8 @@ public abstract class Cinemas {
      * @param seatingPlan
      * @param sessionsID
      */
-    public Cinemas(String cinemaCode, String cinemaClass, ArrayList<Integer> seatingPlan, ArrayList<String> sessionsID) {
+    public Cinemas(String cinemaCode, ArrayList<Integer> seatingPlan, ArrayList<String> sessionsID) {
         this.cinemaCode = cinemaCode;
-        this.cinemaClass = cinemaClass;
         this.seatingPlan = seatingPlan;
         this.sessionsID = sessionsID;
     }
@@ -51,9 +49,7 @@ public abstract class Cinemas {
      * set cinemaClass
      * @param cinemaClass
      */
-    public void setCinemaClass(String cinemaClass) {
-        this.cinemaClass = cinemaClass;
-    }
+    public abstract void setCinemaClass(String cinemaClass);
 
     /**
      * returns seating plan of a Cinema object
