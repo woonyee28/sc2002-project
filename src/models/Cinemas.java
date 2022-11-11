@@ -2,12 +2,11 @@ package models;
 
 import java.util.ArrayList;
 
-public class Cinemas {
+public abstract class Cinemas {
     String cinemaCode;
     String cinemaClass;
     ArrayList<Integer> seatingPlan;
     ArrayList<String> sessionsID;
-
 
     public Cinemas() {
     }
@@ -46,9 +45,7 @@ public class Cinemas {
      * returns cinemaClass of a Cinema object - regular, gold, platinum
      * @return
      */
-    public String getCinemaClass() {
-        return this.cinemaClass;
-    }
+    public abstract String getCinemaClass(); 
 
     /**
      * set cinemaClass

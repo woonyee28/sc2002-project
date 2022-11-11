@@ -113,12 +113,6 @@ public class AmendBookingManager {
         }
         System.out.println(seatingPlan);
         cinema_class = getCinemaClass(cinema_code);
-        Cinemas up = new Cinemas();
-        up.setCinemaClass(toStringClass(cinema_class));
-        up.setCinemaCode(cinema_code.toUpperCase());
-        up.setSeatingPlan(seatingPlan);
-        up.setSessionsID(SessionID);
-        cs.updateFromCSV(up);
         System.out.println("Here is the seating plan AFTER amending for Cinema " + cinema_code.toUpperCase()+":");
         System.out.println("------------SCREEN------------");
         printSeatingPlan(seatingPlan);

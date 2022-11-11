@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 import models.Cinemas;
+import models.GoldCinema;
+import models.PlatinumCinema;
+import models.RegularCinema;
 
 public class CinemaSerializer implements InterfaceSerializer<Cinemas>{
     private static final String CSV_SEPARATOR = ",";
@@ -72,7 +75,21 @@ public class CinemaSerializer implements InterfaceSerializer<Cinemas>{
                for (String s: tempCast) {           
                 sessionsID.add(s);
                }
-               Cinemas m = new Cinemas(cinemaCode,cinemaClass,seatingPlan,sessionsID);
+               Cinemas m = new RegularCinema(cinemaCode,cinemaClass,seatingPlan,sessionsID);
+               switch (cinemaClass){
+                    case "Regular":
+                        m = new RegularCinema(cinemaCode,cinemaClass,seatingPlan,sessionsID);
+                        break;
+                    case "Gold":
+                        m = new GoldCinema(cinemaCode,cinemaClass,seatingPlan,sessionsID);
+                        break;
+                    case "Platinum":
+                        m = new PlatinumCinema(cinemaCode,cinemaClass,seatingPlan,sessionsID);
+                        break;
+                    default:
+                        System.out.println("CinemaSerializer Line 83 Error!");
+                        break;
+               }
                cinemaList.add(m);
                
             }
