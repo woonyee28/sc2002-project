@@ -136,15 +136,29 @@ public class MemberManager implements logIn {
 		
         System.out.println("--------- Create an account ---------");
         Scanner input1 = new Scanner(System.in);
+        email = "";
         System.out.println("Please enter your email:");
         email = input1.nextLine();
+        while (email.contains("@")==false){
+            System.out.println("Please enter a valid email:");
+            email = input1.nextLine();
+        }
+        
 
         if (!create.checkExistenceEmail(email)){
             movieGoerID = create.checkExistenceID() + 1;
             System.out.println("Please enter your name:");
             name = input1.nextLine();
-            System.out.println("Please enter your age:");
-            age = input1.nextInt();
+            age = -1;
+            while (age==-1){
+                System.out.println("Please enter your age:");
+                int test = input1.nextInt();
+                if (test<=12||test>=99){
+                    System.out.println("Please enter a valid age. (12-99)");
+                }else{
+                    age = test;
+                }
+            }
             System.out.println("Please enter your mobile number:");
             mobile = input1.nextInt();
 

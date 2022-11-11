@@ -9,8 +9,11 @@ doc -> javadoc
 src -> all java code  
 Note: Each folder contains a readme.md for further explanation 
 
+## Video Submmision
+[Click Me](https://youtu.be/lJLKBrd6ofM)
+
 ## Authors 
 - `woonyee28` - data/flatfiles, serializers, models, Sales Reporting, Booking History, Review, Movie Listing/Modifying
-- `Nzkai` - Booking, Cancel Transaction
+- `Nzkai` - Booking, Cancel Transaction, Report
 - `Dingang123` - UML, test files, Staff Config, priceData, javadoc
 - `Runz99` - Login/Sign Up, Movie Information, Price Calculation, Video, javadoc

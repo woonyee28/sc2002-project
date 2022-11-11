@@ -91,8 +91,16 @@ public class MemberCreate implements logIn {
             movieGoerID = checkExistenceID() + 1;
             System.out.println("Please enter your name:");
             name = input1.nextLine();
-            System.out.println("Please enter your age:");
-            age = input1.nextInt();
+            age = -1;
+            while (age!=-1){
+                System.out.println("Please enter your age:");
+                int test = input1.nextInt();
+                if (test<=12||test>=99){
+                    System.out.println("Please enter a valid age. (12-99)");
+                }else{
+                    age = test;
+                }
+            }
             System.out.println("Please enter your mobile number:");
             mobile = input1.nextInt();
 
@@ -100,6 +108,7 @@ public class MemberCreate implements logIn {
             System.out.println("Please enter your password:");
             password = input2.nextLine();
             ;
+            
             
             passwordHashed = String.valueOf(password.hashCode());
 
