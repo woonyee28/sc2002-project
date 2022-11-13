@@ -12,7 +12,7 @@ Note: Each folder contains a readme.md for further explanation
 ## Submmision Links
 Youtube: [Click Me](https://youtu.be/lJLKBrd6ofM)      
 Class Diagram: [Click Me](https://github.com/woonyee28/sc2002-project/blob/main/Class%20Diagram%20v5.png)    
-Project Report: [Click Me](https://github.com/woonyee28/sc2002-project/blob/main/SC2002%20SS5%20Grp3%20Project%20Report.pdf)
+Project Report: [Click Me](https://github.com/woonyee28/sc2002-project/blob/main/SC2002%20SS5%20Grp3%20Project%20Report.pdf)   
 Sequence Diagram (Booking): [Click Me](https://github.com/woonyee28/sc2002-project/blob/main/Sequence%20Diagram%20For%20Booking.png)   
 
 
