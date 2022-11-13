@@ -7,7 +7,7 @@ import managers.AmendBookingManager;
 import managers.PriceManager;
 
 
-public class MemberApp extends MoblimaMainApp{
+public class MemberApp{
 	/**
 	 * The movieGoerID of this MemberApp.
 	 */
